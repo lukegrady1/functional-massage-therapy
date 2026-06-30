@@ -1,26 +1,62 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+  Functional Massage Therapy — design tokens
+  Palette: Espresso + Copper, drawn from the brand logo.
+  Single warm light theme; espresso is the dark band / heading / button color,
+  copper is the single locked accent. Type: Bricolage Grotesque + Manrope.
+*/
+
+@theme {
+  --color-bone: #f6f3ee;
+  --color-surface: #fcfaf6;
+  --color-line: #e7e1d7;
+
+  --color-espresso: #3a2a20;
+  --color-espresso-deep: #271b14;
+  --color-cocoa: #6b4733;
+
+  --color-ink: #241b15;
+  --color-muted: #6e635a;
+
+  --color-copper: #bc7a3f;
+  --color-copper-dark: #8a4e1f;
+
+  --font-display: var(--font-display), "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body: var(--font-body), "Manrope", system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bone);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-copper);
+  color: #fff;
+}
+
+/* Subtle film grain over fixed layer only (no scroll repaint cost) */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }

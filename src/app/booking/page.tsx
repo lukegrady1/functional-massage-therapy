@@ -1,0 +1,142 @@
+import type { Metadata } from "next";
+import {
+  ClockCounterClockwise,
+  Sparkle,
+  ChatCircleText,
+  MapPin,
+} from "@phosphor-icons/react/dist/ssr";
+import { Eyebrow } from "@/components/Eyebrow";
+import { Reveal } from "@/components/Reveal";
+import { BookingEmbed } from "@/components/BookingEmbed";
+import { hours, site } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Book a Session",
+  description:
+    "Book your massage therapy appointment at Functional Massage Therapy in Sturbridge, MA. Online scheduling and booking by phone.",
+};
+
+const expect = [
+  {
+    icon: ChatCircleText,
+    title: "A quick check-in",
+    body: "We talk through your goals, history, and what hurts before any hands-on work begins.",
+  },
+  {
+    icon: Sparkle,
+    title: "Work tailored to you",
+    body: "Pressure, pace, and focus areas are adjusted to your body and how it responds.",
+  },
+  {
+    icon: ClockCounterClockwise,
+    title: "Tools to take home",
+    body: "You leave with simple self-care steps to hold your progress between sessions.",
+  },
+];
+
+export default function BookingPage() {
+  return (
+    <>
+      {/* Header */}
+      <section className="mx-auto max-w-7xl px-5 pt-16 pb-12 sm:px-8 lg:pt-24 lg:pb-14">
+        <Reveal>
+          <Eyebrow>Booking</Eyebrow>
+        </Reveal>
+        <Reveal delay={0.06}>
+          <h1 className="mt-6 max-w-3xl font-display text-[2.6rem] font-bold leading-[1.05] tracking-tight text-espresso sm:text-6xl">
+            Book your appointment
+          </h1>
+        </Reveal>
+        <Reveal delay={0.12}>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
+            Pick a time that works for you below. Prefer to talk first? Call me
+            at {site.phone} and we&apos;ll find the right session together.
+          </p>
+        </Reveal>
+      </section>
+
+      {/* Calendar + sidebar */}
+      <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8 lg:pb-28">
+        <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr]">
+          <Reveal>
+            <BookingEmbed />
+          </Reveal>
+
+          <Reveal delay={0.08}>
+            <aside className="flex flex-col gap-6">
+              <div className="rounded-3xl border border-line bg-surface p-7">
+                <h2 className="font-display text-xl font-bold text-espresso">
+                  Hours
+                </h2>
+                <ul className="mt-4 flex flex-col">
+                  {hours.map((h) => {
+                    const closed = h.open === "Closed";
+                    return (
+                      <li
+                        key={h.day}
+                        className="flex items-baseline justify-between border-b border-line py-2.5 text-[0.95rem] last:border-b-0"
+                      >
+                        <span className="font-medium text-ink">{h.day}</span>
+                        <span
+                          className={
+                            closed
+                              ? "text-muted"
+                              : "font-semibold text-espresso tabular-nums"
+                          }
+                        >
+                          {h.open}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+
+              <a
+                href={site.mapsHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 rounded-3xl border border-line bg-surface p-7 transition-colors hover:border-espresso/30"
+              >
+                <MapPin size={22} weight="fill" className="mt-0.5 shrink-0 text-copper" />
+                <span className="text-[0.95rem] leading-relaxed text-muted">
+                  <span className="font-semibold text-espresso">Find me here</span>
+                  <br />
+                  {site.address.line1}, {site.address.note}
+                  <br />
+                  {site.address.city}, {site.address.state} {site.address.zip}
+                </span>
+              </a>
+            </aside>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* What to expect */}
+      <section className="bg-espresso text-bone">
+        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-24">
+          <Reveal>
+            <h2 className="max-w-xl font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+              What your first visit looks like
+            </h2>
+          </Reveal>
+          <div className="mt-12 grid gap-x-12 gap-y-10 sm:grid-cols-3">
+            {expect.map((item, i) => (
+              <Reveal
+                key={item.title}
+                delay={i * 0.08}
+                className="border-t border-bone/15 pt-6"
+              >
+                <item.icon size={28} weight="bold" className="text-copper" />
+                <h3 className="mt-4 font-display text-xl font-bold">
+                  {item.title}
+                </h3>
+                <p className="mt-2 leading-relaxed text-bone/75">{item.body}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
