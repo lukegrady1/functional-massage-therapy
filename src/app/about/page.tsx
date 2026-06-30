@@ -68,7 +68,7 @@ export default function AboutPage() {
         <Reveal delay={0.1}>
           <div className="relative mx-auto aspect-[4/3] max-w-md overflow-hidden rounded-[2rem] bg-line shadow-xl shadow-espresso/10 sm:max-w-lg sm:aspect-[4/5] lg:aspect-[5/6] lg:max-w-none">
             <Image
-              src={asset("/lauren-portrait.png")}
+              src={asset("/lauren-portrait.webp")}
               alt="Lauren, owner and licensed massage therapist"
               fill
               priority

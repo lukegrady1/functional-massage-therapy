@@ -77,7 +77,7 @@ export default function Home() {
           <Reveal delay={0.1} className="relative">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] bg-line shadow-xl shadow-espresso/10 sm:aspect-[4/5] lg:aspect-[5/6]">
               <Image
-                src={asset("/treatment-room.png")}
+                src={asset("/treatment-room.webp")}
                 alt="Inside the Functional Massage Therapy treatment room in Sturbridge"
                 fill
                 priority
@@ -101,7 +101,7 @@ export default function Home() {
           <Reveal className="order-2 lg:order-1">
             <div className="relative mx-auto aspect-[4/3] max-w-md overflow-hidden rounded-[2rem] bg-line sm:max-w-lg lg:aspect-[5/6] lg:max-w-none">
               <Image
-                src={asset("/lauren-portrait.png")}
+                src={asset("/lauren-portrait.webp")}
                 alt="Lauren, owner and licensed massage therapist"
                 fill
                 sizes="(max-width: 1024px) 100vw, 45vw"

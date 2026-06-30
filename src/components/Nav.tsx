@@ -14,7 +14,7 @@ function Wordmark() {
   return (
     <Link href="/" className="flex items-center" aria-label="Functional Massage Therapy home">
       <Image
-        src={asset("/logo.png")}
+        src={asset("/logo.webp")}
         alt="Functional Massage Therapy"
         width={220}
         height={157}

@@ -32,7 +32,7 @@ export function Footer() {
           <div>
             <div className="inline-flex rounded-2xl bg-bone p-5 sm:p-6">
               <Image
-                src={asset("/logo.png")}
+                src={asset("/logo.webp")}
                 alt="Functional Massage Therapy"
                 width={360}
                 height={257}
