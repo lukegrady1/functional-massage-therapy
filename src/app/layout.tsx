@@ -18,19 +18,41 @@ const body = Manrope({
   weight: ["400", "500", "600", "700"],
 });
 
+// Deployed site origin + repo subpath (set in CI). OG images must be
+// absolute URLs that crawlers can fetch, so build the full path here.
+const siteOrigin = "https://lukegrady1.github.io";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const ogImageUrl = `${siteOrigin}${basePath}/og-image.png`;
+
+const description =
+  "Results-driven massage therapy for athletes, weekend warriors, and anyone living with chronic pain. A functional, whole-body approach in Sturbridge, MA with Lauren.";
+
 export const metadata: Metadata = {
   title: {
     default: "Functional Massage Therapy | Sturbridge, MA",
     template: "%s | Functional Massage Therapy",
   },
-  description:
-    "Results-driven massage therapy for athletes, weekend warriors, and anyone living with chronic pain. A functional, whole-body approach in Sturbridge, MA with Lauren.",
-  metadataBase: new URL("https://functionalmassagetherapy.com"),
+  description,
+  metadataBase: new URL(`${siteOrigin}${basePath}`),
   openGraph: {
     title: "Functional Massage Therapy | Sturbridge, MA",
     description:
       "Results-driven, functional massage therapy for athletes and chronic pain. Book with Lauren in Sturbridge, MA.",
     type: "website",
+    images: [
+      {
+        url: ogImageUrl,
+        width: 1200,
+        height: 630,
+        alt: "Functional Massage Therapy",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Functional Massage Therapy | Sturbridge, MA",
+    description,
+    images: [ogImageUrl],
   },
 };
 
