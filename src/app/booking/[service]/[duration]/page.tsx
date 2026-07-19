@@ -184,8 +184,14 @@ export default async function BookingTierPage({ params }: Params) {
               </div>
 
               <p className="px-1 text-[0.95rem] leading-relaxed text-muted">
-                Not the right session? Call me at {site.phone} and we’ll figure
-                it out together.
+                Not the right session? Call me at{" "}
+                <a
+                  href={site.phoneHref}
+                  className="font-semibold text-espresso underline decoration-copper/40 underline-offset-4 transition-colors duration-200 hover:text-copper hover:decoration-copper"
+                >
+                  {site.phone}
+                </a>{" "}
+                and we’ll figure it out together.
               </p>
             </aside>
           </Reveal>

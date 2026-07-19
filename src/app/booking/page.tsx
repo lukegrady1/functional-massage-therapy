@@ -47,8 +47,14 @@ export default function BookingPage() {
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
             Choose a session and length below, then pick a time that works for
-            you. Prefer to talk first? Call me at {site.phone} and we’ll find the
-            right session together.
+            you. Prefer to talk first? Call me at{" "}
+            <a
+              href={site.phoneHref}
+              className="font-semibold text-espresso underline decoration-copper/40 underline-offset-4 transition-colors duration-200 hover:text-copper hover:decoration-copper"
+            >
+              {site.phone}
+            </a>{" "}
+            and we’ll find the right session together.
           </p>
         </div>
       </section>
