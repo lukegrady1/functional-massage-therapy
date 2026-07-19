@@ -1,19 +1,31 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { CalendarBlank } from "@phosphor-icons/react/dist/ssr";
 
 /*
   Quick-booking FAB from the Stitch mockup: calendar icon plus a permanent
   "Book Now" label, pinned bottom-right on phones.
 
-  No longer a client component — with the label always shown there is no state
-  or timer, so this renders on the server and ships no JavaScript. The visible
-  text is also the accessible name, so no aria-label is needed.
+  Hidden on /booking itself — the booking widget is already the whole page
+  there, so the FAB just floats over the calendar it would send you to.
+
+  That check is why this is a client component: it reads the current route.
+  It renders no state or timers otherwise, so the hook is the only JS here.
+  `usePathname` strips basePath, so this still matches under the GitHub Pages
+  subpath, but `trailingSlash: true` means it returns "/booking/" — hence the
+  trailing slash is trimmed before comparing.
 
   Hidden at `lg` rather than Stitch's `md` because that is where this site's
   nav switches to the desktop bar with its own Book Now button; matching the
   breakpoint literally would leave tablet widths with no visible booking CTA.
 */
 export function BookingFab() {
+  const pathname = usePathname();
+
+  if (pathname.replace(/\/+$/, "") === "/booking") return null;
+
   return (
     <Link
       href="/booking"

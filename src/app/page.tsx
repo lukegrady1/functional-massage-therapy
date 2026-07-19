@@ -51,8 +51,18 @@ export default function Home() {
   return (
     <>
       {/* ---------- HERO ---------- */}
-      <section className="relative isolate flex min-h-[clamp(460px,68vh,760px)] items-center overflow-hidden">
+      {/*
+        Fills the viewport below the 96px sticky nav so the next section never
+        peeks in. svh (not vh) so mobile browser chrome doesn't push it over.
+      */}
+      <section className="relative isolate flex min-h-[clamp(560px,calc(100svh-96px),900px)] items-start overflow-hidden sm:items-center">
         <div className="absolute inset-0 -z-10">
+          {/*
+            The photo is landscape and the phone viewport is portrait, so
+            object-cover keeps the full height and crops the sides to a narrow
+            column. Centred, that column is the window and curtain; 68% lands
+            on the treatment table, which is the actual subject.
+          */}
           <Image
             src={asset("/treatment-room.webp")}
             alt=""
@@ -60,9 +70,14 @@ export default function Home() {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center"
+            className="object-cover object-[68%_center] sm:object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-bone via-bone/85 to-bone/20 sm:to-transparent" />
+          {/*
+            Scrim runs with the text. On desktop the copy sits left, so the
+            bone fades left-to-right; on mobile it sits up top, so it fades
+            top-to-bottom and leaves the lower half of the room visible.
+          */}
+          <div className="absolute inset-0 bg-gradient-to-b from-bone via-bone/90 to-bone/25 sm:bg-gradient-to-r sm:from-bone sm:via-bone/85 sm:to-transparent" />
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-bone to-transparent" />
         </div>
 
@@ -71,7 +86,7 @@ export default function Home() {
           into the SSR markup, so anything above the fold stays invisible
           until hydration. The hero renders immediately and static.
         */}
-        <div className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 sm:py-20">
+        <div className="mx-auto w-full max-w-7xl px-5 pt-10 pb-14 sm:px-8 sm:py-20">
           <div className="max-w-xl">
             <h1 className="t-headline-xl text-espresso">
               Clinical Excellence in Therapeutic{" "}
@@ -82,7 +97,12 @@ export default function Home() {
               function and vitality. Experience a tailored approach to recovery
               and chronic pain management.
             </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            {/*
+              Buttons sit inline and size to their label. Stacked full-width
+              they read as a form, and the second one competes with the primary
+              for weight it does not deserve.
+            */}
+            <div className="mt-8 flex flex-wrap items-center gap-3 sm:mt-9">
               <Button href="/booking">
                 Book a Session
                 <ArrowRight size={18} weight="bold" />

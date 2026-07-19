@@ -34,8 +34,23 @@ function initials(name: string) {
     .toUpperCase();
 }
 
+/*
+  Phone widths are sized so two cards fit with a peek of the third. Three at a
+  time was asked for but does not survive the arithmetic: on a 390px screen that
+  is ~120px per card, and a 100-character quote wraps to ten lines of a dozen
+  characters. Two at ~44vw leaves enough measure to read. The padding and type
+  scale down with it — p-8 on a 172px card spends most of the width on air.
+
+  Everything from `sm` up is unchanged; desktop was already right.
+*/
+/*
+  No `h-full` here. It reads like "match the tallest card" but does the
+  opposite: an explicit height opts a flex item out of `align-items: stretch`,
+  so the short draft cards sat at content height next to a full quote. Letting
+  stretch apply is what actually equalises them.
+*/
 const cardBase =
-  "mr-4 flex h-full w-[78vw] max-w-sm shrink-0 flex-col rounded-3xl p-8 sm:mr-5 sm:w-[19rem] sm:max-w-none lg:w-[23.5rem] sm:min-h-[18rem] sm:p-10";
+  "mr-3 flex w-[44vw] shrink-0 flex-col rounded-3xl p-5 sm:mr-5 sm:w-[19rem] lg:w-[23.5rem] sm:min-h-[18rem] sm:p-10";
 
 function Card({ t }: { t: Testimonial }) {
   if (t.draft) {
@@ -43,9 +58,11 @@ function Card({ t }: { t: Testimonial }) {
       <div
         className={`${cardBase} items-center justify-center border-2 border-dashed border-line text-center`}
       >
-        <Quotes size={28} weight="fill" className="text-line" />
-        <p className="mt-4 font-semibold text-muted">Awaiting client feedback</p>
-        <p className="mt-2 text-sm leading-relaxed text-muted/70">
+        <Quotes weight="fill" className="h-5 w-5 text-line sm:h-7 sm:w-7" />
+        <p className="mt-3 text-sm font-semibold text-muted sm:mt-4 sm:text-base">
+          Awaiting client feedback
+        </p>
+        <p className="mt-2 text-xs leading-relaxed text-muted/70 sm:text-sm">
           Add a real, permissioned quote in{" "}
           <code className="font-mono text-[0.8rem]">lib/site.ts</code>.
         </p>
@@ -55,18 +72,21 @@ function Card({ t }: { t: Testimonial }) {
 
   return (
     <figure className={`${cardBase} surface-raised`}>
-      <Quotes size={28} weight="fill" className="text-copper" />
-      <blockquote className="mt-5 flex-1 leading-relaxed text-ink">
+      <Quotes
+        weight="fill"
+        className="h-5 w-5 shrink-0 text-copper sm:h-7 sm:w-7"
+      />
+      <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-ink sm:mt-5 sm:text-base">
         {t.quote}
       </blockquote>
-      <figcaption className="mt-8 flex items-center gap-4">
+      <figcaption className="mt-5 flex items-center gap-2.5 sm:mt-8 sm:gap-4">
         <span
           aria-hidden
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-espresso text-sm font-semibold text-bone"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-espresso text-xs font-semibold text-bone sm:h-11 sm:w-11 sm:text-sm"
         >
           {initials(t.name)}
         </span>
-        <span className="text-sm">
+        <span className="min-w-0 text-xs sm:text-sm">
           <span className="block font-semibold text-espresso">{t.name}</span>
           <span className="block text-muted">{t.context}</span>
         </span>
