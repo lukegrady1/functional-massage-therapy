@@ -208,7 +208,7 @@ body {
 
   Opt-in via `.btn-arrow` rather than applying to every `.press`: a leading
   icon is also `svg:last-child` when it is the only element child, and the
-  contact form's submit swaps in a spinning icon whose `animate-spin` owns
+  enquiry form's submit swaps in a spinning icon whose `animate-spin` owns
   the transform property outright.
 */
 .btn-arrow > svg:last-child {

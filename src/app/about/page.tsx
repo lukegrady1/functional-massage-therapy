@@ -66,19 +66,14 @@ export default function AboutPage() {
               aria-hidden
               className="edge-petal absolute -left-4 -top-4 hidden h-full w-full bg-tan sm:block"
             />
-            {/*
-              The source photo is landscape (1206x918). A tall 4:5 frame with
-              object-top crops to the wall above her head, so the frame is kept
-              square and the focal point pulled slightly above center.
-            */}
             <div className="edge-petal relative aspect-square w-full overflow-hidden shadow-[0_24px_60px_-24px_rgb(51_38_28_/_0.4)]">
               <Image
-                src={asset("/lauren-portrait.webp")}
-                alt="Lauren, owner and licensed massage therapist"
+                src={asset("/treatment-in-progress.webp")}
+                alt="A treatment session in progress"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 40vw"
-                className="object-cover object-[50%_35%]"
+                className="object-cover object-center"
               />
             </div>
           </div>

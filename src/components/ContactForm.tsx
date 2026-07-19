@@ -14,7 +14,7 @@ export function ContactForm({
     coaching leads land in a separate GoHighLevel pipeline from massage
     booking enquiries, rather than all landing in one bucket.
   */
-  source = "contact-page",
+  source = "site",
   heading,
 }: {
   source?: string;

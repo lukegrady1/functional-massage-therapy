@@ -25,7 +25,6 @@ export const nav = [
   { label: "Services", href: "/services" },
   { label: "Coaching", href: "/coaching" },
   { label: "Booking", href: "/booking" },
-  { label: "Contact", href: "/contact" },
 ] as const;
 
 export const hours = [

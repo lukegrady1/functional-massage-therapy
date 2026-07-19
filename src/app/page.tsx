@@ -3,56 +3,47 @@ import Link from "next/link";
 import {
   ArrowRight,
   Barbell,
-  PersonSimpleRun,
-  HeartHalf,
+  HandHeart,
+  PersonSimpleTaiChi,
   MapPin,
   CheckCircle,
 } from "@phosphor-icons/react/dist/ssr";
+import type { Icon } from "@phosphor-icons/react";
 import { Button } from "@/components/Button";
 import { Eyebrow } from "@/components/Eyebrow";
 import { Reveal } from "@/components/Reveal";
 import { CtaBand } from "@/components/CtaBand";
 import { Testimonials } from "@/components/Testimonials";
 import { services, hours, site } from "@/lib/site";
-import { toneStyles } from "@/lib/tones";
 import { asset } from "@/lib/asset";
 
-const audiences = [
-  { icon: Barbell, label: "Lifters & powerlifters" },
-  { icon: PersonSimpleRun, label: "Runners & field athletes" },
-  { icon: HeartHalf, label: "Living with chronic pain" },
-];
+/*
+  Page composition follows the Stitch mockup section for section — hero over a
+  scrim, philosophy bento, three featured service cards, coaching spotlight,
+  testimonials, closing CTA — on this site's espresso/copper palette rather
+  than Stitch's forest green.
 
-const credentials = [
-  "Licensed massage therapist since 2020",
-  "Pre-season sports massage, Boston College D1 football",
-  "Competitive powerlifting background",
-  "Cupping & assisted stretch certified",
-];
+  Two sections have no Stitch equivalent and are kept because a local practice
+  cannot do without them: the numbered approach, and location + hours.
+*/
+
+const serviceIcons: Record<string, Icon> = {
+  "sports-recovery": Barbell,
+  "deep-tissue": HandHeart,
+  "functional-therapeutic": PersonSimpleTaiChi,
+};
+
+// Stitch features three services and sends the rest to the services page.
+const featured = services.filter((s) => s.slug in serviceIcons);
 
 const principles = [
   {
-    title: "Assessment first",
+    title: "Evidence-based assessment",
     body: "Every session starts with how you actually move, not a fixed routine.",
   },
   {
     title: "Integrated recovery",
     body: "Hands-on work paired with the self-care that holds it between visits.",
-  },
-];
-
-const coachingPoints = [
-  {
-    title: "Movement audit",
-    body: "We map the patterns loading the tissue we keep having to treat.",
-  },
-  {
-    title: "Load & recovery plan",
-    body: "Training, sleep, and desk setup adjusted around what your body tolerates.",
-  },
-  {
-    title: "Between-session work",
-    body: "A short, specific routine you will actually do, reviewed as you progress.",
   },
 ];
 
@@ -77,13 +68,7 @@ const approach = [
 export default function Home() {
   return (
     <>
-      {/*
-        ---------- HERO: full-bleed room, text held on a scrim ----------
-        The photograph carries the atmosphere, so it runs edge to edge rather
-        than sitting in a shaped frame. A directional scrim keeps the left
-        column opaque enough for AA text contrast while the right side of the
-        room stays legible.
-      */}
+      {/* ---------- HERO ---------- */}
       <section className="relative isolate flex min-h-[clamp(560px,78vh,760px)] items-center overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <Image
@@ -95,8 +80,6 @@ export default function Home() {
             sizes="100vw"
             className="object-cover object-center"
           />
-          {/* Two scrims: one horizontal for the text column, one to seat the
-              photo into the page background at the bottom edge. */}
           <div className="absolute inset-0 bg-gradient-to-r from-bone via-bone/85 to-bone/20 sm:to-transparent" />
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-bone to-transparent" />
         </div>
@@ -108,7 +91,10 @@ export default function Home() {
         */}
         <div className="mx-auto w-full max-w-7xl px-5 py-20 sm:px-8">
           <div className="max-w-xl">
-            <Eyebrow>Sturbridge, MA</Eyebrow>
+            {/* Stitch marks the hero with a filled pill, not a rule. */}
+            <span className="inline-block rounded-full bg-tan px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-espresso">
+              Sturbridge, MA
+            </span>
             <h1 className="mt-6 font-display text-[2.9rem] font-semibold leading-[1.04] tracking-[-0.02em] text-espresso sm:text-6xl lg:text-[4.1rem]">
               Tailored massage that helps you{" "}
               <em className="italic text-copper">heal</em>.
@@ -130,30 +116,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- PHILOSOPHY: text column + image mosaic ---------- */}
+      {/* ---------- PHILOSOPHY: 5/7 split, text + image mosaic ---------- */}
       <section className="texture-linen bg-surface">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-12 lg:gap-16 lg:py-28">
           <div className="lg:col-span-5">
             <Reveal>
-              <Eyebrow>The practice</Eyebrow>
-            </Reveal>
-            <Reveal delay={0.06}>
-              <h2 className="mt-6 font-display text-3xl font-semibold leading-[1.12] tracking-[-0.02em] text-espresso sm:text-[2.6rem]">
-                Hi, I’m Lauren. This is a small but mighty practice.
+              <h2 className="font-display text-3xl font-semibold leading-[1.12] tracking-[-0.02em] text-espresso sm:text-[2.6rem]">
+                Our philosophy
               </h2>
             </Reveal>
-            <Reveal delay={0.12}>
+            <Reveal delay={0.06}>
               <p className="mt-6 max-w-[52ch] leading-relaxed text-muted">
-                My background is in fitness, competitive powerlifting, and
-                healthy living. I furthered my education in massage therapy in
-                2020, and at Boston College I worked with their D1 football team
-                on pre-season sports massage and recovery.
+                We move past relaxation to address the mechanics underneath.
+                The functional approach pairs anatomical precision with years
+                on the platform and on the sidelines, so the work targets the
+                pattern behind the pain rather than the spot that hurts.
               </p>
             </Reveal>
 
             <ul className="mt-8 flex flex-col gap-5">
               {principles.map((p, i) => (
-                <Reveal as="li" key={p.title} delay={0.18 + i * 0.06}>
+                <Reveal as="li" key={p.title} delay={0.12 + i * 0.06}>
                   <div className="flex items-start gap-4">
                     <CheckCircle
                       size={22}
@@ -171,12 +154,12 @@ export default function Home() {
               ))}
             </ul>
 
-            <Reveal delay={0.32}>
+            <Reveal delay={0.26}>
               <Link
                 href="/about"
                 className="group mt-9 inline-flex items-center gap-2 font-semibold text-espresso transition-colors duration-200 hover:text-copper"
               >
-                Read Lauren’s full story
+                Meet Lauren
                 <ArrowRight
                   size={18}
                   weight="bold"
@@ -186,45 +169,31 @@ export default function Home() {
             </Reveal>
           </div>
 
-          {/*
-            Mosaic: one tall portrait beside a stacked pair. The quote tile
-            fills the fourth slot so the grid resolves without needing a
-            photograph the practice does not have.
-          */}
-          {/*
-            Portrait takes the wider 3/5 column. A narrower one forces
-            object-cover to crop into the face far harder than reads well.
-          */}
-          <div className="grid gap-4 sm:grid-cols-5 lg:col-span-7 lg:h-[30rem]">
-            <Reveal className="h-full sm:col-span-3">
-              <div className="reveal-image shadow-ambient relative h-72 w-full overflow-hidden rounded-2xl sm:h-full">
+          {/* Tall image beside a stacked pair, per Stitch. */}
+          <div className="grid gap-4 sm:grid-cols-2 lg:col-span-7 lg:h-[31rem]">
+            <Reveal className="h-full">
+              <div className="reveal-image shadow-ambient relative h-64 w-full overflow-hidden rounded-2xl sm:h-full">
                 <Image
-                  src={asset("/lauren-portrait.webp")}
-                  alt="Lauren, owner and licensed massage therapist"
+                  src={asset("/hands-detail.webp")}
+                  alt="Close detail of hands working into the muscles of a back"
                   fill
-                  sizes="(max-width: 1024px) 100vw, 34vw"
-                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, 30vw"
+                  className="object-cover"
                 />
               </div>
             </Reveal>
 
-            <div className="grid gap-4 sm:col-span-2 sm:grid-rows-2">
-              {/*
-                A credential tile rather than a second photograph. The
-                practice's remaining images are dim phone snaps that fight the
-                palette; type on a tan ground says more and stays on-brand.
-              */}
+            <div className="grid gap-4 sm:grid-rows-2">
               <Reveal delay={0.08} className="h-full">
-                <ul className="flex h-full flex-col justify-center gap-3 rounded-2xl bg-tan p-8">
-                  {credentials.map((c) => (
-                    <li key={c} className="flex items-baseline gap-3">
-                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-espresso/45" />
-                      <span className="text-[0.95rem] font-medium text-espresso">
-                        {c}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="reveal-image shadow-ambient relative h-48 w-full overflow-hidden rounded-2xl sm:h-full">
+                  <Image
+                    src={asset("/eucalyptus-still-life.webp")}
+                    alt="Eucalyptus, a warm stone and treatment oil on a wood surface"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 30vw"
+                    className="object-cover"
+                  />
+                </div>
               </Reveal>
 
               <Reveal delay={0.16} className="h-full">
@@ -242,76 +211,80 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- SERVICES: tone-differentiated cards ---------- */}
-      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-        <Reveal>
-          <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-            <h2 className="max-w-xl font-display text-3xl font-semibold leading-[1.12] tracking-[-0.02em] text-espresso sm:text-[2.6rem]">
-              Bodywork built around results
-            </h2>
-            <Link
-              href="/services"
-              className="group inline-flex shrink-0 items-center gap-2 font-semibold text-espresso transition-colors duration-200 hover:text-copper"
-            >
-              View all services
-              <ArrowRight
-                size={18}
-                weight="bold"
-                className="transition-transform duration-200 ease-out group-hover:translate-x-1"
-              />
-            </Link>
-          </div>
-        </Reveal>
+      {/* ---------- FEATURED SERVICES: centered heading, 3 cards ---------- */}
+      <section className="surface-inset">
+        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+          <Reveal>
+            <div className="mx-auto max-w-xl text-center">
+              <h2 className="font-display text-3xl font-semibold leading-[1.12] tracking-[-0.02em] text-espresso sm:text-[2.6rem]">
+                Featured services
+              </h2>
+              <p className="mt-4 leading-relaxed text-muted">
+                Treatments built for restoration, pain management, and athletic
+                maintenance.
+              </p>
+            </div>
+          </Reveal>
 
-        <div className="mt-12 grid gap-5 lg:grid-cols-2">
-          {services.map((s, i) => {
-            const t = toneStyles[s.tone];
-            return (
-              <Reveal key={s.slug} delay={i * 0.06} className="group">
-                <Link
-                  href="/services"
-                  className={`${t.cell} lift shadow-ambient flex h-full flex-col rounded-3xl p-8 sm:p-10`}
-                >
-                  <span
-                    className={`${t.rule} mb-6 block h-px w-10 origin-left transition-transform duration-300 ease-out group-hover:scale-x-[2.4]`}
-                  />
-                  <span
-                    className={`${t.meta} text-xs font-semibold uppercase tracking-[0.16em]`}
+          {/*
+            Uniform paper cards rather than the tone-per-service treatment.
+            Stitch's grid reads as one menu of equals; the tonal system still
+            differentiates the rows on the services page itself.
+          */}
+          <div className="mt-14 grid gap-5 md:grid-cols-3">
+            {featured.map((s, i) => {
+              const Icon = serviceIcons[s.slug];
+              return (
+                <Reveal key={s.slug} delay={i * 0.06} className="group h-full">
+                  <Link
+                    href={`/services#${s.slug}`}
+                    className="lift shadow-ambient flex h-full flex-col rounded-3xl border border-line/60 bg-surface p-8 sm:p-10"
                   >
-                    {s.durations}
-                  </span>
-                  <h3 className="mt-2 font-display text-2xl font-semibold tracking-[-0.01em]">
-                    {s.name}
-                  </h3>
-                  <p className={`${t.body} mt-3 max-w-md leading-relaxed`}>
-                    {s.summary}
-                  </p>
+                    <Icon size={34} className="text-copper" />
+                    <span className="mt-6 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
+                      {s.durations}
+                    </span>
+                    <h3 className="mt-2 font-display text-2xl font-semibold tracking-[-0.01em] text-espresso">
+                      {s.name}
+                    </h3>
+                    <p className="mt-3 leading-relaxed text-muted">
+                      {s.summary}
+                    </p>
 
-                  <ul className="mt-6 flex flex-wrap gap-2">
-                    {s.bestFor.map((b) => (
-                      <li
-                        key={b}
-                        className={`${t.chip} rounded-full px-3 py-1.5 text-xs font-medium`}
-                      >
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
+                    <ul className="mt-6 mb-8 flex flex-col gap-2.5">
+                      {s.bestFor.map((b) => (
+                        <li
+                          key={b}
+                          className="flex items-center gap-2.5 text-sm text-muted"
+                        >
+                          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-copper" />
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
 
-                  {/* Inherits the cell's full-contrast text color rather than
-                      the muted `meta` tone: this is the card's call to action. */}
-                  <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold">
-                    Learn more
-                    <ArrowRight
-                      size={16}
-                      weight="bold"
-                      className="transition-transform duration-200 ease-out group-hover:translate-x-1"
-                    />
-                  </span>
-                </Link>
-              </Reveal>
-            );
-          })}
+                    <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-espresso">
+                      Learn more
+                      <ArrowRight
+                        size={16}
+                        weight="bold"
+                        className="transition-transform duration-200 ease-out group-hover:translate-x-1"
+                      />
+                    </span>
+                  </Link>
+                </Reveal>
+              );
+            })}
+          </div>
+
+          <Reveal delay={0.2}>
+            <div className="mt-12 flex justify-center">
+              <Button href="/services" variant="outline">
+                View all services
+                <ArrowRight size={18} weight="bold" />
+              </Button>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -336,8 +309,8 @@ export default function Home() {
             <Reveal delay={0.18}>
               <div className="reveal-image relative mt-10 hidden aspect-[4/3] w-full max-w-md overflow-hidden rounded-2xl lg:block">
                 <Image
-                  src={asset("/hands-detail.webp")}
-                  alt="Close detail of hands working into the muscles of a client's back"
+                  src={asset("/treatment-in-progress.webp")}
+                  alt="A treatment session in progress"
                   fill
                   sizes="34vw"
                   className="object-cover"
@@ -371,7 +344,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- COACHING SPOTLIGHT: inset panel, split ---------- */}
+      {/* ---------- COACHING SPOTLIGHT: half text, half image ---------- */}
       <section className="overflow-hidden bg-surface">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
           <Reveal>
@@ -379,7 +352,7 @@ export default function Home() {
               <div className="flex flex-col justify-center p-10 sm:p-14 lg:w-1/2 lg:p-16">
                 <Eyebrow onDark>Coaching program</Eyebrow>
                 <h2 className="mt-6 font-display text-3xl font-semibold leading-[1.1] tracking-[-0.02em] text-bone sm:text-[2.6rem]">
-                  Beyond the table
+                  Beyond the table: integrated wellness
                 </h2>
                 <p className="mt-6 max-w-md text-lg leading-relaxed text-bone/70">
                   The table is where we find the pattern. Coaching is where it
@@ -394,79 +367,23 @@ export default function Home() {
                 </div>
               </div>
 
-              {/*
-                Numbered panel instead of a photograph: the coaching offer is
-                a process, and showing the steps sells it better than a stock
-                shot of two people with a tablet.
-              */}
-              <div className="bloom-warm flex flex-col justify-center gap-px bg-espresso p-10 sm:p-14 lg:w-1/2 lg:p-16">
-                {coachingPoints.map((c, i) => (
-                  <div
-                    key={c.title}
-                    className="border-t border-bone/12 py-6 first:border-t-0 first:pt-0 last:pb-0"
-                  >
-                    <span className="font-display text-sm font-semibold text-copper-light">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="mt-1 font-display text-xl font-semibold text-bone">
-                      {c.title}
-                    </h3>
-                    <p className="mt-1.5 text-[0.95rem] leading-relaxed text-bone/65">
-                      {c.body}
-                    </p>
-                  </div>
-                ))}
+              <div className="relative min-h-[320px] lg:min-h-[480px] lg:w-1/2">
+                <Image
+                  src={asset("/athlete-stretch.webp")}
+                  alt="An athlete moving through a mobility routine"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
               </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/*
-        ---------- INTERLUDE: full-bleed image band ----------
-        A breath between the two dense sections, and the one place the page
-        lets a photograph run at full width.
-      */}
-      <section
-        aria-hidden
-        className="relative h-[280px] overflow-hidden sm:h-[380px]"
-      >
-        <Image
-          src={asset("/treatment-in-progress.webp")}
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-espresso/45" />
-        <div className="absolute inset-0 flex items-center justify-center px-6">
-          <p className="max-w-2xl text-center font-display text-2xl font-semibold italic leading-snug text-bone sm:text-[2.25rem]">
-            Slow, deliberate work — and a plan for what happens after you get
-            off the table.
-          </p>
-        </div>
-      </section>
-
-      {/* ---------- AUDIENCE CHIPS ---------- */}
-      <section className="surface-inset">
-        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
-          <Reveal className="flex flex-wrap justify-center gap-3">
-            {audiences.map((a) => (
-              <span
-                key={a.label}
-                className="surface-raised inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 text-sm font-semibold text-espresso"
-              >
-                <a.icon size={18} weight="bold" className="text-copper" />
-                {a.label}
-              </span>
-            ))}
-          </Reveal>
-        </div>
-      </section>
-
       <Testimonials />
 
-      {/* ---------- LOCATION & HOURS: split, raised hours panel ---------- */}
+      {/* ---------- LOCATION & HOURS ---------- */}
       <section className="bloom-warm">
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:gap-16 lg:py-28">
           <div>
@@ -499,7 +416,8 @@ export default function Home() {
             </Reveal>
             <Reveal delay={0.18}>
               <div className="mt-8">
-                <Button href="/contact" variant="outline">
+                {/* Straight to Maps now that there is no contact page. */}
+                <Button href={site.mapsHref} variant="outline" external>
                   Get directions
                 </Button>
               </div>
