@@ -51,7 +51,7 @@ export default function Home() {
   return (
     <>
       {/* ---------- HERO ---------- */}
-      <section className="relative isolate flex min-h-[clamp(560px,78vh,760px)] items-center overflow-hidden">
+      <section className="relative isolate flex min-h-[clamp(460px,68vh,760px)] items-center overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <Image
             src={asset("/treatment-room.webp")}
@@ -150,9 +150,9 @@ export default function Home() {
           </div>
 
           {/* Tall image beside a stacked pair, per Stitch. */}
-          <div className="grid gap-4 sm:grid-cols-2 lg:col-span-7 lg:h-[31rem]">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:col-span-7 lg:h-[31rem]">
             <Reveal className="h-full">
-              <div className="reveal-image shadow-ambient relative h-64 w-full overflow-hidden rounded-2xl sm:h-full">
+              <div className="reveal-image shadow-ambient relative h-56 w-full overflow-hidden rounded-2xl sm:h-64 lg:h-full">
                 <Image
                   src={asset("/hands-detail.webp")}
                   alt="Close detail of hands working into the muscles of a back"
@@ -163,9 +163,9 @@ export default function Home() {
               </div>
             </Reveal>
 
-            <div className="grid gap-4 sm:grid-rows-2">
+            <div className="contents sm:grid sm:gap-4 sm:grid-rows-2">
               <Reveal delay={0.08} className="h-full">
-                <div className="reveal-image shadow-ambient relative h-48 w-full overflow-hidden rounded-2xl sm:h-full">
+                <div className="reveal-image shadow-ambient relative h-56 w-full overflow-hidden rounded-2xl sm:h-full">
                   <Image
                     src={asset("/eucalyptus-still-life.webp")}
                     alt="Eucalyptus, a warm stone and treatment oil on a wood surface"
@@ -176,8 +176,8 @@ export default function Home() {
                 </div>
               </Reveal>
 
-              <Reveal delay={0.16} className="h-full">
-                <figure className="flex h-full flex-col justify-end rounded-2xl bg-espresso p-8 text-bone">
+              <Reveal delay={0.16} className="col-span-2 h-full sm:col-span-1">
+                <figure className="flex h-full flex-col justify-end rounded-2xl bg-espresso p-6 text-bone sm:p-8">
                   <blockquote className="t-headline-md italic">
                     &ldquo;Movement is the song of the body.&rdquo;
                   </blockquote>
@@ -211,11 +211,20 @@ export default function Home() {
             Stitch's grid reads as one menu of equals; the tonal system still
             differentiates the rows on the services page itself.
           */}
-          <div className="mt-14 grid gap-5 md:grid-cols-3">
+          {/*
+            Phones get a snap-scrolling row; sm and up get the Stitch grid.
+            The negative margin lets the row bleed to the screen edges while
+            the padding keeps the first and last cards aligned to the text.
+          */}
+          <div className="no-scrollbar -mx-5 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-1 sm:mx-0 sm:mt-14 sm:grid sm:grid-cols-3 sm:gap-5 sm:overflow-visible sm:px-0">
             {featured.map((s, i) => {
               const Icon = serviceIcons[s.slug];
               return (
-                <Reveal key={s.slug} delay={i * 0.06} className="group h-full">
+                <Reveal
+                  key={s.slug}
+                  delay={i * 0.06}
+                  className="group h-full w-[85%] shrink-0 snap-start sm:w-auto"
+                >
                   <Link
                     href={`/services#${s.slug}`}
                     className="lift shadow-ambient flex h-full flex-col rounded-3xl border border-line/60 bg-surface p-8 sm:p-10"

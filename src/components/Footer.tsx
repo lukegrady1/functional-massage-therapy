@@ -36,7 +36,7 @@ export function Footer() {
         Extra bottom padding on phones so the fixed booking FAB (bottom-6 plus
         a 56px button) does not sit on top of the last row of links.
       */}
-      <div className="mx-auto max-w-7xl px-5 pt-12 pb-28 sm:px-8 sm:py-16 lg:py-20">
+      <div className="mx-auto max-w-7xl px-5 pt-10 pb-24 sm:px-8 sm:py-16 lg:py-20">
         {/*
           Two blocks rather than four equal columns. Previously the map sat as
           a fourth column, which left a dead gap through the middle of the row
@@ -47,23 +47,23 @@ export function Footer() {
           block, and the map takes the narrow one. The stacked left side is
           about as tall as the square, so the two read as a balanced pair.
         */}
-        <div className="grid gap-12 lg:grid-cols-[1.75fr_1fr] lg:gap-16">
+        <div className="grid gap-8 sm:gap-12 lg:grid-cols-[1.75fr_1fr] lg:gap-16">
           <div>
-            <div className="inline-flex rounded-xl bg-bone p-3">
+            <div className="inline-flex rounded-xl bg-bone p-2.5 sm:p-3">
               <Image
                 src={asset("/logo.webp")}
                 alt="Functional Massage Therapy"
                 width={360}
                 height={257}
-                className="h-16 w-auto"
+                className="h-12 w-auto sm:h-16"
               />
             </div>
-            <p className="mt-5 max-w-sm text-[0.95rem] leading-relaxed text-bone/70">
+            <p className="mt-4 max-w-sm text-[0.95rem] leading-relaxed text-bone/70 sm:mt-5">
               Professional manual therapy and movement coaching dedicated to
               restoring your body&rsquo;s natural state of vitality.
             </p>
 
-            <div className="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-6">
+            <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-8 sm:mt-10 sm:grid-cols-3 sm:gap-6">
               <div>
                 <h3 className={columnHeading}>Explore</h3>
                 <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2.5 sm:flex-col sm:gap-2.5">
@@ -109,14 +109,20 @@ export function Footer() {
                 </a>
               </div>
 
-              <div>
+              <div className="col-span-2 sm:col-span-1">
                 <h3 className={columnHeading}>Hours</h3>
                 <ul className="mt-4 flex flex-col gap-2.5">
                   {schedule.map((h) => {
                     const closed = h.open === "Closed";
                     return (
-                      <li key={h.label} className="text-[0.9rem] leading-snug">
-                        <span className="block text-bone/55">{h.label}</span>
+                      <li
+                        key={h.label}
+                        className="flex items-baseline justify-between gap-3 text-[0.9rem] leading-snug sm:block"
+                      >
+                        {/* sm:block so the day sits above the time again in
+                            the narrow desktop column — inline there ran them
+                            together as "Mon - TueClosed". */}
+                        <span className="text-bone/55 sm:block">{h.label}</span>
                         <span
                           className={
                             closed
@@ -139,13 +145,33 @@ export function Footer() {
             homepage so the page keeps the Stitch section list exactly, while
             address, hours and map still sit together.
           */}
-          <LocationMap className="aspect-square w-full max-w-sm lg:max-w-none lg:self-start" />
+          {/* Uncapped: the wider it is on a phone, the closer it gets to the
+              ~400px where Google restores the business info card. */}
+          <LocationMap className="aspect-[4/3] w-full sm:aspect-square lg:self-start" />
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-bone/15 pt-7 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-bone/55">
-            &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
-          </p>
+        <div className="mt-10 flex flex-col gap-4 border-t border-bone/15 pt-6 sm:mt-12 sm:pt-7 sm:flex-row sm:items-center sm:justify-between">
+          {/*
+            Credit line inherits the copyright's colour so the row reads as one
+            block of fine print; only the studio name lifts on hover.
+          */}
+          <div className="flex flex-col gap-1 text-sm text-bone/55">
+            <p>
+              &copy; {new Date().getFullYear()} {site.name}. All rights
+              reserved.
+            </p>
+            <p>
+              Designed by{" "}
+              <a
+                href="https://gradydigital.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors duration-200 hover:text-copper-light"
+              >
+                Grady Digital
+              </a>
+            </p>
+          </div>
           <Link
             href="/booking"
             className="press inline-flex items-center gap-1.5 text-sm font-semibold text-bone hover:text-copper-light"

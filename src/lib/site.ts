@@ -81,6 +81,9 @@ export const testimonials: Testimonial[] = [
   },
   { quote: "", name: "", context: "", draft: true },
   { quote: "", name: "", context: "", draft: true },
+  { quote: "", name: "", context: "", draft: true },
+  { quote: "", name: "", context: "", draft: true },
+  { quote: "", name: "", context: "", draft: true },
 ];
 
 /* ------------------------------------------------------------------------

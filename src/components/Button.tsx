@@ -9,7 +9,7 @@ type Variant = "primary" | "outline" | "outlineLight" | "light";
 const base =
   "press btn-arrow inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-tight whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper focus-visible:ring-offset-2 focus-visible:ring-offset-bone";
 
-const sizes = "px-7 py-3.5 text-[0.95rem]";
+const sizes = "px-4 py-3.5 text-[0.95rem] sm:px-7";
 
 // The hover lift itself lives in `.press`; these add the matching change in
 // elevation so the button reads as rising off the page rather than sliding up it.

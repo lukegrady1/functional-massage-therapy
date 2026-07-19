@@ -118,7 +118,6 @@ export default function ServicesPage() {
 
       <CtaBand
         title="Ready to feel the difference?"
-        primaryLabel="Book Now"
         secondary={false}
       />
     </>

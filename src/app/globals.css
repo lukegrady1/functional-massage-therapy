@@ -122,6 +122,54 @@ body {
   }
 }
 
+/*
+  CTA title, held to a single line on phones by scaling with the viewport.
+
+  Written here rather than as a Tailwind arbitrary value: `text-[min(6.6vw,2rem)]`
+  silently generates no CSS, because the comma inside min() breaks arbitrary
+  value parsing. The heading stayed at 32px and clipped.
+
+  5.5vw is measured, not guessed: at 5.9vw the longest title rendered 292px
+  against a 280px box on a 360px phone — 12px over. This leaves headroom.
+*/
+@media (max-width: 639px) {
+  .t-cta-title {
+    font-size: min(5.4vw, 2rem);
+    line-height: 1.25;
+    white-space: nowrap;
+  }
+}
+
+/*
+  Auto-scrolling review strip (phones).
+
+  The track holds the list twice and translates by exactly -50%, so the second
+  copy lands where the first began and the seam is invisible. Timing is linear
+  because constant motion must not ease — any curve reads as a stutter each
+  time the loop restarts.
+*/
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: marquee-x var(--marquee-duration, 60s) linear infinite;
+}
+/* Let people stop it to actually read a review. */
+.marquee:hover,
+.marquee:focus-within {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+  }
+}
+
 .t-headline-lg {
   font-family: var(--font-display);
   font-size: 32px;
@@ -305,6 +353,25 @@ body {
   .lift:hover {
     transform: translateY(-4px);
   }
+}
+
+/*
+  Swipeable card row (phones only — the same markup becomes a grid at sm).
+
+  Three full-width cards stacked cost ~1500px of scroll on a phone; as a row
+  they cost one card's height. Cards are sized to leave the next one peeking
+  at the edge, which is what tells people the row scrolls — a carousel whose
+  second card is fully offscreen just looks like a single card.
+
+  The scrollbar is hidden because the peeking card already signals it, and a
+  visible bar under a card row reads as a rendering artifact on mobile.
+*/
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 /*
