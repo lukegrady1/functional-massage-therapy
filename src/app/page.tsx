@@ -232,54 +232,92 @@ export default function Home() {
             differentiates the rows on the services page itself.
           */}
           {/*
-            Phones get a snap-scrolling row; sm and up get the Stitch grid.
-            The negative margin lets the row bleed to the screen edges while
-            the padding keeps the first and last cards aligned to the text.
+            Two arrangements of the same three cards.
+
+            At lg this is the Stitch grid — three tall cards side by side, each
+            carrying its bullets.
+
+            Below that they were a snap-scrolling row, one card at 85% width.
+            Two of the three services sat off-screen behind a horizontal swipe
+            nobody is obliged to notice, inside a page that otherwise scrolls
+            vertically, and each card ran 426px because it repeated its own
+            summary as bullets underneath itself.
+
+            Now they stack as compact rows: icon in a tinted badge, then price,
+            name, and a two-line summary. All three are visible at once with
+            nothing to swipe, the row is 150px, and the bullets — which only
+            restate the summary — are dropped rather than shrunk.
+
+            The grid waits for lg rather than sm because three columns need the
+            width. The old carousel also stopped at sm, which left 640-1024px
+            rendering the full card in a 185px column: "Functional Massage"
+            broke over two lines and the body set two or three words to a line.
+            The stacked rows carry that range far better.
           */}
-          <div className="no-scrollbar -mx-5 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-1 sm:mx-0 sm:mt-14 sm:grid sm:grid-cols-3 sm:gap-5 sm:overflow-visible sm:px-0">
+          <div className="mt-10 flex flex-col gap-3 lg:mt-14 lg:grid lg:grid-cols-3 lg:gap-5">
             {featured.map((s, i) => {
               const Icon = serviceIcons[s.slug];
               return (
-                <Reveal
-                  key={s.slug}
-                  delay={i * 0.06}
-                  className="group h-full w-[85%] shrink-0 snap-start sm:w-auto"
-                >
+                <Reveal key={s.slug} delay={i * 0.06} className="group h-full">
                   <Link
                     href={`/services#${s.slug}`}
-                    className="lift shadow-ambient flex h-full flex-col rounded-3xl border border-line/60 bg-surface p-8 sm:p-10"
+                    className="lift shadow-ambient flex h-full items-center gap-4 rounded-3xl border border-line/60 bg-surface p-5 lg:flex-col lg:items-stretch lg:gap-0 lg:p-10"
                   >
-                    <Icon size={34} className="text-copper" />
-                    <span className="mt-6 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-                      {priceLabel(s)}
-                    </span>
-                    <h3 className="mt-2 t-headline-md text-espresso">
-                      {s.name}
-                    </h3>
-                    <p className="mt-3 leading-relaxed text-muted">
-                      {s.summary}
-                    </p>
-
-                    <ul className="mt-6 mb-8 flex flex-col gap-2.5">
-                      {s.bestFor.map((b) => (
-                        <li
-                          key={b}
-                          className="flex items-center gap-2.5 text-sm text-muted"
-                        >
-                          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-copper" />
-                          {b}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-espresso">
-                      Learn more
-                      <ArrowRight
-                        size={16}
-                        weight="bold"
-                        className="transition-transform duration-200 ease-out group-hover:translate-x-1"
+                    {/*
+                      A filled badge on phones, where the icon anchors a short
+                      row and needs weight to hold the left edge; the bare mark
+                      from the Stitch card once it heads its own column.
+                    */}
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-tan lg:h-auto lg:w-auto lg:justify-start lg:rounded-none lg:bg-transparent">
+                      <Icon
+                        weight="regular"
+                        className="h-6 w-6 text-copper lg:h-[34px] lg:w-[34px]"
                       />
                     </span>
+
+                    <div className="min-w-0 flex-1 lg:flex lg:h-full lg:flex-col">
+                      <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-muted lg:mt-6">
+                        {priceLabel(s)}
+                      </span>
+                      <h3 className="mt-1 t-headline-md text-espresso lg:mt-2">
+                        {s.name}
+                      </h3>
+                      <p className="mt-1 line-clamp-2 leading-relaxed text-muted lg:mt-3 lg:line-clamp-none">
+                        {s.summary}
+                      </p>
+
+                      <ul className="mt-6 mb-8 hidden flex-col gap-2.5 lg:flex">
+                        {s.bestFor.map((b) => (
+                          <li
+                            key={b}
+                            className="flex items-center gap-2.5 text-sm text-muted"
+                          >
+                            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-copper" />
+                            {b}
+                          </li>
+                        ))}
+                      </ul>
+
+                      <span className="mt-auto hidden items-center gap-2 text-sm font-semibold text-espresso lg:inline-flex">
+                        Learn more
+                        <ArrowRight
+                          size={16}
+                          weight="bold"
+                          className="transition-transform duration-200 ease-out group-hover:translate-x-1"
+                        />
+                      </span>
+                    </div>
+
+                    {/*
+                      Phones carry the affordance as a bare chevron at the end
+                      of the row — "Learn more" would be a third line of text
+                      in a layout whose whole point is being short.
+                    */}
+                    <ArrowRight
+                      size={18}
+                      weight="bold"
+                      className="ml-auto shrink-0 text-muted lg:hidden"
+                    />
                   </Link>
                 </Reveal>
               );
