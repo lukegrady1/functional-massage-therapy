@@ -5,9 +5,18 @@ import { Reveal } from "@/components/Reveal";
 export function CtaBand({
   title = "Ready to Restore Your Motion?",
   body = "Join us for a session and discover the difference a clinical, functional approach can make in your life.",
+  primaryLabel = "Book Your Initial Consultation",
+  /*
+    The services page already *is* the service menu, so a "View Service Menu"
+    button there points back at the page you are on. It opts out and runs a
+    single centred booking CTA instead.
+  */
+  secondary = true,
 }: {
   title?: string;
   body?: string;
+  primaryLabel?: string;
+  secondary?: boolean;
 }) {
   return (
     // The band sits as a shaped panel inset from the page edge rather than a
@@ -29,16 +38,14 @@ export function CtaBand({
           <Reveal delay={0.14}>
             <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
               <Button href="/booking" variant="light">
-                Book Your Initial Consultation
+                {primaryLabel}
                 <ArrowRight size={18} weight="bold" />
               </Button>
-              <Button
-                href="/services"
-                variant="outline"
-                className="border-bone/30 text-bone hover:border-bone hover:bg-bone/10"
-              >
-                View Service Menu
-              </Button>
+              {secondary && (
+                <Button href="/services" variant="outlineLight">
+                  View Service Menu
+                </Button>
+              )}
             </div>
           </Reveal>
         </div>

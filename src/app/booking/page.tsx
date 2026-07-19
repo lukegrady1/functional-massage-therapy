@@ -105,7 +105,7 @@ export default function BookingPage() {
                 <span className="text-[0.95rem] leading-relaxed text-muted">
                   <span className="font-semibold text-espresso">Find me here</span>
                   <br />
-                  {site.address.line1}, {site.address.note}
+                  {site.address.line1}
                   <br />
                   {site.address.city}, {site.address.state} {site.address.zip}
                 </span>

@@ -21,122 +21,138 @@ function groupedHours() {
   }));
 }
 
+const columnHeading =
+  "text-xs font-semibold uppercase tracking-[0.18em] text-bone/50";
+const linkStyle =
+  "text-[0.95rem] text-bone/80 transition-colors duration-200 hover:text-copper-light";
+
 export function Footer() {
   const schedule = groupedHours();
 
   return (
     <footer className="border-t border-bone/10 bg-espresso-deep text-bone">
       <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
-        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1.2fr]">
-          {/* Brand + address */}
+        {/*
+          Two blocks rather than four equal columns. Previously the map sat as
+          a fourth column, which left a dead gap through the middle of the row
+          and made it ragged — the map is roughly twice the height of a link
+          list, so nothing lined up.
+
+          Now the text content nests its own three columns inside the wider
+          block, and the map takes the narrow one. The stacked left side is
+          about as tall as the square, so the two read as a balanced pair.
+        */}
+        <div className="grid gap-12 lg:grid-cols-[1.75fr_1fr] lg:gap-16">
           <div>
-            <div className="inline-flex rounded-2xl bg-bone p-4 sm:p-5">
+            <div className="inline-flex rounded-xl bg-bone p-3">
               <Image
                 src={asset("/logo.webp")}
                 alt="Functional Massage Therapy"
                 width={360}
                 height={257}
-                className="h-20 w-auto sm:h-24"
+                className="h-16 w-auto"
               />
             </div>
-            <p className="mt-6 max-w-sm text-[0.95rem] leading-relaxed text-bone/70">
+            <p className="mt-5 max-w-sm text-[0.95rem] leading-relaxed text-bone/70">
               Professional manual therapy and movement coaching dedicated to
               restoring your body&rsquo;s natural state of vitality.
             </p>
-            <a
-              href={site.mapsHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 flex w-fit items-start gap-2 text-[0.95rem] text-bone/80 transition-colors hover:text-copper-light"
-            >
-              <MapPin size={18} weight="fill" className="mt-0.5 shrink-0 text-copper-light" />
-              <span>
-                {site.address.line1} ({site.address.note})
-                <br />
-                {site.address.city}, {site.address.state} {site.address.zip}
-              </span>
-            </a>
-            <a
-              href={site.phoneHref}
-              className="mt-3 flex w-fit items-center gap-2 text-[0.95rem] text-bone/80 transition-colors hover:text-copper-light"
-            >
-              <Phone size={18} weight="fill" className="shrink-0 text-copper-light" />
-              {site.phone}
-            </a>
+
+            <div className="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-6">
+              <div>
+                <h3 className={columnHeading}>Explore</h3>
+                <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2.5 sm:flex-col sm:gap-2.5">
+                  {nav.map((item) => (
+                    <li key={item.href}>
+                      <Link href={item.href} className={linkStyle}>
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h3 className={columnHeading}>Visit</h3>
+                <a
+                  href={site.mapsHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`mt-4 flex w-fit items-start gap-2 ${linkStyle}`}
+                >
+                  <MapPin
+                    size={18}
+                    weight="fill"
+                    className="mt-0.5 shrink-0 text-copper-light"
+                  />
+                  <span>
+                    {site.address.line1}
+                    <br />
+                    {site.address.city}, {site.address.state} {site.address.zip}
+                  </span>
+                </a>
+                <a
+                  href={site.phoneHref}
+                  className={`mt-3 flex w-fit items-center gap-2 ${linkStyle}`}
+                >
+                  <Phone
+                    size={18}
+                    weight="fill"
+                    className="shrink-0 text-copper-light"
+                  />
+                  {site.phone}
+                </a>
+              </div>
+
+              <div>
+                <h3 className={columnHeading}>Hours</h3>
+                <ul className="mt-4 flex flex-col gap-2.5">
+                  {schedule.map((h) => {
+                    const closed = h.open === "Closed";
+                    return (
+                      <li key={h.label} className="text-[0.9rem] leading-snug">
+                        <span className="block text-bone/55">{h.label}</span>
+                        <span
+                          className={
+                            closed
+                              ? "text-bone/40"
+                              : "font-semibold tabular-nums text-bone"
+                          }
+                        >
+                          {h.open}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
           </div>
 
-          {/* Nav — links wrap horizontally on mobile, stack into a column on desktop */}
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-bone/50">
-              Explore
-            </h3>
-            <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2.5 lg:flex-col lg:gap-3">
-              {nav.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-[0.95rem] text-bone/80 transition-colors hover:text-copper-light"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Hours (grouped) */}
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-bone/50">
-              Hours
-            </h3>
-            <ul className="mt-5 flex max-w-sm flex-col gap-2.5">
-              {schedule.map((h) => {
-                const closed = h.open === "Closed";
-                return (
-                  <li
-                    key={h.label}
-                    className="flex items-baseline justify-between gap-3 text-[0.9rem]"
-                  >
-                    <span className="text-bone/80">{h.label}</span>
-                    <span
-                      className={
-                        closed
-                          ? "text-bone/40"
-                          : "font-semibold text-bone tabular-nums"
-                      }
-                    >
-                      {h.open}
-                    </span>
-                  </li>
-                );
-              })}
-            </ul>
+          {/*
+            Business Profile map. Lives in the footer rather than on the
+            homepage so the page keeps the Stitch section list exactly, while
+            address, hours and map still sit together.
+          */}
+          <div className="aspect-square w-full max-w-sm overflow-hidden rounded-2xl lg:max-w-none lg:self-start">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2960.9312793331314!2d-72.06048369999999!3d42.087521900000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e6a7e25853e50b%3A0x725b4f148e17210d!2sFunctional%20Massage%20Therapy!5e0!3m2!1sen!2sus!4v1784424956324!5m2!1sen!2sus"
+              title="Map showing Functional Massage Therapy at 48 Main St, Sturbridge, MA"
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
+              className="h-full w-full border-0"
+            />
           </div>
         </div>
 
-        {/*
-          Business Profile map. Lives here rather than on the homepage so the
-          page keeps the Stitch section list exactly, while the address, hours
-          and map still sit together where someone looks for them.
-        */}
-        <div className="mt-12 h-56 w-full overflow-hidden rounded-2xl sm:h-64">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2960.9312793331314!2d-72.06048369999999!3d42.087521900000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e6a7e25853e50b%3A0x725b4f148e17210d!2sFunctional%20Massage%20Therapy!5e0!3m2!1sen!2sus!4v1784424956324!5m2!1sen!2sus"
-            title="Map showing Functional Massage Therapy at 48 Main St, Sturbridge, MA"
-            loading="lazy"
-            allowFullScreen
-            referrerPolicy="strict-origin-when-cross-origin"
-            className="h-full w-full border-0"
-          />
-        </div>
-
-        <div className="mt-10 flex flex-col gap-4 border-t border-bone/15 pt-7 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-4 border-t border-bone/15 pt-7 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-bone/55">
             &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
           <Link
             href="/booking"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-bone transition-colors hover:text-copper-light"
+            className="press inline-flex items-center gap-1.5 text-sm font-semibold text-bone hover:text-copper-light"
           >
             Book your appointment
             <ArrowUpRight size={16} weight="bold" />

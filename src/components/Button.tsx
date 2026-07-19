@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-type Variant = "primary" | "outline" | "light";
+type Variant = "primary" | "outline" | "outlineLight" | "light";
 
 // `press` (globals.css) carries the scale-on-active and the scoped transition.
 // Deliberately not `transition-all`: that animates properties we never intend
@@ -20,6 +20,16 @@ const variants: Record<Variant, string> = {
   // outline for secondary actions on light surfaces
   outline:
     "border border-espresso/30 text-espresso hover:border-espresso hover:bg-espresso/5",
+  /*
+    Outline for dark surfaces. Exists as a real variant because passing colour
+    overrides through `className` does not work here: Tailwind resolves
+    conflicting utilities by stylesheet order, not by the order they appear in
+    the class string, so `text-espresso` from the light outline variant beats
+    an appended `text-bone` and renders the button dark-on-dark — invisible.
+    Reach for this instead of overriding `outline`.
+  */
+  outlineLight:
+    "border border-bone/30 text-bone hover:border-bone hover:bg-bone/10",
   // for use on dark espresso sections
   light: "bg-bone text-espresso hover:bg-white hover:shadow-lg hover:shadow-black/15",
 };

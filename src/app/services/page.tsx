@@ -116,7 +116,11 @@ export default function ServicesPage() {
         </Reveal>
       </section>
 
-      <CtaBand title="Ready to feel the difference?" />
+      <CtaBand
+        title="Ready to feel the difference?"
+        primaryLabel="Book Now"
+        secondary={false}
+      />
     </>
   );
 }

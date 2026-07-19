@@ -10,7 +10,6 @@ export const site = {
   email: "hello@functionalmassagetherapy.com", // TODO: confirm real address
   address: {
     line1: "48 Main St",
-    note: "Inside Historic Yoga",
     city: "Sturbridge",
     state: "MA",
     zip: "01566",
