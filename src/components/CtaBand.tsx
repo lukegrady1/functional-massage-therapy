@@ -46,7 +46,7 @@ export function CtaBand({
             */}
             <div
               className={`mx-auto mt-8 grid gap-3 sm:mt-9 ${
-                secondary ? "max-w-lg grid-cols-2" : "max-w-xs grid-cols-1"
+                secondary ? "max-w-sm grid-cols-2" : "max-w-xs grid-cols-1"
               }`}
             >
               <Button href="/booking" variant="light" className="w-full">
@@ -55,7 +55,7 @@ export function CtaBand({
               </Button>
               {secondary && (
                 <Button href="/services" variant="outlineLight" className="w-full">
-                  View Service Menu
+                  View Services
                 </Button>
               )}
             </div>
