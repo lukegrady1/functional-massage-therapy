@@ -12,6 +12,7 @@ import { Button } from "@/components/Button";
 import { Eyebrow } from "@/components/Eyebrow";
 import { Reveal } from "@/components/Reveal";
 import { CtaBand } from "@/components/CtaBand";
+import { Testimonials } from "@/components/Testimonials";
 import { services, hours, site } from "@/lib/site";
 import { toneStyles } from "@/lib/tones";
 import { asset } from "@/lib/asset";
@@ -332,6 +333,17 @@ export default function Home() {
                 self-care, so the progress holds.
               </p>
             </Reveal>
+            <Reveal delay={0.18}>
+              <div className="reveal-image relative mt-10 hidden aspect-[4/3] w-full max-w-md overflow-hidden rounded-2xl lg:block">
+                <Image
+                  src={asset("/hands-detail.webp")}
+                  alt="Close detail of hands working into the muscles of a client's back"
+                  fill
+                  sizes="34vw"
+                  className="object-cover"
+                />
+              </div>
+            </Reveal>
           </div>
 
           <ul className="flex flex-col">
@@ -410,9 +422,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- TESTIMONIAL: audience chips + one real quote ---------- */}
+      {/*
+        ---------- INTERLUDE: full-bleed image band ----------
+        A breath between the two dense sections, and the one place the page
+        lets a photograph run at full width.
+      */}
+      <section
+        aria-hidden
+        className="relative h-[280px] overflow-hidden sm:h-[380px]"
+      >
+        <Image
+          src={asset("/treatment-in-progress.webp")}
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-espresso/45" />
+        <div className="absolute inset-0 flex items-center justify-center px-6">
+          <p className="max-w-2xl text-center font-display text-2xl font-semibold italic leading-snug text-bone sm:text-[2.25rem]">
+            Slow, deliberate work — and a plan for what happens after you get
+            off the table.
+          </p>
+        </div>
+      </section>
+
+      {/* ---------- AUDIENCE CHIPS ---------- */}
       <section className="surface-inset">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-24">
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
           <Reveal className="flex flex-wrap justify-center gap-3">
             {audiences.map((a) => (
               <span
@@ -424,22 +461,10 @@ export default function Home() {
               </span>
             ))}
           </Reveal>
-
-          <Reveal delay={0.1}>
-            <figure className="surface-raised mx-auto mt-14 max-w-3xl rounded-3xl p-10 text-center sm:p-14">
-              <blockquote className="font-display text-2xl font-semibold italic leading-snug tracking-[-0.01em] text-espresso sm:text-[2rem]">
-                &ldquo;Lauren actually listens, finds the problem, and fixes it.
-                My squat depth came back after one session.&rdquo;
-              </blockquote>
-              <figcaption className="mt-8 text-sm text-muted">
-                <span className="font-semibold text-espresso">Mike Sartori</span>
-                <br />
-                Masters powerlifter, Worcester
-              </figcaption>
-            </figure>
-          </Reveal>
         </div>
       </section>
+
+      <Testimonials />
 
       {/* ---------- LOCATION & HOURS: split, raised hours panel ---------- */}
       <section className="bloom-warm">
@@ -477,6 +502,17 @@ export default function Home() {
                 <Button href="/contact" variant="outline">
                   Get directions
                 </Button>
+              </div>
+            </Reveal>
+            <Reveal delay={0.24}>
+              <div className="reveal-image shadow-ambient relative mt-12 aspect-[16/9] w-full overflow-hidden rounded-2xl">
+                <Image
+                  src={asset("/oils-still-life.webp")}
+                  alt="Massage oil and warm stones resting on folded linen"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  className="object-cover"
+                />
               </div>
             </Reveal>
           </div>

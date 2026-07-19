@@ -39,6 +39,42 @@ export const hours = [
 ] as const;
 
 /* ------------------------------------------------------------------------
+   TESTIMONIALS
+   ------------------------------------------------------------------------
+   Entries with `draft: true` are UNFILLED SLOTS. They render on the site as
+   visibly empty outlined cards reading "Awaiting client feedback" so the
+   section cannot be mistaken for finished copy.
+
+   Fill each one in with a real, permissioned quote and delete the `draft`
+   flag. Do not invent quotes to fill the grid: publishing fabricated
+   testimonials is deceptive and, in the US, violates the FTC endorsement
+   rules (16 CFR 255). If real feedback is not available for a slot, delete
+   the entry instead — the grid reflows to however many are present.
+
+   `context` is what the person came in for ("Masters powerlifter",
+   "Chronic low back pain"), not a job title. It is what makes a quote
+   useful to the next reader.
+   ------------------------------------------------------------------------ */
+
+export type Testimonial = {
+  quote: string;
+  name: string;
+  context: string;
+  draft?: boolean;
+};
+
+export const testimonials: Testimonial[] = [
+  {
+    quote:
+      "Lauren actually listens, finds the problem, and fixes it. My squat depth came back after one session.",
+    name: "Mike Sartori",
+    context: "Masters powerlifter, Worcester",
+  },
+  { quote: "", name: "", context: "", draft: true },
+  { quote: "", name: "", context: "", draft: true },
+];
+
+/* ------------------------------------------------------------------------
    COACHING
    ------------------------------------------------------------------------
    PLACEHOLDER CONTENT. Everything below is scaffolding so the page can be
@@ -114,6 +150,10 @@ export type Service = {
   summary: string;
   detail: string;
   bestFor: string[];
+  /* Illustrative imagery. Atmosphere and technique only — never presented as
+     a photograph of this studio or of an identifiable client. */
+  image: string;
+  imageAlt: string;
   /*
     Surface treatment for the services grid. The site is deliberately light on
     photography, so each service is distinguished by material and tone rather
@@ -125,6 +165,8 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "sports-recovery",
+    image: "/athlete-stretch.webp",
+    imageAlt: "An athlete mid-stretch in a darkened gym",
     name: "Sports & Recovery",
     durations: "60 / 90 min",
     summary:
@@ -136,6 +178,8 @@ export const services: Service[] = [
   },
   {
     slug: "deep-tissue",
+    image: "/hands-detail.webp",
+    imageAlt: "Hands working slowly into the deep tissue of a back",
     name: "Targeted Deep Tissue",
     durations: "60 / 90 min",
     summary:
@@ -147,6 +191,8 @@ export const services: Service[] = [
   },
   {
     slug: "functional-therapeutic",
+    image: "/mobility-back.webp",
+    imageAlt: "A seated figure rotating through the thoracic spine",
     name: "Functional Therapeutic",
     durations: "60 / 90 min",
     summary:
@@ -158,6 +204,8 @@ export const services: Service[] = [
   },
   {
     slug: "cupping-stretch",
+    image: "/cupping-still-life.webp",
+    imageAlt: "Cups and a warm stone laid out on folded linen",
     name: "Cupping & Assisted Stretch",
     durations: "Add-on or 30 min",
     summary:
