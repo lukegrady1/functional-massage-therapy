@@ -3,7 +3,7 @@ import { ArrowRight, Quotes } from "@phosphor-icons/react/dist/ssr";
 import { Button } from "@/components/Button";
 import { Eyebrow } from "@/components/Eyebrow";
 import { Reveal } from "@/components/Reveal";
-import { ContactForm } from "@/components/ContactForm";
+import { FormEmbed } from "@/components/FormEmbed";
 import { toneStyles } from "@/lib/tones";
 import {
   coachingPillars,
@@ -211,10 +211,18 @@ export default function CoachingPage() {
             </Reveal>
           </div>
 
+          {/*
+            The hand-rolled ContactForm this replaces never submitted anywhere.
+            Its handler carried a "TODO: wire to a real endpoint" comment, then
+            waited 900ms and showed the success state regardless — so every
+            coaching enquiry made through it was discarded while the sender was
+            told it had gone through. This posts to GoHighLevel for real.
+          */}
           <Reveal delay={0.08}>
-            <ContactForm
-              source="coaching"
-              heading="Coaching enquiry"
+            <FormEmbed
+              formId="vCvuDp8DrEWDKQv7isaP"
+              title="Coaching Form"
+              initialHeight={674}
             />
           </Reveal>
         </div>
