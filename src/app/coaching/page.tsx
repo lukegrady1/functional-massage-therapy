@@ -38,8 +38,8 @@ export default function CoachingPage() {
             <em className="pb-1 leading-[1.15] text-copper">whole athlete</em>.
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-            PLACEHOLDER: one or two lines on who this coaching is for and what
-            makes it different. Keep it under 25 words.
+            For people who train hard and keep hitting the same wall. Strength,
+            nutrition, and recovery handled as one thing rather than three.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button href="#enquire">
@@ -86,8 +86,11 @@ export default function CoachingPage() {
             </Reveal>
             <Reveal delay={0.08}>
               <p className="mt-5 max-w-md text-lg leading-relaxed text-bone/70">
-                PLACEHOLDER: a short line setting expectations about commitment,
-                pacing, or who this is not a fit for.
+                This is a working relationship, not a plan you download and
+                never hear about again. It suits people who want someone
+                accountable on the other end and are willing to change course
+                when the training says so. If you would rather be handed a
+                program and left alone, I am not the right coach for you.
               </p>
             </Reveal>
           </div>

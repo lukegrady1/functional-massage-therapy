@@ -89,15 +89,26 @@ export const testimonials: Testimonial[] = [
 /* ------------------------------------------------------------------------
    COACHING
    ------------------------------------------------------------------------
-   PLACEHOLDER CONTENT. Everything below is scaffolding so the page can be
-   built and reviewed. Replace with Lauren's real coaching offer, real
-   pricing, and real client results before this page goes live.
+   DRAFT COPY, NOT CONFIRMED FACT. The prose below was written to replace
+   scaffolding placeholders and is consistent with Lauren's background as
+   stated on the About page — personal training and nutrition first, then
+   competitive powerlifting, massage qualification in 2020, pre-season
+   recovery work with the D1 football program at Boston College.
 
-   The testimonial entries are intentionally written as visible empty slots
-   rather than realistic invented quotes. Publishing fabricated testimonials
-   would be deceptive to clients and, in the US, is an FTC endorsement-rule
-   violation. They must be filled with real, permissioned client feedback or
-   the section should be removed.
+   What it does NOT come from is Lauren. The mechanics it describes — that
+   there is an intake call, that the plan arrives days later, that check-ins
+   can be video, phone, or in person — are plausible defaults, not her stated
+   offer. She has to confirm or correct each one before this is public,
+   because a client will read it as a promise about what they are buying.
+
+   No prices are quoted here on purpose. Unlike the massage tiers, the
+   coaching offer has no agreed rate to state.
+
+   The testimonial entries below stay as visible empty slots. Publishing
+   invented client quotes would be deceptive and, in the US, violates the FTC
+   endorsement rules (16 CFR 255) — that holds however plausible the quote
+   sounds, so they cannot be drafted "for now" the way the prose above can.
+   They get filled with real, permissioned feedback or the section goes.
    ------------------------------------------------------------------------ */
 
 export type CoachingPillar = {
@@ -109,17 +120,17 @@ export type CoachingPillar = {
 export const coachingPillars: CoachingPillar[] = [
   {
     title: "Strength & programming",
-    body: "PLACEHOLDER: describe the training side of the coaching. What kind of programming, for whom, and how it is delivered.",
+    body: "Training built around your lifts, your week, and the equipment you actually have — not a template with your name at the top. Years under the bar mean I know what load feels like when it is working and when it is quietly breaking you down.",
     tone: "espresso",
   },
   {
     title: "Nutrition & recovery",
-    body: "PLACEHOLDER: describe the nutrition and recovery support included, and how hands-on it is.",
+    body: "Nutrition that works with how you already eat instead of replacing it, and recovery treated as part of the training rather than what happens if there is time left over. Sleep, fuel, and stress all pull on the same rope.",
     tone: "tan",
   },
   {
     title: "Movement & mobility",
-    body: "PLACEHOLDER: describe how the bodywork practice feeds into coaching, and what makes this different from a standard online coach.",
+    body: "This is where the table work feeds in. Spending my days with my hands on tissue means I can usually find the restriction sitting behind a stalled lift, then work on it directly and program around it while it clears.",
     tone: "graphite",
   },
 ];
@@ -128,17 +139,17 @@ export const coachingSteps = [
   {
     n: "01",
     title: "Intake call",
-    body: "PLACEHOLDER: what happens on the first call, how long it takes, and what the client should bring to it.",
+    body: "We go through your training history, what you are working toward, what hurts, and what your week realistically allows. Bring your current program if you have one and be honest about the parts you skip — that is usually where the useful information is.",
   },
   {
     n: "02",
     title: "Your plan",
-    body: "PLACEHOLDER: what the client actually receives, in what format, and how quickly after the call.",
+    body: "You get your programming written up alongside the nutrition and recovery targets we agreed on, in a format you can actually follow in the gym. Then you train on it, and we adjust once it has met reality.",
   },
   {
     n: "03",
     title: "Ongoing check-ins",
-    body: "PLACEHOLDER: cadence of check-ins, how progress is tracked, and what adjustments look like over time.",
+    body: "We stay in contact — video, phone, or in person if you are local to Sturbridge. You tell me how the sessions went, I adjust the load and the plan around it. Progress gets judged over months, not single weeks.",
   },
 ];
 
