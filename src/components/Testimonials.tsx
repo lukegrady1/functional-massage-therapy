@@ -30,12 +30,11 @@ export function Testimonials() {
     <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
       <Reveal>
         <div className="text-center">
-          <h2 className="font-display text-3xl font-semibold leading-[1.12] tracking-[-0.02em] text-espresso sm:text-[2.6rem]">
-            What clients say
+          <h2 className="t-headline-lg text-espresso">
+            What Our Clients Say
           </h2>
           <p className="mx-auto mt-4 max-w-xl leading-relaxed text-muted">
-            Lifters, runners, and people who had stopped expecting the pain to
-            go anywhere.
+            Trusted by athletes, professionals, and recovery seekers.
           </p>
         </div>
       </Reveal>

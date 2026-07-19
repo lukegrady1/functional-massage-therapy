@@ -36,11 +36,11 @@ export const nav = [
 export const hours = [
   { day: "Monday", open: "Closed" },
   { day: "Tuesday", open: "Closed" },
-  { day: "Wednesday", open: "10:00 AM - 5:30 PM" },
-  { day: "Thursday", open: "10:00 AM - 5:30 PM" },
-  { day: "Friday", open: "10:00 AM - 4:00 PM" },
-  { day: "Saturday", open: "9:00 AM - 3:00 PM" },
-  { day: "Sunday", open: "12:30 PM - 5:30 PM" },
+  { day: "Wednesday", open: "11:00 AM - 5:30 PM" },
+  { day: "Thursday", open: "11:00 AM - 5:30 PM" },
+  { day: "Friday", open: "11:00 AM - 5:30 PM" },
+  { day: "Saturday", open: "8:30 AM - 2:30 PM" },
+  { day: "Sunday", open: "Closed" },
 ] as const;
 
 /* ------------------------------------------------------------------------

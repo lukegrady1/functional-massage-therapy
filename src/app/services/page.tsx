@@ -22,7 +22,7 @@ export default function ServicesPage() {
       <section className="bloom-warm">
         <div className="mx-auto max-w-7xl px-5 pt-10 pb-14 sm:px-8 lg:pt-14 lg:pb-16">
           <Eyebrow>Services</Eyebrow>
-          <h1 className="mt-6 max-w-3xl font-display text-[2.6rem] font-bold leading-[1.06] tracking-tight text-espresso sm:text-6xl">
+          <h1 className="mt-6 max-w-3xl t-headline-xl text-espresso">
             Every session is tailored to{" "}
             <em className="pb-1 leading-[1.15] text-copper">you</em>.
           </h1>
@@ -71,7 +71,7 @@ export default function ServicesPage() {
                       >
                         {s.durations}
                       </span>
-                      <h2 className="mt-2 font-display text-[1.9rem] font-semibold leading-tight tracking-[-0.02em] sm:text-4xl">
+                      <h2 className="mt-2 t-headline-lg">
                         {s.name}
                       </h2>
                       <p className={`${t.body} mt-5 text-lg leading-relaxed`}>

@@ -38,12 +38,12 @@ const featured = services.filter((s) => s.slug in serviceIcons);
 
 const principles = [
   {
-    title: "Evidence-based assessment",
-    body: "Every session starts with how you actually move, not a fixed routine.",
+    title: "Evidence-Based Assessment",
+    body: "Targeted protocols based on functional movement analysis.",
   },
   {
-    title: "Integrated recovery",
-    body: "Hands-on work paired with the self-care that holds it between visits.",
+    title: "Integrated Recovery",
+    body: "Combining manual therapy with active lifestyle coaching.",
   },
 ];
 
@@ -93,15 +93,16 @@ export default function Home() {
           <div className="max-w-xl">
             {/* Stitch marks the hero with a filled pill, not a rule. */}
             <span className="inline-block rounded-full bg-tan px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-espresso">
-              Sturbridge, MA
+              Clinical Serenity in Motion
             </span>
-            <h1 className="mt-6 font-display text-[2.9rem] font-semibold leading-[1.04] tracking-[-0.02em] text-espresso sm:text-6xl lg:text-[4.1rem]">
-              Tailored massage that helps you{" "}
-              <em className="italic text-copper">heal</em>.
+            <h1 className="mt-6 t-headline-xl text-espresso">
+              Clinical Excellence in Therapeutic{" "}
+              <em className="italic text-copper">Motion</em>
             </h1>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-muted">
-              Whole-body bodywork for athletes, weekend warriors, and chronic
-              pain. Built around you.
+              Specialized massage therapy and wellness coaching to restore
+              function and vitality. Experience a tailored approach to recovery
+              and chronic pain management.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button href="/booking">
@@ -121,16 +122,17 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-12 lg:gap-16 lg:py-28">
           <div className="lg:col-span-5">
             <Reveal>
-              <h2 className="font-display text-3xl font-semibold leading-[1.12] tracking-[-0.02em] text-espresso sm:text-[2.6rem]">
-                Our philosophy
+              <h2 className="t-headline-lg text-espresso">
+                Our Philosophy
               </h2>
             </Reveal>
             <Reveal delay={0.06}>
               <p className="mt-6 max-w-[52ch] leading-relaxed text-muted">
-                We move past relaxation to address the mechanics underneath.
-                The functional approach pairs anatomical precision with years
-                on the platform and on the sidelines, so the work targets the
-                pattern behind the pain rather than the spot that hurts.
+                At Functional Massage Therapy, we move beyond relaxation to
+                address the underlying mechanics of your body. Our
+                &ldquo;Functional&rdquo; approach combines anatomical precision
+                with therapeutic intuition to bridge the gap between medical
+                expertise and holistic wellness.
               </p>
             </Reveal>
 
@@ -198,11 +200,11 @@ export default function Home() {
 
               <Reveal delay={0.16} className="h-full">
                 <figure className="flex h-full flex-col justify-end rounded-2xl bg-espresso p-8 text-bone">
-                  <blockquote className="font-display text-2xl font-semibold italic leading-snug">
-                    &ldquo;Expect to heal.&rdquo;
+                  <blockquote className="t-headline-md italic">
+                    &ldquo;Movement is the song of the body.&rdquo;
                   </blockquote>
                   <figcaption className="mt-3 text-xs font-semibold uppercase tracking-[0.16em] text-bone/55">
-                    The functional approach
+                    Functional Philosophy
                   </figcaption>
                 </figure>
               </Reveal>
@@ -216,12 +218,12 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
           <Reveal>
             <div className="mx-auto max-w-xl text-center">
-              <h2 className="font-display text-3xl font-semibold leading-[1.12] tracking-[-0.02em] text-espresso sm:text-[2.6rem]">
-                Featured services
+              <h2 className="t-headline-lg text-espresso">
+                Featured Services
               </h2>
               <p className="mt-4 leading-relaxed text-muted">
-                Treatments built for restoration, pain management, and athletic
-                maintenance.
+                Clinical grade treatments designed for restoration, pain
+                management, and athletic optimization.
               </p>
             </div>
           </Reveal>
@@ -244,7 +246,7 @@ export default function Home() {
                     <span className="mt-6 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
                       {s.durations}
                     </span>
-                    <h3 className="mt-2 font-display text-2xl font-semibold tracking-[-0.01em] text-espresso">
+                    <h3 className="mt-2 t-headline-md text-espresso">
                       {s.name}
                     </h3>
                     <p className="mt-3 leading-relaxed text-muted">
@@ -296,7 +298,7 @@ export default function Home() {
               <Eyebrow onDark>The functional approach</Eyebrow>
             </Reveal>
             <Reveal delay={0.06}>
-              <h2 className="mt-6 font-display text-3xl font-semibold leading-[1.12] tracking-[-0.02em] sm:text-[2.6rem]">
+              <h2 className="mt-6 t-headline-lg">
                 Healing that lasts past the table
               </h2>
             </Reveal>
@@ -331,7 +333,7 @@ export default function Home() {
                   {step.n}
                 </span>
                 <div>
-                  <h3 className="font-display text-2xl font-semibold">
+                  <h3 className="t-headline-md">
                     {step.title}
                   </h3>
                   <p className="mt-2 max-w-lg leading-relaxed text-bone/70">
@@ -351,17 +353,18 @@ export default function Home() {
             <div className="shadow-lifted flex flex-col overflow-hidden rounded-[2rem] bg-graphite lg:flex-row">
               <div className="flex flex-col justify-center p-10 sm:p-14 lg:w-1/2 lg:p-16">
                 <Eyebrow onDark>Coaching program</Eyebrow>
-                <h2 className="mt-6 font-display text-3xl font-semibold leading-[1.1] tracking-[-0.02em] text-bone sm:text-[2.6rem]">
-                  Beyond the table: integrated wellness
+                <h2 className="mt-6 t-headline-lg text-bone">
+                  Beyond the Table: Integrated Wellness
                 </h2>
                 <p className="mt-6 max-w-md text-lg leading-relaxed text-bone/70">
-                  The table is where we find the pattern. Coaching is where it
-                  gets rebuilt — movement, load, and recovery habits shaped
-                  around the life you actually live.
+                  Our coaching program provides the tools you need to maintain
+                  progress between sessions. We focus on ergonomic correction,
+                  stress management, and functional movement habits tailored to
+                  your unique lifestyle.
                 </p>
                 <div className="mt-9">
                   <Button href="/coaching" variant="light">
-                    Learn about coaching
+                    Learn More About Coaching
                     <ArrowRight size={18} weight="bold" />
                   </Button>
                 </div>
@@ -391,7 +394,7 @@ export default function Home() {
               <Eyebrow>Visit the studio</Eyebrow>
             </Reveal>
             <Reveal delay={0.06}>
-              <h2 className="mt-6 font-display text-3xl font-semibold leading-[1.12] tracking-[-0.02em] text-espresso sm:text-[2.6rem]">
+              <h2 className="mt-6 t-headline-lg text-espresso">
                 Find me inside Historic Yoga in Sturbridge
               </h2>
             </Reveal>
@@ -444,7 +447,7 @@ export default function Home() {
 
           <Reveal delay={0.1}>
             <div className="surface-raised rounded-3xl p-7 sm:p-9">
-              <h3 className="font-display text-xl font-semibold text-espresso">
+              <h3 className="t-headline-md text-espresso">
                 Hours
               </h3>
               <ul className="mt-5 flex flex-col">

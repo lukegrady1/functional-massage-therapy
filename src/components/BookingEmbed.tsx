@@ -35,7 +35,7 @@ export function BookingEmbed() {
       <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-tan text-espresso">
         <CalendarCheck size={28} weight="bold" />
       </span>
-      <h3 className="mt-5 font-display text-2xl font-bold text-espresso">
+      <h3 className="mt-5 t-headline-md text-espresso">
         Online booking calendar
       </h3>
       <p className="mt-3 max-w-md leading-relaxed text-muted">

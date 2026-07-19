@@ -40,8 +40,8 @@ export function Footer() {
               />
             </div>
             <p className="mt-6 max-w-sm text-[0.95rem] leading-relaxed text-bone/70">
-              Results-driven, whole-body massage therapy for athletes, weekend
-              warriors, and anyone working through chronic pain.
+              Professional manual therapy and movement coaching dedicated to
+              restoring your body&rsquo;s natural state of vitality.
             </p>
             <a
               href={site.mapsHref}

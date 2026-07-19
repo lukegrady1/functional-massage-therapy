@@ -48,7 +48,7 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 pt-10 pb-16 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:pt-14 lg:pb-20">
           <div>
             <Eyebrow>About the practice</Eyebrow>
-            <h1 className="mt-6 font-display text-[2.6rem] font-bold leading-[1.06] tracking-tight text-espresso sm:text-6xl">
+            <h1 className="mt-6 t-headline-xl text-espresso">
               Small but mighty,
               <br />
               and built for <em className="pb-1 leading-[1.15] text-copper">results</em>.
@@ -84,7 +84,7 @@ export default function AboutPage() {
       <section className="texture-linen bg-surface">
         <div className="mx-auto max-w-3xl px-5 py-20 sm:px-8 lg:py-28">
           <Reveal>
-            <h2 className="font-display text-3xl font-bold leading-tight tracking-tight text-espresso sm:text-[2.6rem]">
+            <h2 className="t-headline-lg text-espresso">
               My journey to this work
             </h2>
           </Reveal>
@@ -116,7 +116,7 @@ export default function AboutPage() {
       {/* Background: 2-col grid of raised panels */}
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
         <Reveal>
-          <h2 className="max-w-2xl font-display text-3xl font-bold leading-tight tracking-tight text-espresso sm:text-[2.6rem]">
+          <h2 className="max-w-2xl t-headline-lg text-espresso">
             The experience behind the hands
           </h2>
         </Reveal>
@@ -128,7 +128,7 @@ export default function AboutPage() {
                   <item.icon size={24} weight="bold" />
                 </span>
                 <div>
-                  <h3 className="font-display text-xl font-bold text-espresso">
+                  <h3 className="t-headline-md text-espresso">
                     {item.title}
                   </h3>
                   <p className="mt-2 leading-relaxed text-muted">{item.body}</p>
@@ -143,7 +143,7 @@ export default function AboutPage() {
       <section className="bg-espresso">
         <div className="mx-auto max-w-4xl px-5 py-20 text-center sm:px-8 lg:py-24">
           <Reveal>
-            <p className="font-display text-2xl font-semibold leading-snug tracking-tight text-bone sm:text-[2.1rem]">
+            <p className="t-headline-lg text-bone">
               &ldquo;Let’s work together to achieve your health goals. Book
               your appointment today, and let’s get started on your wellness
               journey.&rdquo;

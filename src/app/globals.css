@@ -97,6 +97,65 @@ body {
 }
 
 /*
+  TYPE SCALE
+  --------------------------------------------------------------
+  Stitch's scale, transcribed exactly from the project's design tokens. Using
+  named steps instead of ad-hoc utilities keeps every heading on the same
+  ramp — the site previously mixed font-bold and font-semibold across a dozen
+  one-off sizes.
+
+  Note the weights: 600 for the display headline, 500 below it. Serif at 700
+  gets blocky at large sizes; the lighter weights are what give this scale its
+  editorial feel.
+*/
+.t-headline-xl {
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600;
+}
+@media (min-width: 768px) {
+  .t-headline-xl {
+    font-size: 48px;
+    line-height: 56px;
+    letter-spacing: -0.02em;
+  }
+}
+
+.t-headline-lg {
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 500;
+}
+
+.t-headline-md {
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+}
+
+.t-body-lg {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+}
+
+.t-body-md {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.t-label-md {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/*
   MATERIAL LAYER
   --------------------------------------------------------------
   With photography kept minimal, warmth has to come from material: layered

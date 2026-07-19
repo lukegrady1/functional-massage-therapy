@@ -59,7 +59,7 @@ export function ContactForm({
     return (
       <div className="surface-raised flex flex-col items-center justify-center rounded-3xl px-6 py-14 text-center">
         <CheckCircle size={48} weight="fill" className="text-copper" />
-        <h3 className="mt-5 font-display text-2xl font-bold text-espresso">
+        <h3 className="mt-5 t-headline-md text-espresso">
           Message sent
         </h3>
         <p className="mt-3 max-w-sm leading-relaxed text-muted">

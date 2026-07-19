@@ -33,7 +33,7 @@ export default function CoachingPage() {
       <section className="bloom-warm">
         <div className="mx-auto max-w-7xl px-5 pt-10 pb-14 sm:px-8 lg:pt-14 lg:pb-16">
           <Eyebrow>Coaching</Eyebrow>
-          <h1 className="mt-6 max-w-3xl font-display text-[2.6rem] font-bold leading-[1.06] tracking-tight text-espresso sm:text-6xl">
+          <h1 className="mt-6 max-w-3xl t-headline-xl text-espresso">
             Coaching that works on the{" "}
             <em className="pb-1 leading-[1.15] text-copper">whole athlete</em>.
           </h1>
@@ -64,7 +64,7 @@ export default function CoachingPage() {
                   className={`${t.cell} flex h-full flex-col rounded-3xl p-7 sm:p-8`}
                 >
                   <span className={`${t.rule} mb-6 block h-px w-10`} />
-                  <h2 className="font-display text-2xl font-bold leading-tight">
+                  <h2 className="t-headline-md">
                     {p.title}
                   </h2>
                   <p className={`${t.body} mt-3 leading-relaxed`}>{p.body}</p>
@@ -80,7 +80,7 @@ export default function CoachingPage() {
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 lg:py-28">
           <div className="lg:sticky lg:top-24 lg:self-start">
             <Reveal>
-              <h2 className="font-display text-3xl font-bold leading-tight tracking-tight sm:text-[2.6rem]">
+              <h2 className="t-headline-lg">
                 How coaching works
               </h2>
             </Reveal>
@@ -104,7 +104,7 @@ export default function CoachingPage() {
                   {step.n}
                 </span>
                 <div>
-                  <h3 className="font-display text-2xl font-bold">
+                  <h3 className="t-headline-md">
                     {step.title}
                   </h3>
                   <p className="mt-2 max-w-lg leading-relaxed text-bone/70">
@@ -121,7 +121,7 @@ export default function CoachingPage() {
       <section className="surface-inset">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-24">
           <Reveal>
-            <h2 className="max-w-xl font-display text-3xl font-bold leading-tight tracking-tight text-espresso sm:text-[2.6rem]">
+            <h2 className="max-w-xl t-headline-lg text-espresso">
               Client results
             </h2>
           </Reveal>
@@ -155,7 +155,7 @@ export default function CoachingPage() {
               {coachingResults.map((_, i) => (
                 <Reveal key={i} delay={i * 0.06}>
                   <div className="flex h-full min-h-[210px] flex-col justify-center rounded-3xl border border-dashed border-espresso/25 p-7 text-center">
-                    <p className="font-display text-lg font-bold text-espresso">
+                    <p className="t-headline-md text-espresso">
                       Client result slot
                     </p>
                     <p className="mt-2 text-sm leading-relaxed text-muted">
@@ -175,7 +175,7 @@ export default function CoachingPage() {
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[1fr_1.25fr] lg:gap-16 lg:py-24">
           <div>
             <Reveal>
-              <h2 className="font-display text-3xl font-bold leading-tight tracking-tight text-espresso sm:text-[2.6rem]">
+              <h2 className="t-headline-lg text-espresso">
                 Start the conversation
               </h2>
             </Reveal>

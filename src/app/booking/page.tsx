@@ -41,7 +41,7 @@ export default function BookingPage() {
       <section className="bloom-warm">
         <div className="mx-auto max-w-7xl px-5 pt-10 pb-12 sm:px-8 lg:pt-14 lg:pb-14">
           <Eyebrow>Booking</Eyebrow>
-          <h1 className="mt-6 max-w-3xl font-display text-[2.6rem] font-bold leading-[1.06] tracking-tight text-espresso sm:text-6xl">
+          <h1 className="mt-6 max-w-3xl t-headline-xl text-espresso">
             Book your appointment
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
@@ -62,7 +62,7 @@ export default function BookingPage() {
           <Reveal delay={0.08}>
             <aside className="flex flex-col gap-4">
               <div className="surface-raised rounded-3xl p-7">
-                <h2 className="font-display text-xl font-bold text-espresso">
+                <h2 className="t-headline-md text-espresso">
                   Hours
                 </h2>
                 <ul className="mt-4 flex flex-col">
@@ -119,7 +119,7 @@ export default function BookingPage() {
       <section className="bg-espresso text-bone">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-24">
           <Reveal>
-            <h2 className="max-w-xl font-display text-3xl font-bold leading-tight tracking-tight sm:text-[2.6rem]">
+            <h2 className="max-w-xl t-headline-lg">
               What your first visit looks like
             </h2>
           </Reveal>
@@ -131,7 +131,7 @@ export default function BookingPage() {
                 className="border-t border-bone/15 pt-6"
               >
                 <item.icon size={28} weight="bold" className="text-copper-light" />
-                <h3 className="mt-4 font-display text-xl font-bold">
+                <h3 className="mt-4 t-headline-md">
                   {item.title}
                 </h3>
                 <p className="mt-2 leading-relaxed text-bone/70">{item.body}</p>
