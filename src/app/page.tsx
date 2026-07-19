@@ -73,11 +73,7 @@ export default function Home() {
         */}
         <div className="mx-auto w-full max-w-7xl px-5 py-20 sm:px-8">
           <div className="max-w-xl">
-            {/* Stitch marks the hero with a filled pill, not a rule. */}
-            <span className="inline-block rounded-full bg-tan px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-espresso">
-              Clinical Serenity in Motion
-            </span>
-            <h1 className="mt-6 t-headline-xl text-espresso">
+            <h1 className="t-headline-xl text-espresso">
               Clinical Excellence in Therapeutic{" "}
               <em className="italic text-copper">Motion</em>
             </h1>

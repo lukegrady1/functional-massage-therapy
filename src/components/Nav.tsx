@@ -41,7 +41,7 @@ function Wordmark({ scrolled }: { scrolled: boolean }) {
           compositor, so the shrink costs no layout pass and the header height
           stays put instead of reflowing the page under the reader.
         */
-        className={`h-14 w-auto origin-left mix-blend-multiply transition-transform duration-300 ease-out ${
+        className={`h-[72px] w-auto origin-left mix-blend-multiply transition-transform duration-300 ease-out ${
           scrolled ? "scale-90" : "scale-100"
         }`}
       />
@@ -76,7 +76,7 @@ export function Nav() {
           : "border-b border-transparent bg-bone/0"
       }`}
     >
-      <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
+      <div className="mx-auto flex h-[96px] max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
         <Wordmark scrolled={scrolled} />
 
         {/* Links and the CTA travel together on the right, per Stitch. */}
