@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, MapPin } from "@phosphor-icons/react/dist/ssr";
-import { Eyebrow } from "@/components/Eyebrow";
 import { Reveal } from "@/components/Reveal";
 import { LocationMap } from "@/components/LocationMap";
 import { BookingEmbed } from "@/components/BookingEmbed";
@@ -54,7 +53,25 @@ export default async function BookingTierPage({ params }: Params) {
       {/* Header. Above the fold, so no Reveal. */}
       <section className="bloom-warm">
         <div className="mx-auto max-w-7xl px-5 pt-10 pb-12 sm:px-8 lg:pt-14 lg:pb-14">
-          <Eyebrow>Booking</Eyebrow>
+          {/*
+            This slot holds a plain "Booking" eyebrow on the other pages, but
+            here it is the way back to the full menu — landing on a single
+            service otherwise leaves the nav's "Book Now" as the only route
+            back, which returns you to the picker without looking like a way
+            back. It keeps the eyebrow's type treatment so the header still
+            reads as one, with the rule swapped for an arrow to show it acts.
+          */}
+          <Link
+            href="/booking/"
+            className="group/back -mx-2 inline-flex items-center gap-2.5 rounded-lg px-2 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-cocoa transition-colors duration-200 hover:text-copper"
+          >
+            <ArrowLeft
+              size={14}
+              weight="bold"
+              className="text-copper transition-transform duration-200 ease-out group-hover/back:-translate-x-0.5"
+            />
+            Back to all services
+          </Link>
           <h1 className="mt-6 max-w-3xl t-headline-xl text-espresso">
             {service.name}
           </h1>
@@ -174,13 +191,23 @@ export default async function BookingTierPage({ params }: Params) {
           </Reveal>
         </div>
 
+        {/*
+          Repeated at the foot because the widget is tall — by the time you
+          have scrolled through a month of slots the header link is well off
+          screen, and this is exactly where someone decides the session is
+          wrong and wants the menu again.
+        */}
         <Reveal delay={0.1}>
           <Link
             href="/booking/"
-            className="mt-10 inline-flex items-center gap-2 text-[0.95rem] font-semibold text-espresso transition-colors duration-200 hover:text-copper"
+            className="group/back mt-10 inline-flex items-center gap-2 text-[0.95rem] font-semibold text-espresso transition-colors duration-200 hover:text-copper"
           >
-            <ArrowLeft size={16} weight="bold" />
-            All services
+            <ArrowLeft
+              size={16}
+              weight="bold"
+              className="transition-transform duration-200 ease-out group-hover/back:-translate-x-0.5"
+            />
+            Back to all services
           </Link>
         </Reveal>
       </section>
