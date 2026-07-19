@@ -7,6 +7,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import { Eyebrow } from "@/components/Eyebrow";
 import { Reveal } from "@/components/Reveal";
+import { LocationMap } from "@/components/LocationMap";
 import { BookingEmbed } from "@/components/BookingEmbed";
 import { hours, site } from "@/lib/site";
 
@@ -53,7 +54,7 @@ export default function BookingPage() {
       </section>
 
       {/* Calendar + sidebar */}
-      <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8 lg:pb-28">
+      <section className="mx-auto max-w-7xl px-5 pb-14 sm:px-8 sm:pb-20 lg:pb-28">
         <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
           <Reveal>
             <BookingEmbed />
@@ -95,21 +96,37 @@ export default function BookingPage() {
                 </ul>
               </div>
 
-              <a
-                href={site.mapsHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="surface-raised flex items-start gap-3 rounded-3xl p-7 transition-transform duration-200 hover:-translate-y-0.5"
-              >
-                <MapPin size={22} weight="fill" className="mt-0.5 shrink-0 text-copper" />
-                <span className="text-[0.95rem] leading-relaxed text-muted">
-                  <span className="font-semibold text-espresso">Find me here</span>
-                  <br />
-                  {site.address.line1}
-                  <br />
-                  {site.address.city}, {site.address.state} {site.address.zip}
-                </span>
-              </a>
+              {/*
+                Address stays as text — it is what someone copies into a
+                phone or reads aloud — with the map beneath it for orientation.
+                4:3 rather than square so the panel keeps the map above the
+                ~400px width Google needs to show its business info card.
+              */}
+              <div className="surface-raised rounded-3xl p-7">
+                <a
+                  href={site.mapsHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-start gap-3"
+                >
+                  <MapPin
+                    size={22}
+                    weight="fill"
+                    className="mt-0.5 shrink-0 text-copper"
+                  />
+                  <span className="text-[0.95rem] leading-relaxed text-muted">
+                    <span className="font-semibold text-espresso transition-colors duration-200 group-hover:text-copper">
+                      Find me here
+                    </span>
+                    <br />
+                    {site.address.line1}
+                    <br />
+                    {site.address.city}, {site.address.state} {site.address.zip}
+                  </span>
+                </a>
+
+                <LocationMap className="mt-5 aspect-[4/3] w-full" />
+              </div>
             </aside>
           </Reveal>
         </div>
@@ -117,7 +134,7 @@ export default function BookingPage() {
 
       {/* What to expect */}
       <section className="bg-espresso text-bone">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-24">
+        <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20 lg:py-24">
           <Reveal>
             <h2 className="max-w-xl t-headline-lg">
               What your first visit looks like

@@ -22,9 +22,9 @@ export function CtaBand({
     // The band sits as a shaped panel inset from the page edge rather than a
     // full-bleed stripe, so the closing note reads as an invitation rather
     // than a footer wall.
-    <section className="px-5 pb-20 sm:px-8 lg:pb-28">
+    <section className="px-5 py-14 sm:px-8 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-7xl">
-        <div className="bloom-warm shadow-ambient rounded-[2.5rem] bg-espresso px-6 py-20 text-center sm:px-12 lg:py-24">
+        <div className="bloom-warm shadow-ambient rounded-[2.5rem] bg-espresso px-6 py-14 text-center sm:px-12 sm:py-20 lg:py-24">
           <Reveal>
             <h2 className="mx-auto max-w-2xl t-headline-xl text-bone">
               {title}

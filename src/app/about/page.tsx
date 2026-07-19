@@ -82,7 +82,7 @@ export default function AboutPage() {
 
       {/* Story: single-column prose on a raised, textured surface */}
       <section className="texture-linen bg-surface">
-        <div className="mx-auto max-w-3xl px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-3xl px-5 py-14 sm:px-8 sm:py-20 lg:py-28">
           <Reveal>
             <h2 className="t-headline-lg text-espresso">
               My journey to this work
@@ -114,7 +114,7 @@ export default function AboutPage() {
       </section>
 
       {/* Background: 2-col grid of raised panels */}
-      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+      <section className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20 lg:py-28">
         <Reveal>
           <h2 className="max-w-2xl t-headline-lg text-espresso">
             The experience behind the hands
@@ -141,7 +141,7 @@ export default function AboutPage() {
 
       {/* Philosophy: full-width statement on off-black */}
       <section className="bg-espresso">
-        <div className="mx-auto max-w-4xl px-5 py-20 text-center sm:px-8 lg:py-24">
+        <div className="mx-auto max-w-4xl px-5 py-14 text-center sm:px-8 sm:py-20 lg:py-24">
           <Reveal>
             <p className="t-headline-lg text-bone">
               &ldquo;Let’s work together to achieve your health goals. Book

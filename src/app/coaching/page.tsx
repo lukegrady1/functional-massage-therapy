@@ -54,7 +54,7 @@ export default function CoachingPage() {
       </section>
 
       {/* Pillars: tonal panels, one per coaching area */}
-      <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8 lg:pb-24">
+      <section className="mx-auto max-w-7xl px-5 pb-14 sm:px-8 sm:pb-20 lg:pb-24">
         <div className="grid gap-4 lg:grid-cols-3">
           {coachingPillars.map((p, i) => {
             const t = toneStyles[p.tone];
@@ -77,7 +77,7 @@ export default function CoachingPage() {
 
       {/* How it works: sticky heading + numbered steps */}
       <section className="bg-espresso text-bone">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 lg:py-28">
+        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 lg:py-28">
           <div className="lg:sticky lg:top-24 lg:self-start">
             <Reveal>
               <h2 className="t-headline-lg">
@@ -119,7 +119,7 @@ export default function CoachingPage() {
 
       {/* Client results */}
       <section className="surface-inset">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-24">
+        <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20 lg:py-24">
           <Reveal>
             <h2 className="max-w-xl t-headline-lg text-espresso">
               Client results
@@ -172,7 +172,7 @@ export default function CoachingPage() {
 
       {/* Enquiry: routes to a separate coaching pipeline in the CRM */}
       <section id="enquire" className="scroll-mt-24">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[1fr_1.25fr] lg:gap-16 lg:py-24">
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[1fr_1.25fr] lg:gap-16 lg:py-24">
           <div>
             <Reveal>
               <h2 className="t-headline-lg text-espresso">

@@ -71,7 +71,7 @@ export default function Home() {
           into the SSR markup, so anything above the fold stays invisible
           until hydration. The hero renders immediately and static.
         */}
-        <div className="mx-auto w-full max-w-7xl px-5 py-20 sm:px-8">
+        <div className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 sm:py-20">
           <div className="max-w-xl">
             <h1 className="t-headline-xl text-espresso">
               Clinical Excellence in Therapeutic{" "}
@@ -97,7 +97,7 @@ export default function Home() {
 
       {/* ---------- PHILOSOPHY: 5/7 split, text + image mosaic ---------- */}
       <section className="texture-linen bg-surface">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-12 lg:gap-16 lg:py-28">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-12 lg:gap-16 lg:py-28">
           <div className="lg:col-span-5">
             <Reveal>
               <h2 className="t-headline-lg text-espresso">
@@ -193,7 +193,7 @@ export default function Home() {
 
       {/* ---------- FEATURED SERVICES: centered heading, 3 cards ---------- */}
       <section className="surface-inset">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20 lg:py-28">
           <Reveal>
             <div className="mx-auto max-w-xl text-center">
               <h2 className="t-headline-lg text-espresso">
@@ -270,7 +270,7 @@ export default function Home() {
 
       {/* ---------- COACHING SPOTLIGHT: half text, half image ---------- */}
       <section className="overflow-hidden bg-surface">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20 lg:py-28">
           <Reveal>
             <div className="shadow-lifted flex flex-col overflow-hidden rounded-[2rem] bg-graphite lg:flex-row">
               <div className="flex flex-col justify-center p-10 sm:p-14 lg:w-1/2 lg:p-16">

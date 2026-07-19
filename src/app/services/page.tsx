@@ -38,7 +38,7 @@ export default function ServicesPage() {
         service keeps its own surface treatment, and the paired image alternates
         sides so the page reads as a rhythm rather than a list.
       */}
-      <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8 lg:pb-28">
+      <section className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="flex flex-col gap-4">
           {services.map((s, i) => {
             const t = toneStyles[s.tone];

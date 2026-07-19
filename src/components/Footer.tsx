@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MapPin, Phone, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { nav, site, hours } from "@/lib/site";
 import { asset } from "@/lib/asset";
+import { LocationMap } from "@/components/LocationMap";
 
 // Merge consecutive days that share the same hours, e.g. "Mon - Tue".
 function groupedHours() {
@@ -31,7 +32,11 @@ export function Footer() {
 
   return (
     <footer className="border-t border-bone/10 bg-espresso-deep text-bone">
-      <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
+      {/*
+        Extra bottom padding on phones so the fixed booking FAB (bottom-6 plus
+        a 56px button) does not sit on top of the last row of links.
+      */}
+      <div className="mx-auto max-w-7xl px-5 pt-12 pb-28 sm:px-8 sm:py-16 lg:py-20">
         {/*
           Two blocks rather than four equal columns. Previously the map sat as
           a fourth column, which left a dead gap through the middle of the row
@@ -134,16 +139,7 @@ export function Footer() {
             homepage so the page keeps the Stitch section list exactly, while
             address, hours and map still sit together.
           */}
-          <div className="aspect-square w-full max-w-sm overflow-hidden rounded-2xl lg:max-w-none lg:self-start">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2960.9312793331314!2d-72.06048369999999!3d42.087521900000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e6a7e25853e50b%3A0x725b4f148e17210d!2sFunctional%20Massage%20Therapy!5e0!3m2!1sen!2sus!4v1784424956324!5m2!1sen!2sus"
-              title="Map showing Functional Massage Therapy at 48 Main St, Sturbridge, MA"
-              loading="lazy"
-              allowFullScreen
-              referrerPolicy="strict-origin-when-cross-origin"
-              className="h-full w-full border-0"
-            />
-          </div>
+          <LocationMap className="aspect-square w-full max-w-sm lg:max-w-none lg:self-start" />
         </div>
 
         <div className="mt-12 flex flex-col gap-4 border-t border-bone/15 pt-7 sm:flex-row sm:items-center sm:justify-between">

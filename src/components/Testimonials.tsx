@@ -27,7 +27,7 @@ function initials(name: string) {
 
 export function Testimonials() {
   return (
-    <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+    <section className="mx-auto max-w-7xl px-5 pt-14 sm:px-8 sm:pt-20 lg:pt-28">
       <Reveal>
         <div className="text-center">
           <h2 className="t-headline-lg text-espresso">
@@ -43,7 +43,7 @@ export function Testimonials() {
         {testimonials.map((t, i) =>
           t.draft ? (
             <Reveal key={`draft-${i}`} delay={i * 0.06}>
-              <div className="flex h-full min-h-[18rem] flex-col items-center justify-center rounded-3xl border-2 border-dashed border-line p-10 text-center">
+              <div className="flex h-full flex-col items-center justify-center rounded-3xl border-2 border-dashed border-line p-8 text-center sm:min-h-[18rem] sm:p-10">
                 <Quotes size={28} weight="fill" className="text-line" />
                 <p className="mt-4 font-semibold text-muted">
                   Awaiting client feedback
@@ -57,7 +57,7 @@ export function Testimonials() {
             </Reveal>
           ) : (
             <Reveal key={t.name} delay={i * 0.06}>
-              <figure className="surface-raised flex h-full min-h-[18rem] flex-col rounded-3xl p-8 sm:p-10">
+              <figure className="surface-raised flex h-full flex-col rounded-3xl p-8 sm:min-h-[18rem] sm:p-10">
                 <Quotes size={28} weight="fill" className="text-copper" />
                 <blockquote className="mt-5 flex-1 leading-relaxed text-ink">
                   {t.quote}
