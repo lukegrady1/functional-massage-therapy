@@ -4,6 +4,7 @@ import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { BookingFab } from "@/components/BookingFab";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 // An editorial serif for headlines. Manual therapy is a craft with a long
 // literature behind it, and the serif carries that authority in a way a
@@ -75,6 +76,7 @@ export default function RootLayout({
       className={`${display.variable} ${body.variable} h-full antialiased`}
     >
       <body className="grain min-h-full flex flex-col bg-bone text-ink">
+        <ScrollToTop />
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
