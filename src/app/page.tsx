@@ -5,7 +5,6 @@ import {
   Barbell,
   HandHeart,
   PersonSimpleTaiChi,
-  MapPin,
   CheckCircle,
 } from "@phosphor-icons/react/dist/ssr";
 import type { Icon } from "@phosphor-icons/react";
@@ -14,7 +13,7 @@ import { Eyebrow } from "@/components/Eyebrow";
 import { Reveal } from "@/components/Reveal";
 import { CtaBand } from "@/components/CtaBand";
 import { Testimonials } from "@/components/Testimonials";
-import { services, hours, site } from "@/lib/site";
+import { services } from "@/lib/site";
 import { asset } from "@/lib/asset";
 
 /*
@@ -47,23 +46,6 @@ const principles = [
   },
 ];
 
-const approach = [
-  {
-    n: "01",
-    title: "Assess",
-    body: "We start with how you actually move. The session is built around your body, your goals, and the pattern behind the pain.",
-  },
-  {
-    n: "02",
-    title: "Treat",
-    body: "Focused, hands-on work into the tissue that needs it. We address the root of the restriction, not just the spot that hurts.",
-  },
-  {
-    n: "03",
-    title: "Empower",
-    body: "You leave with the tools to hold your progress between visits. Real healing, not a temporary fix.",
-  },
-];
 
 export default function Home() {
   return (
@@ -290,62 +272,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- APPROACH: sticky heading + step list ---------- */}
-      <section className="bg-espresso text-bone">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 lg:py-28">
-          <div className="lg:sticky lg:top-24 lg:self-start">
-            <Reveal>
-              <Eyebrow onDark>The functional approach</Eyebrow>
-            </Reveal>
-            <Reveal delay={0.06}>
-              <h2 className="mt-6 t-headline-lg">
-                Healing that lasts past the table
-              </h2>
-            </Reveal>
-            <Reveal delay={0.12}>
-              <p className="mt-5 max-w-md text-lg leading-relaxed text-bone/70">
-                The goal is to send you home with the tools for continued
-                self-care, so the progress holds.
-              </p>
-            </Reveal>
-            <Reveal delay={0.18}>
-              <div className="reveal-image relative mt-10 hidden aspect-[4/3] w-full max-w-md overflow-hidden rounded-2xl lg:block">
-                <Image
-                  src={asset("/treatment-in-progress.webp")}
-                  alt="A treatment session in progress"
-                  fill
-                  sizes="34vw"
-                  className="object-cover"
-                />
-              </div>
-            </Reveal>
-          </div>
-
-          <ul className="flex flex-col">
-            {approach.map((step, i) => (
-              <Reveal
-                as="li"
-                key={step.n}
-                delay={i * 0.08}
-                className="flex gap-6 border-t border-bone/15 py-8 first:border-t-0 first:pt-0"
-              >
-                <span className="font-display text-4xl font-semibold leading-none text-copper-light">
-                  {step.n}
-                </span>
-                <div>
-                  <h3 className="t-headline-md">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 max-w-lg leading-relaxed text-bone/70">
-                    {step.body}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-      </section>
-
       {/* ---------- COACHING SPOTLIGHT: half text, half image ---------- */}
       <section className="overflow-hidden bg-surface">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
@@ -385,103 +311,6 @@ export default function Home() {
       </section>
 
       <Testimonials />
-
-      {/* ---------- LOCATION & HOURS ---------- */}
-      <section className="bloom-warm">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:gap-16 lg:py-28">
-          <div>
-            <Reveal>
-              <Eyebrow>Visit the studio</Eyebrow>
-            </Reveal>
-            <Reveal delay={0.06}>
-              <h2 className="mt-6 t-headline-lg text-espresso">
-                Find me inside Historic Yoga in Sturbridge
-              </h2>
-            </Reveal>
-            <Reveal delay={0.12}>
-              <a
-                href={site.mapsHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-7 inline-flex items-start gap-3 text-lg text-muted transition-colors duration-200 hover:text-copper"
-              >
-                <MapPin
-                  size={24}
-                  weight="fill"
-                  className="mt-0.5 shrink-0 text-copper"
-                />
-                <span>
-                  {site.address.line1}, {site.address.note}
-                  <br />
-                  {site.address.city}, {site.address.state} {site.address.zip}
-                </span>
-              </a>
-            </Reveal>
-            <Reveal delay={0.18}>
-              <div className="mt-8">
-                {/* Straight to Maps now that there is no contact page. */}
-                <Button href={site.mapsHref} variant="outline" external>
-                  Get directions
-                </Button>
-              </div>
-            </Reveal>
-            <Reveal delay={0.24}>
-              {/*
-                Google Business Profile embed. Sized by the wrapper's aspect
-                ratio rather than the iframe's own width/height attributes so
-                it scales with the column instead of overflowing on mobile.
-                `title` is what a screen reader announces in place of the map.
-              */}
-              <div className="shadow-ambient relative mt-12 aspect-[16/9] w-full overflow-hidden rounded-2xl">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2960.9312793331314!2d-72.06048369999999!3d42.087521900000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e6a7e25853e50b%3A0x725b4f148e17210d!2sFunctional%20Massage%20Therapy!5e0!3m2!1sen!2sus!4v1784424956324!5m2!1sen!2sus"
-                  title="Map showing Functional Massage Therapy at 48 Main St, Sturbridge, MA"
-                  loading="lazy"
-                  allowFullScreen
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  className="absolute inset-0 h-full w-full border-0"
-                />
-              </div>
-            </Reveal>
-          </div>
-
-          <Reveal delay={0.1}>
-            <div className="surface-raised rounded-3xl p-7 sm:p-9">
-              <h3 className="t-headline-md text-espresso">
-                Hours
-              </h3>
-              <ul className="mt-5 flex flex-col">
-                {hours.map((h) => {
-                  const closed = h.open === "Closed";
-                  return (
-                    <li
-                      key={h.day}
-                      className="flex items-baseline justify-between py-3 text-[0.95rem]"
-                    >
-                      <span
-                        className={
-                          closed ? "text-muted/70" : "font-medium text-ink"
-                        }
-                      >
-                        {h.day}
-                      </span>
-                      <span
-                        className={
-                          closed
-                            ? "text-muted/70"
-                            : "font-semibold tabular-nums text-espresso"
-                        }
-                      >
-                        {h.open}
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          </Reveal>
-        </div>
-      </section>
 
       <CtaBand />
     </>

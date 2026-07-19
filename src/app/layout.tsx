@@ -3,6 +3,7 @@ import { Source_Serif_4, Inter } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { BookingFab } from "@/components/BookingFab";
 
 // An editorial serif for headlines. Manual therapy is a craft with a long
 // literature behind it, and the serif carries that authority in a way a
@@ -77,6 +78,7 @@ export default function RootLayout({
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
+        <BookingFab />
       </body>
     </html>
   );

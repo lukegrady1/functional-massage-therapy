@@ -114,6 +114,22 @@ export function Footer() {
           </div>
         </div>
 
+        {/*
+          Business Profile map. Lives here rather than on the homepage so the
+          page keeps the Stitch section list exactly, while the address, hours
+          and map still sit together where someone looks for them.
+        */}
+        <div className="mt-12 h-56 w-full overflow-hidden rounded-2xl sm:h-64">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2960.9312793331314!2d-72.06048369999999!3d42.087521900000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e6a7e25853e50b%3A0x725b4f148e17210d!2sFunctional%20Massage%20Therapy!5e0!3m2!1sen!2sus!4v1784424956324!5m2!1sen!2sus"
+            title="Map showing Functional Massage Therapy at 48 Main St, Sturbridge, MA"
+            loading="lazy"
+            allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
+            className="h-full w-full border-0"
+          />
+        </div>
+
         <div className="mt-10 flex flex-col gap-4 border-t border-bone/15 pt-7 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-bone/55">
             &copy; {new Date().getFullYear()} {site.name}. All rights reserved.

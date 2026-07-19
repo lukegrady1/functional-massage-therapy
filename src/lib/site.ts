@@ -25,11 +25,16 @@ export const site = {
     "https://www.google.com/maps/search/?api=1&query=Functional+Massage+Therapy+48+Main+St+Sturbridge+MA+01566",
 } as const;
 
+/*
+  Order matches the Stitch nav: Home, Services, Coaching, About. Booking sits
+  last and is filtered out of the desktop bar, where the Book Now button is
+  the booking entry point; it still appears in the mobile menu and the footer.
+*/
 export const nav = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Coaching", href: "/coaching" },
+  { label: "About", href: "/about" },
   { label: "Booking", href: "/booking" },
 ] as const;
 

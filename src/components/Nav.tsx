@@ -101,14 +101,6 @@ export function Nav() {
             })}
           </nav>
 
-          <a
-            href={site.phoneHref}
-            className="flex items-center gap-1.5 text-sm font-semibold text-espresso transition-colors duration-200 hover:text-copper"
-          >
-            <Phone size={16} weight="fill" />
-            {site.phone}
-          </a>
-
           <Button href="/booking" className="px-6 py-2.5">
             Book Now
           </Button>
