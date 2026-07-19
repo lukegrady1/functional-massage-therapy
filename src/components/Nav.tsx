@@ -55,7 +55,13 @@ function Wordmark({
           compositor, so the shrink costs no layout pass and the header height
           stays put instead of reflowing the page under the reader.
         */
-        className={`h-[72px] w-auto origin-left mix-blend-multiply transition-transform duration-300 ease-out ${
+        /*
+          84px inside the 96px bar. The bar's own height is deliberately not
+          touched: the hero sizes itself with calc(100svh-96px) and the mobile
+          menu pads down by the same 96px, so growing the header means
+          chasing that number through both.
+        */
+        className={`h-[84px] w-auto origin-left mix-blend-multiply transition-transform duration-300 ease-out ${
           scrolled ? "scale-90" : "scale-100"
         }`}
       />
