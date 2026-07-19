@@ -43,47 +43,53 @@ const background = [
 export default function AboutPage() {
   return (
     <>
-      {/* Header (split) */}
-      <section className="mx-auto grid max-w-7xl items-center gap-12 px-5 pt-16 pb-16 sm:px-8 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:pt-24 lg:pb-20">
-        <div>
-          <Reveal>
+      {/* Header: split. Above the fold, so no Reveal (see note in page.tsx). */}
+      <section className="bloom-warm">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 pt-10 pb-16 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:pt-14 lg:pb-20">
+          <div>
             <Eyebrow>About the practice</Eyebrow>
-          </Reveal>
-          <Reveal delay={0.06}>
-            <h1 className="mt-6 font-display text-[2.6rem] font-bold leading-[1.05] tracking-tight text-espresso sm:text-6xl">
+            <h1 className="mt-6 font-display text-[2.6rem] font-bold leading-[1.06] tracking-tight text-espresso sm:text-6xl">
               Small but mighty,
               <br />
-              and built for{" "}
-              <span className="italic text-copper">results</span>.
+              and built for <em className="pb-1 leading-[1.15] text-copper">results</em>.
             </h1>
-          </Reveal>
-          <Reveal delay={0.12}>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted">
               I&apos;m Lauren, owner and therapist of this practice. I&apos;m
               passionate about whole-body wellness and bringing a comprehensive,
               functional approach to your therapeutic needs.
             </p>
-          </Reveal>
-        </div>
-        <Reveal delay={0.1}>
-          <div className="relative mx-auto aspect-[4/3] max-w-md overflow-hidden rounded-[2rem] bg-line shadow-xl shadow-espresso/10 sm:max-w-lg sm:aspect-[4/5] lg:aspect-[5/6] lg:max-w-none">
-            <Image
-              src={asset("/lauren-portrait.webp")}
-              alt="Lauren, owner and licensed massage therapist"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 45vw"
-              className="object-cover object-top"
-            />
           </div>
-        </Reveal>
+
+          {/* Wrapper is sized to the photo so the offset plate tracks it. */}
+          <div className="relative mx-auto w-full max-w-[420px]">
+            <div
+              aria-hidden
+              className="edge-petal absolute -left-4 -top-4 hidden h-full w-full bg-tan sm:block"
+            />
+            {/*
+              The source photo is landscape (1206x918). A tall 4:5 frame with
+              object-top crops to the wall above her head, so the frame is kept
+              square and the focal point pulled slightly above center.
+            */}
+            <div className="edge-petal relative aspect-square w-full overflow-hidden shadow-[0_24px_60px_-24px_rgb(20_19_18_/_0.4)]">
+              <Image
+                src={asset("/lauren-portrait.webp")}
+                alt="Lauren, owner and licensed massage therapist"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover object-[50%_35%]"
+              />
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* Story (single-column prose) */}
-      <section className="bg-surface">
+      {/* Story: single-column prose on a raised, textured surface */}
+      <section className="texture-linen bg-surface">
         <div className="mx-auto max-w-3xl px-5 py-20 sm:px-8 lg:py-28">
           <Reveal>
-            <h2 className="font-display text-3xl font-bold leading-tight tracking-tight text-espresso sm:text-4xl">
+            <h2 className="font-display text-3xl font-bold leading-tight tracking-tight text-espresso sm:text-[2.6rem]">
               My journey to this work
             </h2>
           </Reveal>
@@ -112,35 +118,33 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Background highlights (2-col icon grid) */}
+      {/* Background: 2-col grid of raised panels */}
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
         <Reveal>
-          <h2 className="max-w-2xl font-display text-3xl font-bold leading-tight tracking-tight text-espresso sm:text-4xl">
+          <h2 className="max-w-2xl font-display text-3xl font-bold leading-tight tracking-tight text-espresso sm:text-[2.6rem]">
             The experience behind the hands
           </h2>
         </Reveal>
-        <div className="mt-12 grid gap-x-12 gap-y-10 sm:grid-cols-2">
+        <div className="mt-12 grid gap-4 sm:grid-cols-2">
           {background.map((item, i) => (
-            <Reveal
-              key={item.title}
-              delay={i * 0.06}
-              className="flex gap-5 border-t border-line pt-7"
-            >
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-espresso/5 text-copper">
-                <item.icon size={24} weight="bold" />
-              </span>
-              <div>
-                <h3 className="font-display text-xl font-bold text-espresso">
-                  {item.title}
-                </h3>
-                <p className="mt-2 leading-relaxed text-muted">{item.body}</p>
+            <Reveal key={item.title} delay={i * 0.06}>
+              <div className="surface-raised flex h-full gap-5 rounded-3xl p-7">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-tan text-espresso">
+                  <item.icon size={24} weight="bold" />
+                </span>
+                <div>
+                  <h3 className="font-display text-xl font-bold text-espresso">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 leading-relaxed text-muted">{item.body}</p>
+                </div>
               </div>
             </Reveal>
           ))}
         </div>
       </section>
 
-      {/* Philosophy (full-width quote on brand) */}
+      {/* Philosophy: full-width statement on off-black */}
       <section className="bg-espresso">
         <div className="mx-auto max-w-4xl px-5 py-20 text-center sm:px-8 lg:py-24">
           <Reveal>
@@ -151,7 +155,7 @@ export default function AboutPage() {
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="mt-7 text-sm font-semibold uppercase tracking-[0.16em] text-bone/85">
+            <p className="mt-7 text-sm font-semibold uppercase tracking-[0.16em] text-copper-light">
               In good health, Lauren
             </p>
           </Reveal>

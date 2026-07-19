@@ -13,44 +13,42 @@ export const metadata: Metadata = {
 
 const openDays = hours.filter((h) => h.open !== "Closed");
 
+const iconChip =
+  "flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-tan text-espresso";
+const infoLabel =
+  "block text-xs font-semibold uppercase tracking-[0.16em] text-muted";
+
 export default function ContactPage() {
   return (
     <>
-      {/* Header */}
-      <section className="mx-auto max-w-7xl px-5 pt-16 pb-12 sm:px-8 lg:pt-24 lg:pb-14">
-        <Reveal>
+      {/* Header. Above the fold, so no Reveal. */}
+      <section className="bloom-warm">
+        <div className="mx-auto max-w-7xl px-5 pt-10 pb-12 sm:px-8 lg:pt-14 lg:pb-14">
           <Eyebrow>Get in touch</Eyebrow>
-        </Reveal>
-        <Reveal delay={0.06}>
-          <h1 className="mt-6 max-w-3xl font-display text-[2.6rem] font-bold leading-[1.05] tracking-tight text-espresso sm:text-6xl">
+          <h1 className="mt-6 max-w-3xl font-display text-[2.6rem] font-bold leading-[1.06] tracking-tight text-espresso sm:text-6xl">
             Questions before you book? Let&apos;s talk.
           </h1>
-        </Reveal>
-        <Reveal delay={0.12}>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
             Reach out by phone, email, or the form below. The fastest way to
             lock in a time is to book online.
           </p>
-        </Reveal>
+        </div>
       </section>
 
       {/* Info + form */}
       <section className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 lg:pb-20">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.25fr] lg:gap-16">
-          {/* Info column */}
-          <div className="flex flex-col gap-7">
+          <div className="flex flex-col gap-3">
             <Reveal>
               <a
                 href={site.phoneHref}
-                className="flex items-start gap-4 transition-colors hover:text-copper"
+                className="surface-raised flex items-start gap-4 rounded-2xl p-5 transition-transform duration-200 hover:-translate-y-0.5"
               >
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-espresso/5 text-copper">
+                <span className={iconChip}>
                   <Phone size={20} weight="fill" />
                 </span>
                 <span>
-                  <span className="block text-sm font-semibold uppercase tracking-[0.14em] text-muted">
-                    Call
-                  </span>
+                  <span className={infoLabel}>Call</span>
                   <span className="mt-1 block text-lg font-semibold text-espresso">
                     {site.phone}
                   </span>
@@ -61,16 +59,14 @@ export default function ContactPage() {
             <Reveal delay={0.05}>
               <a
                 href={`mailto:${site.email}`}
-                className="flex items-start gap-4 transition-colors hover:text-copper"
+                className="surface-raised flex items-start gap-4 rounded-2xl p-5 transition-transform duration-200 hover:-translate-y-0.5"
               >
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-espresso/5 text-copper">
+                <span className={iconChip}>
                   <EnvelopeSimple size={20} weight="fill" />
                 </span>
-                <span>
-                  <span className="block text-sm font-semibold uppercase tracking-[0.14em] text-muted">
-                    Email
-                  </span>
-                  <span className="mt-1 block text-lg font-semibold text-espresso">
+                <span className="min-w-0">
+                  <span className={infoLabel}>Email</span>
+                  <span className="mt-1 block break-words text-lg font-semibold text-espresso">
                     {site.email}
                   </span>
                 </span>
@@ -82,15 +78,13 @@ export default function ContactPage() {
                 href={site.mapsHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-start gap-4 transition-colors hover:text-copper"
+                className="surface-raised flex items-start gap-4 rounded-2xl p-5 transition-transform duration-200 hover:-translate-y-0.5"
               >
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-espresso/5 text-copper">
+                <span className={iconChip}>
                   <MapPin size={20} weight="fill" />
                 </span>
                 <span>
-                  <span className="block text-sm font-semibold uppercase tracking-[0.14em] text-muted">
-                    Visit
-                  </span>
+                  <span className={infoLabel}>Visit</span>
                   <span className="mt-1 block text-lg font-semibold leading-snug text-espresso">
                     {site.address.line1}, {site.address.note}
                     <br />
@@ -101,14 +95,12 @@ export default function ContactPage() {
             </Reveal>
 
             <Reveal delay={0.15}>
-              <div className="flex items-start gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-espresso/5 text-copper">
+              <div className="surface-raised flex items-start gap-4 rounded-2xl p-5">
+                <span className={iconChip}>
                   <Clock size={20} weight="fill" />
                 </span>
                 <span>
-                  <span className="block text-sm font-semibold uppercase tracking-[0.14em] text-muted">
-                    Open
-                  </span>
+                  <span className={infoLabel}>Open</span>
                   <span className="mt-1 block leading-snug text-espresso">
                     {openDays[0].day} to {openDays[openDays.length - 1].day}
                     <br />
@@ -121,7 +113,6 @@ export default function ContactPage() {
             </Reveal>
           </div>
 
-          {/* Form */}
           <Reveal delay={0.08}>
             <ContactForm />
           </Reveal>

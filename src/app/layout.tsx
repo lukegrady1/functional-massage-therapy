@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Manrope } from "next/font/google";
+import { Archivo, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 
-const display = Bricolage_Grotesque({
+// Archivo is a grotesque with flat terminals and tight apertures. Chosen over
+// the previous rounded geometric display face for a sharper, more serious read.
+const display = Archivo({
   variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
   weight: ["500", "600", "700"],
 });
 
-const body = Manrope({
+const body = Inter_Tight({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
 });
 
 // Deployed site origin + repo subpath (set in CI). OG images must be

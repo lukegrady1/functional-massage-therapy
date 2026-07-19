@@ -19,7 +19,7 @@ function Wordmark() {
         width={220}
         height={157}
         priority
-        className="h-20 w-auto"
+        className="h-14 w-auto mix-blend-multiply"
       />
     </Link>
   );
@@ -43,11 +43,11 @@ export function Nav() {
     <header
       className={`sticky top-0 z-50 transition-colors duration-300 ${
         scrolled
-          ? "border-b border-line bg-bone/85 backdrop-blur-md"
+          ? "border-b border-line bg-bone/95 backdrop-blur-md"
           : "border-b border-transparent bg-bone/0"
       }`}
     >
-      <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-5 sm:px-8">
+      <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 sm:px-8">
         <Wordmark />
 
         <nav className="hidden items-center gap-1 lg:flex">

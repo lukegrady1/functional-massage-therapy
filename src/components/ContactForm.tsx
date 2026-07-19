@@ -6,9 +6,20 @@ import { PaperPlaneTilt, CheckCircle, ArrowClockwise } from "@phosphor-icons/rea
 type Status = "idle" | "submitting" | "success" | "error";
 
 const inputCls =
-  "w-full rounded-xl border border-line bg-bone px-4 py-3 text-ink placeholder:text-muted/70 transition-colors focus:border-espresso focus:outline-none focus:ring-2 focus:ring-copper/40";
+  "w-full rounded-xl border border-line bg-surface px-4 py-3 text-ink placeholder:text-muted transition-colors focus:border-espresso focus:outline-none focus:ring-2 focus:ring-copper/50";
 
-export function ContactForm() {
+export function ContactForm({
+  /*
+    Identifies which page the enquiry came from. Sent with the payload so
+    coaching leads land in a separate GoHighLevel pipeline from massage
+    booking enquiries, rather than all landing in one bucket.
+  */
+  source = "contact-page",
+  heading,
+}: {
+  source?: string;
+  heading?: string;
+} = {}) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -32,7 +43,10 @@ export function ContactForm() {
 
     setStatus("submitting");
     try {
-      // TODO: wire to a real endpoint (GoHighLevel, Formspree, Resend, etc.)
+      // TODO: wire to a real endpoint (GoHighLevel form/webhook).
+      // The payload below is the shape to POST once the GHL endpoint exists:
+      //   { name, email, phone, message, source }
+      void { name, email, message, source };
       await new Promise((res) => setTimeout(res, 900));
       setStatus("success");
       form.reset();
@@ -43,8 +57,8 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="flex flex-col items-center justify-center rounded-3xl border border-line bg-surface px-6 py-14 text-center">
-        <CheckCircle size={48} weight="fill" className="text-cocoa" />
+      <div className="surface-raised flex flex-col items-center justify-center rounded-3xl px-6 py-14 text-center">
+        <CheckCircle size={48} weight="fill" className="text-copper" />
         <h3 className="mt-5 font-display text-2xl font-bold text-espresso">
           Message sent
         </h3>
@@ -68,9 +82,13 @@ export function ContactForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="rounded-3xl border border-line bg-surface p-7 sm:p-8"
+      className="surface-raised rounded-3xl p-7 sm:p-8"
     >
       <div className="flex flex-col gap-5">
+        {heading && (
+          <p className="text-lg font-semibold text-espresso">{heading}</p>
+        )}
+
         <div className="flex flex-col gap-2">
           <label htmlFor="name" className="text-sm font-semibold text-espresso">
             Name
@@ -146,7 +164,7 @@ export function ContactForm() {
         </div>
 
         {status === "error" && (
-          <p className="rounded-xl bg-copper/10 px-4 py-3 text-sm font-medium text-copper-dark">
+          <p className="rounded-xl bg-copper/12 px-4 py-3 text-sm font-medium text-copper-dark">
             Something went wrong sending your message. Please try again or call
             instead.
           </p>

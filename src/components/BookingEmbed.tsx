@@ -18,7 +18,7 @@ const CALENDAR_EMBED_URL = ""; // <-- paste GHL booking widget URL here
 export function BookingEmbed() {
   if (CALENDAR_EMBED_URL) {
     return (
-      <div className="overflow-hidden rounded-3xl border border-line bg-surface">
+      <div className="surface-raised overflow-hidden rounded-3xl">
         <iframe
           src={CALENDAR_EMBED_URL}
           title="Book an appointment"
@@ -31,8 +31,8 @@ export function BookingEmbed() {
 
   // Placeholder shown until the GHL URL is wired in.
   return (
-    <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-espresso/25 bg-surface px-6 py-16 text-center">
-      <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-espresso/5 text-copper">
+    <div className="surface-inset flex flex-col items-center justify-center rounded-3xl border border-dashed border-espresso/25 px-6 py-16 text-center">
+      <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-tan text-espresso">
         <CalendarCheck size={28} weight="bold" />
       </span>
       <h3 className="mt-5 font-display text-2xl font-bold text-espresso">

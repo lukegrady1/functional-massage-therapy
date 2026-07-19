@@ -37,34 +37,31 @@ const expect = [
 export default function BookingPage() {
   return (
     <>
-      {/* Header */}
-      <section className="mx-auto max-w-7xl px-5 pt-16 pb-12 sm:px-8 lg:pt-24 lg:pb-14">
-        <Reveal>
+      {/* Header. Above the fold, so no Reveal. */}
+      <section className="bloom-warm">
+        <div className="mx-auto max-w-7xl px-5 pt-10 pb-12 sm:px-8 lg:pt-14 lg:pb-14">
           <Eyebrow>Booking</Eyebrow>
-        </Reveal>
-        <Reveal delay={0.06}>
-          <h1 className="mt-6 max-w-3xl font-display text-[2.6rem] font-bold leading-[1.05] tracking-tight text-espresso sm:text-6xl">
+          <h1 className="mt-6 max-w-3xl font-display text-[2.6rem] font-bold leading-[1.06] tracking-tight text-espresso sm:text-6xl">
             Book your appointment
           </h1>
-        </Reveal>
-        <Reveal delay={0.12}>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
             Pick a time that works for you below. Prefer to talk first? Call me
-            at {site.phone} and we&apos;ll find the right session together.
+            at {site.phone}{" "}
+            and we&apos;ll find the right session together.
           </p>
-        </Reveal>
+        </div>
       </section>
 
       {/* Calendar + sidebar */}
       <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8 lg:pb-28">
-        <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr]">
+        <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
           <Reveal>
             <BookingEmbed />
           </Reveal>
 
           <Reveal delay={0.08}>
-            <aside className="flex flex-col gap-6">
-              <div className="rounded-3xl border border-line bg-surface p-7">
+            <aside className="flex flex-col gap-4">
+              <div className="surface-raised rounded-3xl p-7">
                 <h2 className="font-display text-xl font-bold text-espresso">
                   Hours
                 </h2>
@@ -74,14 +71,20 @@ export default function BookingPage() {
                     return (
                       <li
                         key={h.day}
-                        className="flex items-baseline justify-between border-b border-line py-2.5 text-[0.95rem] last:border-b-0"
+                        className="flex items-baseline justify-between py-2.5 text-[0.95rem]"
                       >
-                        <span className="font-medium text-ink">{h.day}</span>
+                        <span
+                          className={
+                            closed ? "text-muted/70" : "font-medium text-ink"
+                          }
+                        >
+                          {h.day}
+                        </span>
                         <span
                           className={
                             closed
-                              ? "text-muted"
-                              : "font-semibold text-espresso tabular-nums"
+                              ? "text-muted/70"
+                              : "font-semibold tabular-nums text-espresso"
                           }
                         >
                           {h.open}
@@ -96,7 +99,7 @@ export default function BookingPage() {
                 href={site.mapsHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-start gap-3 rounded-3xl border border-line bg-surface p-7 transition-colors hover:border-espresso/30"
+                className="surface-raised flex items-start gap-3 rounded-3xl p-7 transition-transform duration-200 hover:-translate-y-0.5"
               >
                 <MapPin size={22} weight="fill" className="mt-0.5 shrink-0 text-copper" />
                 <span className="text-[0.95rem] leading-relaxed text-muted">
@@ -116,7 +119,7 @@ export default function BookingPage() {
       <section className="bg-espresso text-bone">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-24">
           <Reveal>
-            <h2 className="max-w-xl font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+            <h2 className="max-w-xl font-display text-3xl font-bold leading-tight tracking-tight sm:text-[2.6rem]">
               What your first visit looks like
             </h2>
           </Reveal>
@@ -127,11 +130,11 @@ export default function BookingPage() {
                 delay={i * 0.08}
                 className="border-t border-bone/15 pt-6"
               >
-                <item.icon size={28} weight="bold" className="text-copper" />
+                <item.icon size={28} weight="bold" className="text-copper-light" />
                 <h3 className="mt-4 font-display text-xl font-bold">
                   {item.title}
                 </h3>
-                <p className="mt-2 leading-relaxed text-bone/75">{item.body}</p>
+                <p className="mt-2 leading-relaxed text-bone/70">{item.body}</p>
               </Reveal>
             ))}
           </div>

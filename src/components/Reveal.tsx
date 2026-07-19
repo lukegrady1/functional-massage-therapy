@@ -7,7 +7,7 @@ import type { ReactNode } from "react";
 export function Reveal({
   children,
   delay = 0,
-  y = 22,
+  y = 14,
   className = "",
   as = "div",
 }: {
@@ -25,8 +25,11 @@ export function Reveal({
       className={className}
       initial={reduce ? false : { opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
+      // amount 0 + a negative bottom margin starts the reveal slightly before
+      // the element enters, so content is already settled by the time it is
+      // actually readable instead of fading in under the reader.
+      viewport={{ once: true, amount: 0, margin: "0px 0px -12% 0px" }}
+      transition={{ duration: 0.45, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
     </MotionTag>

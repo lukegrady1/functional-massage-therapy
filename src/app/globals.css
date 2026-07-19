@@ -8,22 +8,41 @@
 */
 
 @theme {
-  --color-bone: #f6f3ee;
-  --color-surface: #fcfaf6;
-  --color-line: #e7e1d7;
+  /*
+    BLACK & TAN
+    Contrast does the work here, not hue. A true off-black against a warm tan,
+    over a light neutral ground. The ground sits a step below the raised
+    surfaces so panels read as genuinely lifted.
+  */
+  --color-bone: #e9e4da;
+  --color-surface: #f4f1ea;
+  --color-surface-deep: #ded8cb;
+  --color-line: #c9c1b1;
 
-  --color-espresso: #3a2a20;
-  --color-espresso-deep: #271b14;
-  --color-cocoa: #6b4733;
+  /* Off-black, never pure #000, which kills depth. */
+  --color-espresso: #141312;
+  --color-espresso-deep: #0a0a09;
+  --color-cocoa: #6d5330;
 
-  --color-ink: #241b15;
-  --color-muted: #6e635a;
+  --color-ink: #1a1917;
+  --color-muted: #5f5b54;
 
-  --color-copper: #bc7a3f;
-  --color-copper-dark: #8a4e1f;
+  /*
+    Tan is the warm counterweight to the black. The darker value is for accent
+    text on light ground (contrast-safe); the lighter one is for text and rules
+    sitting on the off-black.
+  */
+  --color-copper: #8a6a3e;
+  --color-copper-dark: #6d5330;
+  --color-copper-light: #c9a76a;
 
-  --font-display: var(--font-display), "Bricolage Grotesque", system-ui, sans-serif;
-  --font-body: var(--font-body), "Manrope", system-ui, sans-serif;
+  /* Tan as a surface, plus a graphite mid-tone for grid variety. */
+  --color-tan: #d9cdb4;
+  --color-tan-deep: #b3a58c;
+  --color-graphite: #3b3833;
+
+  --font-display: var(--font-display), "Archivo", system-ui, sans-serif;
+  --font-body: var(--font-body), "Inter Tight", system-ui, sans-serif;
 }
 
 html {
@@ -48,6 +67,89 @@ body {
 ::selection {
   background: var(--color-copper);
   color: #fff;
+}
+
+/*
+  MATERIAL LAYER
+  --------------------------------------------------------------
+  With photography kept minimal, warmth has to come from material: layered
+  light, woven texture, and organic edges. All of it is CSS on static
+  elements, so there is no image weight and no scroll repaint cost.
+*/
+
+/* Raised panel. Tinted shadow (never pure black) + top highlight = lift. */
+.surface-raised {
+  background: linear-gradient(
+    168deg,
+    var(--color-surface) 0%,
+    color-mix(in oklab, var(--color-surface) 88%, var(--color-bone)) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.55),
+    0 1px 2px rgb(46 38 32 / 0.04),
+    0 12px 32px -12px rgb(46 38 32 / 0.14);
+}
+
+/* Panel sunk into the ground instead of lifted off it. */
+.surface-inset {
+  background: var(--color-surface-deep);
+  box-shadow:
+    inset 0 2px 6px rgb(46 38 32 / 0.09),
+    inset 0 1px 0 rgb(46 38 32 / 0.05);
+}
+
+/*
+  Woven linen texture. Two fine diagonal gradients crossing at 90deg reads as
+  fabric at low opacity without an image request.
+*/
+.texture-linen {
+  position: relative;
+  isolation: isolate;
+}
+.texture-linen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.4;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgb(46 38 32 / 0.028) 0 1px,
+      transparent 1px 4px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgb(46 38 32 / 0.028) 0 1px,
+      transparent 1px 4px
+    );
+}
+
+/*
+  Warm light bloom. Stands in for the glow a photograph would carry, and gives
+  large flat sections a focal point.
+*/
+.bloom-warm {
+  background-image:
+    radial-gradient(
+      70% 55% at 18% 8%,
+      color-mix(in oklab, var(--color-copper) 16%, transparent) 0%,
+      transparent 62%
+    ),
+    radial-gradient(
+      55% 50% at 92% 84%,
+      color-mix(in oklab, var(--color-tan-deep) 28%, transparent) 0%,
+      transparent 60%
+    );
+}
+
+/* Organic asymmetric edge. The "not a rounded rectangle" shape. */
+.edge-organic {
+  border-radius: 46% 54% 40% 60% / 52% 42% 58% 48%;
+}
+.edge-petal {
+  border-radius: 2.5rem 8rem 2.5rem 8rem;
 }
 
 /* Subtle film grain over fixed layer only (no scroll repaint cost) */

@@ -30,13 +30,13 @@ export function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1.2fr]">
           {/* Brand + address */}
           <div>
-            <div className="inline-flex rounded-2xl bg-bone p-5 sm:p-6">
+            <div className="inline-flex rounded-2xl bg-bone p-4 sm:p-5">
               <Image
                 src={asset("/logo.webp")}
                 alt="Functional Massage Therapy"
                 width={360}
                 height={257}
-                className="h-28 w-auto sm:h-36"
+                className="h-20 w-auto sm:h-24"
               />
             </div>
             <p className="mt-6 max-w-sm text-[0.95rem] leading-relaxed text-bone/70">
@@ -47,9 +47,9 @@ export function Footer() {
               href={site.mapsHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-start gap-2 text-[0.95rem] text-bone/80 transition-colors hover:text-copper"
+              className="mt-6 flex w-fit items-start gap-2 text-[0.95rem] text-bone/80 transition-colors hover:text-copper-light"
             >
-              <MapPin size={18} weight="fill" className="mt-0.5 shrink-0 text-copper" />
+              <MapPin size={18} weight="fill" className="mt-0.5 shrink-0 text-copper-light" />
               <span>
                 {site.address.line1} ({site.address.note})
                 <br />
@@ -58,9 +58,9 @@ export function Footer() {
             </a>
             <a
               href={site.phoneHref}
-              className="mt-3 inline-flex items-center gap-2 text-[0.95rem] text-bone/80 transition-colors hover:text-copper"
+              className="mt-3 flex w-fit items-center gap-2 text-[0.95rem] text-bone/80 transition-colors hover:text-copper-light"
             >
-              <Phone size={18} weight="fill" className="shrink-0 text-copper" />
+              <Phone size={18} weight="fill" className="shrink-0 text-copper-light" />
               {site.phone}
             </a>
           </div>
@@ -75,7 +75,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-[0.95rem] text-bone/80 transition-colors hover:text-copper"
+                    className="text-[0.95rem] text-bone/80 transition-colors hover:text-copper-light"
                   >
                     {item.label}
                   </Link>
@@ -120,7 +120,7 @@ export function Footer() {
           </p>
           <Link
             href="/booking"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-bone transition-colors hover:text-copper"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-bone transition-colors hover:text-copper-light"
           >
             Book your appointment
             <ArrowUpRight size={16} weight="bold" />

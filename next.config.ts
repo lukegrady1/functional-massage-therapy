@@ -18,8 +18,8 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   images: {
     // Required for `output: export` (no on-demand optimizer at runtime).
+    // All imagery is local to /public, so no remotePatterns are needed.
     unoptimized: true,
-    remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
   },
 };
 
