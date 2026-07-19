@@ -23,10 +23,17 @@ import { Button } from "@/components/Button";
     in `nav` for the mobile menu and the footer.
 */
 
-function Wordmark({ scrolled }: { scrolled: boolean }) {
+function Wordmark({
+  scrolled,
+  onClick,
+}: {
+  scrolled: boolean;
+  onClick: (e: React.MouseEvent) => void;
+}) {
   return (
     <Link
       href="/"
+      onClick={onClick}
       className="flex shrink-0 items-center"
       aria-label="Functional Massage Therapy home"
     >
@@ -68,6 +75,20 @@ export function Nav() {
 
   const deskLinks = nav.filter((item) => item.href !== "/booking");
 
+  /*
+    On any other page the logo is an ordinary link home. On the home page
+    itself it would otherwise do nothing — the route does not change, so
+    neither Next nor <ScrollToTop> reacts — leaving you stranded wherever you
+    had scrolled to. Scroll to the top by hand instead, and honour reduced
+    motion, since the page-wide `scroll-behavior: smooth` would animate it.
+  */
+  const onWordmarkClick = (e: React.MouseEvent) => {
+    close();
+    if (pathname.replace(/\/+$/, "") !== "") return;
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: reduce ? "instant" : "smooth" });
+  };
+
   return (
     <header
       className={`sticky top-0 z-50 transition-colors duration-300 ${
@@ -77,7 +98,7 @@ export function Nav() {
       }`}
     >
       <div className="mx-auto flex h-[96px] max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
-        <Wordmark scrolled={scrolled} />
+        <Wordmark scrolled={scrolled} onClick={onWordmarkClick} />
 
         {/* Links and the CTA travel together on the right, per Stitch. */}
         <div className="hidden items-center gap-7 lg:flex">
