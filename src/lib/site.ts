@@ -50,19 +50,18 @@ export const hours = [
 /* ------------------------------------------------------------------------
    TESTIMONIALS
    ------------------------------------------------------------------------
-   Entries with `draft: true` are UNFILLED SLOTS. They render on the site as
-   visibly empty outlined cards reading "Awaiting client feedback" so the
-   section cannot be mistaken for finished copy.
+   Every entry below is a real, published Google review, quoted verbatim.
 
-   Fill each one in with a real, permissioned quote and delete the `draft`
-   flag. Do not invent quotes to fill the grid: publishing fabricated
-   testimonials is deceptive and, in the US, violates the FTC endorsement
-   rules (16 CFR 255). If real feedback is not available for a slot, delete
-   the entry instead — the grid reflows to however many are present.
+   Do not invent quotes to fill the carousel, and do not put a star rating on
+   a quote without knowing what the reviewer actually gave. Publishing
+   fabricated testimonials — or real ones with invented ratings attached — is
+   deceptive and, in the US, violates the FTC endorsement rules (16 CFR 255).
+   The carousel loops on however many are present, so removing one is always
+   safer than inventing one.
 
-   `context` is what the person came in for ("Masters powerlifter",
-   "Chronic low back pain"), not a job title. It is what makes a quote
-   useful to the next reader.
+   `draft: true` still renders a visibly empty "Awaiting client feedback"
+   slot. Nothing uses it now that there is real feedback, but it stays for
+   the next section that needs to be honest about being unfinished.
    ------------------------------------------------------------------------ */
 
 export type Testimonial = {
@@ -79,8 +78,31 @@ export type Testimonial = {
     full names on Google, but there is no reason to widen that audience here.
   */
   name: string;
+  /*
+    Stars the reviewer actually gave. Stored per entry rather than assumed,
+    so that adding a four-star review later shows four stars instead of
+    silently inheriting a hardcoded five.
+  */
+  rating: 1 | 2 | 3 | 4 | 5;
   draft?: boolean;
 };
+
+/*
+  Aggregate rating shown above the carousel.
+
+  Verified against the live Google listing on 2026-07-19, which reported 5.0
+  from 40 reviews and a breakdown of "5 stars, 40 reviews / 4 stars, 0
+  reviews" — so the per-card fives below are the real figures, not an
+  assumption that positive-sounding means five.
+
+  This is a checkable public claim and it goes stale as reviews come in.
+  Re-read it off the listing before quoting it, and do not round up.
+*/
+export const googleRating = {
+  score: "5.0",
+  count: 40,
+  verified: "19 July 2026",
+} as const;
 
 /*
   Real Google reviews of the practice, selected from the public listing and
@@ -100,46 +122,55 @@ export const testimonials: Testimonial[] = [
     quote:
       "I booked a massage to help with my sciatica. Lauren listened to my concerns and communicated clearly during each step. She checked in multiple times as to my comfort and I left nearly pain free. Great massage, lovely room and atmosphere, very professional.",
     name: "Tina H.",
+    rating: 5,
   },
   {
     quote:
       "I am fellow massage therapist and had a meniscus tear injury. I needed someone to help release the fascia on my left hip and leg. Lauren did just that and released other parts I needed work in, like my neck and shoulders. Her work made a huge difference in the functioning of the knee no more clicking when I twist and turn.",
     name: "Julia S.",
+    rating: 5,
   },
   {
     quote:
       "Lauren does an excellent deep massage. My neck was so sore I could barely look to the left. Now I'm pain free and have full range of motion!",
     name: "Denise F.",
+    rating: 5,
   },
   {
     quote:
       "10/10 recommend. Lauren knows what she is doing. If you have an issue you need worked on or simply want better health and flexibility, this woman takes feedback and delivers. If you have been thinking about Functional Massage but haven't take the leap, give Lauren a call today!",
     name: "Kristen L.",
+    rating: 5,
   },
   {
     quote:
       "What a wonderful woman Lauren is. A champion for all around health and doesn't hesitate to share her expertise in her field. I'm pretty sure me and my whole family will be on Lauren's table. I initially brought my son to her. I can not wait to book for myself. We were very satisfied with the experience and results.",
     name: "Gina T.",
+    rating: 5,
   },
   {
     quote:
       "Lauren was wonderful! The deep massage was just what I needed relieving tension / pain in my neck/ shoulder area. She is professional & extremely knowledgeable x highly recommend!",
     name: "Leah C.",
+    rating: 5,
   },
   {
     quote:
       "Such a great experience. Lauren really is the best ! She strives to make you feel better and takes the time to understand the problem and fixes it. I would highly recommend Lauren !!",
     name: "Eleanor C.",
+    rating: 5,
   },
   {
     quote:
       "Relaxing atmosphere, warm, nice people, and a fluffy puppy to really set the mood. Lauren really knows what she's doing. Highly recommend to everyone",
     name: "Jon J.",
+    rating: 5,
   },
   {
     quote:
       "Lauren is an exceptional massage therapist. She knows the body and is able to go deep. I absolutely will go back.",
     name: "Alleah F.",
+    rating: 5,
   },
 ];
 

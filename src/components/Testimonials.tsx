@@ -1,6 +1,34 @@
-import { Quotes } from "@phosphor-icons/react/dist/ssr";
+import { Quotes, Star } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "@/components/Reveal";
-import { testimonials, type Testimonial } from "@/lib/site";
+import {
+  googleRating,
+  site,
+  testimonials,
+  type Testimonial,
+} from "@/lib/site";
+
+/*
+  Renders the stars a reviewer actually gave, not a decorative row of five.
+  The accessible label carries the number, so a screen reader gets "5 out of 5
+  stars" rather than five separate icons.
+*/
+function Stars({ rating }: { rating: number }) {
+  return (
+    <span
+      className="flex shrink-0 items-center gap-0.5 text-copper"
+      role="img"
+      aria-label={`${rating} out of 5 stars`}
+    >
+      {Array.from({ length: 5 }, (_, i) => (
+        <Star
+          key={i}
+          weight={i < rating ? "fill" : "regular"}
+          className={`h-3.5 w-3.5 sm:h-4 sm:w-4 ${i < rating ? "" : "opacity-30"}`}
+        />
+      ))}
+    </span>
+  );
+}
 
 /*
   Client testimonials.
@@ -72,10 +100,18 @@ function Card({ t }: { t: Testimonial }) {
 
   return (
     <figure className={`${cardBase} surface-raised`}>
-      <Quotes
-        weight="fill"
-        className="h-5 w-5 shrink-0 text-copper sm:h-7 sm:w-7"
-      />
+      {/*
+        Stars sit opposite the quote mark rather than under the name: the
+        rating is the first thing scanned, and at the foot of a 300-word card
+        it would be read last if at all.
+      */}
+      <div className="flex shrink-0 items-center justify-between gap-3">
+        <Quotes
+          weight="fill"
+          className="h-5 w-5 shrink-0 text-copper sm:h-7 sm:w-7"
+        />
+        <Stars rating={t.rating} />
+      </div>
       <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-ink sm:mt-5 sm:text-base">
         {t.quote}
       </blockquote>
@@ -103,6 +139,28 @@ export function Testimonials() {
           <p className="mx-auto mt-4 max-w-xl leading-relaxed text-muted">
             Trusted by athletes, professionals, and recovery seekers.
           </p>
+
+          {/*
+            The aggregate carries more weight than nine identical five-star
+            rows, and it links out so the claim can be checked rather than
+            just asserted. Figures come from lib/site.ts, where the date they
+            were read off the listing is recorded — they go stale as reviews
+            come in.
+          */}
+          <a
+            href={site.mapsHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group mt-5 inline-flex items-center gap-2.5 rounded-full border border-line bg-surface px-4 py-2 transition-colors duration-200 hover:border-copper"
+          >
+            <Stars rating={5} />
+            <span className="text-sm text-muted">
+              <span className="font-semibold text-espresso">
+                {googleRating.score}
+              </span>{" "}
+              from {googleRating.count} Google reviews
+            </span>
+          </a>
         </div>
       </Reveal>
 
