@@ -71,7 +71,7 @@ export default function AboutPage() {
               object-top crops to the wall above her head, so the frame is kept
               square and the focal point pulled slightly above center.
             */}
-            <div className="edge-petal relative aspect-square w-full overflow-hidden shadow-[0_24px_60px_-24px_rgb(20_19_18_/_0.4)]">
+            <div className="edge-petal relative aspect-square w-full overflow-hidden shadow-[0_24px_60px_-24px_rgb(51_38_28_/_0.4)]">
               <Image
                 src={asset("/lauren-portrait.webp")}
                 alt="Lauren, owner and licensed massage therapist"

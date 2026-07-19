@@ -69,7 +69,7 @@ export function ContactForm({
         <button
           type="button"
           onClick={() => setStatus("idle")}
-          className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-espresso transition-colors hover:text-copper"
+          className="press mt-6 inline-flex items-center gap-2 text-sm font-semibold text-espresso hover:text-copper"
         >
           <ArrowClockwise size={16} weight="bold" />
           Send another message
@@ -173,7 +173,10 @@ export function ContactForm({
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="inline-flex items-center justify-center gap-2 rounded-full bg-espresso px-7 py-3.5 text-[0.95rem] font-semibold text-bone transition-all hover:bg-espresso-deep active:translate-y-px disabled:cursor-not-allowed disabled:opacity-70"
+          // Matches Button's primary variant. `press` carries the hover lift
+          // and press feedback; the arrow-slide is deliberately not applied
+          // because this button's icon leads and spins while submitting.
+          className="press inline-flex items-center justify-center gap-2 rounded-full bg-espresso px-7 py-3.5 text-[0.95rem] font-semibold text-bone shadow-sm shadow-espresso/20 hover:bg-espresso-deep hover:shadow-lg hover:shadow-espresso/25 disabled:cursor-not-allowed disabled:opacity-70"
         >
           {status === "submitting" ? (
             <>

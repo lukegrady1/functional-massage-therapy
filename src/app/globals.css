@@ -4,33 +4,42 @@
   Functional Massage Therapy — design tokens
   Palette: Espresso + Copper, drawn from the brand logo.
   Single warm light theme; espresso is the dark band / heading / button color,
-  copper is the single locked accent. Type: Bricolage Grotesque + Manrope.
+  copper is the single locked accent. Type: Source Serif 4 + Inter.
 */
 
 @theme {
   /*
-    BLACK & TAN
-    Contrast does the work here, not hue. A true off-black against a warm tan,
-    over a light neutral ground. The ground sits a step below the raised
-    surfaces so panels read as genuinely lifted.
+    COFFEE & TAN
+    Every dark surface on the site is a warm brown, never a neutral black.
+    Contrast still does the structural work, but the hue is what makes the
+    dark bands feel like a treatment room rather than a clinic. The ground
+    sits a step below the raised surfaces so panels read as genuinely lifted.
   */
   --color-bone: #e9e4da;
   --color-surface: #f4f1ea;
   --color-surface-deep: #ded8cb;
   --color-line: #c9c1b1;
 
-  /* Off-black, never pure #000, which kills depth. */
-  --color-espresso: #141312;
-  --color-espresso-deep: #0a0a09;
+  /*
+    The dark tone is a genuine coffee brown, not an off-black. A near-black
+    dark band reads as clinical and cold; this is a treatment room, and the
+    warmth in the dark surfaces is what makes it feel like somewhere you are
+    welcomed rather than processed.
+
+    Contrast is unaffected: #33261c holds 11.5:1 against bone and 6.4:1 for
+    the /70 muted text used on dark sections, both well clear of WCAG AA.
+  */
+  --color-espresso: #33261c;
+  --color-espresso-deep: #241a13;
   --color-cocoa: #6d5330;
 
-  --color-ink: #1a1917;
+  --color-ink: #221c16;
   --color-muted: #5f5b54;
 
   /*
-    Tan is the warm counterweight to the black. The darker value is for accent
-    text on light ground (contrast-safe); the lighter one is for text and rules
-    sitting on the off-black.
+    Copper is the accent drawn straight from the logo. The darker value is for
+    accent text on light ground (contrast-safe); the lighter one is for text
+    and rules sitting on the dark coffee surfaces.
   */
   --color-copper: #8a6a3e;
   --color-copper-dark: #6d5330;
@@ -39,7 +48,9 @@
   /* Tan as a surface, plus a graphite mid-tone for grid variety. */
   --color-tan: #d9cdb4;
   --color-tan-deep: #b3a58c;
-  --color-graphite: #3b3833;
+  /* Mid-tone brown, kept a clear step lighter than espresso so the two-tone
+     panels (coaching spotlight) still separate. */
+  --color-graphite: #523d2d;
 
   /*
     Editorial serif for headlines against a functional sans for body. The
@@ -176,16 +187,50 @@ body {
   still fetching images.
 */
 
-/* Press feedback. Subtle enough to feel like the surface gave, not bounced. */
+/*
+  Button feel: rise on hover, give on press.
+
+  Both are transform-only so they stay on the compositor. Durations are short
+  on purpose — hover at 200ms and press at 140ms, because the press is the
+  system confirming it heard you and any delay there reads as lag.
+*/
 .press {
   transition:
-    transform 160ms var(--ease-out),
+    transform 200ms var(--ease-out),
+    box-shadow 200ms var(--ease-out),
     background-color 200ms var(--ease-out),
     border-color 200ms var(--ease-out),
     color 200ms var(--ease-out);
 }
-.press:active {
+
+/*
+  A trailing arrow leads the button, reinforcing the direction of travel.
+
+  Opt-in via `.btn-arrow` rather than applying to every `.press`: a leading
+  icon is also `svg:last-child` when it is the only element child, and the
+  contact form's submit swaps in a spinning icon whose `animate-spin` owns
+  the transform property outright.
+*/
+.btn-arrow > svg:last-child {
+  transition: transform 200ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .press:hover:not(:disabled) {
+    transform: translateY(-2px);
+  }
+  .btn-arrow:hover:not(:disabled) > svg:last-child {
+    transform: translateX(3px);
+  }
+}
+
+/*
+  Declared after the hover block so it wins at equal specificity: pressing
+  while hovering must read as a press, not a hover.
+*/
+.press:active:not(:disabled) {
   transform: scale(0.97);
+  transition-duration: 140ms;
 }
 
 /*
@@ -209,7 +254,7 @@ body {
   above it.
 */
 .shadow-ambient {
-  box-shadow: 0 20px 40px -15px rgb(20 19 18 / 0.1);
+  box-shadow: 0 20px 40px -15px rgb(51 38 28 / 0.12);
 }
 
 /*
@@ -236,7 +281,11 @@ body {
     Reduced motion means gentler, not none. Color and opacity feedback stays
     because it aids comprehension; positional movement and wipes go.
   */
-  .lift:hover {
+  .lift:hover,
+  .press:hover {
+    transform: none;
+  }
+  .btn-arrow:hover > svg:last-child {
     transform: none;
   }
   .press:active {

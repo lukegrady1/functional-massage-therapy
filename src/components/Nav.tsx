@@ -10,16 +10,40 @@ import { nav, site } from "@/lib/site";
 import { asset } from "@/lib/asset";
 import { Button } from "@/components/Button";
 
-function Wordmark() {
+/*
+  Header follows the Stitch layout: brand hard left, then the navigation and
+  the booking CTA grouped together hard right, over a blurred surface bar.
+
+  Two deliberate departures:
+
+  - The brand is the logo mark, not a text wordmark. It carries the hand
+    illustration and the espresso/copper the whole palette derives from.
+  - "Booking" is dropped from the desktop link row because the Book a Session
+    button is the booking entry point, and listing both is redundant. It stays
+    in `nav` for the mobile menu and the footer.
+*/
+
+function Wordmark({ scrolled }: { scrolled: boolean }) {
   return (
-    <Link href="/" className="flex items-center" aria-label="Functional Massage Therapy home">
+    <Link
+      href="/"
+      className="flex shrink-0 items-center"
+      aria-label="Functional Massage Therapy home"
+    >
       <Image
         src={asset("/logo.webp")}
         alt="Functional Massage Therapy"
         width={220}
         height={157}
         priority
-        className="h-14 w-auto mix-blend-multiply"
+        /*
+          Scaled rather than resized on scroll: transform runs on the
+          compositor, so the shrink costs no layout pass and the header height
+          stays put instead of reflowing the page under the reader.
+        */
+        className={`h-14 w-auto origin-left mix-blend-multiply transition-transform duration-300 ease-out ${
+          scrolled ? "scale-90" : "scale-100"
+        }`}
       />
     </Link>
   );
@@ -32,6 +56,9 @@ export function Nav() {
   const reduce = useReducedMotion();
   const close = () => setOpen(false);
 
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 8);
     handler();
@@ -39,51 +66,52 @@ export function Nav() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
+  const deskLinks = nav.filter((item) => item.href !== "/booking");
+
   return (
     <header
       className={`sticky top-0 z-50 transition-colors duration-300 ${
         scrolled
-          ? "border-b border-line bg-bone/95 backdrop-blur-md"
+          ? "border-b border-line bg-surface/90 shadow-sm backdrop-blur-md"
           : "border-b border-transparent bg-bone/0"
       }`}
     >
-      <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 sm:px-8">
-        <Wordmark />
+      <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
+        <Wordmark scrolled={scrolled} />
 
-        <nav className="hidden items-center gap-1 lg:flex">
-          {nav.map((item) => {
-            const active =
-              item.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(item.href);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`relative rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
-                  active
-                    ? "text-espresso"
-                    : "text-muted hover:text-espresso"
-                }`}
-              >
-                {item.label}
-                {active && (
-                  <span className="absolute inset-x-4 -bottom-0.5 h-0.5 rounded-full bg-copper" />
-                )}
-              </Link>
-            );
-          })}
-        </nav>
+        {/* Links and the CTA travel together on the right, per Stitch. */}
+        <div className="hidden items-center gap-7 lg:flex">
+          <nav className="flex items-center gap-7">
+            {deskLinks.map((item) => {
+              const active = isActive(item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`border-b-2 pb-1 text-sm transition-colors duration-200 ${
+                    active
+                      ? "border-copper font-bold text-espresso"
+                      : "border-transparent font-semibold text-muted hover:text-espresso"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
           <a
             href={site.phoneHref}
-            className="flex items-center gap-1.5 text-sm font-semibold text-espresso transition-colors hover:text-copper"
+            className="flex items-center gap-1.5 text-sm font-semibold text-espresso transition-colors duration-200 hover:text-copper"
           >
             <Phone size={16} weight="fill" />
             {site.phone}
           </a>
-          <Button href="/booking">Book a Session</Button>
+
+          <Button href="/booking" className="px-6 py-2.5">
+            Book Now
+          </Button>
         </div>
 
         <button
@@ -104,29 +132,24 @@ export function Nav() {
             animate={{ opacity: 1, height: "auto" }}
             exit={reduce ? { opacity: 0 } : { opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden border-t border-line bg-bone lg:hidden"
+            className="overflow-hidden border-t border-line bg-surface lg:hidden"
           >
             <div className="mx-auto max-w-7xl px-5 py-4 sm:px-8">
               <ul className="flex flex-col">
-                {nav.map((item) => {
-                  const active =
-                    item.href === "/"
-                      ? pathname === "/"
-                      : pathname.startsWith(item.href);
-                  return (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        onClick={close}
-                        className={`flex items-center justify-between border-b border-line py-3.5 text-lg font-semibold ${
-                          active ? "text-copper" : "text-espresso"
-                        }`}
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  );
-                })}
+                {nav.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      onClick={close}
+                      aria-current={isActive(item.href) ? "page" : undefined}
+                      className={`flex items-center justify-between border-b border-line py-3.5 text-lg font-semibold ${
+                        isActive(item.href) ? "text-copper" : "text-espresso"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
               <div className="mt-5 flex flex-col gap-3">
                 <Button href="/booking" className="w-full" onClick={close}>

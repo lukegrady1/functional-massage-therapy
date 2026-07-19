@@ -7,18 +7,21 @@ type Variant = "primary" | "outline" | "light";
 // Deliberately not `transition-all`: that animates properties we never intend
 // to move and costs a frame budget for nothing.
 const base =
-  "press inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-tight whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper focus-visible:ring-offset-2 focus-visible:ring-offset-bone";
+  "press btn-arrow inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-tight whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper focus-visible:ring-offset-2 focus-visible:ring-offset-bone";
 
 const sizes = "px-7 py-3.5 text-[0.95rem]";
 
+// The hover lift itself lives in `.press`; these add the matching change in
+// elevation so the button reads as rising off the page rather than sliding up it.
 const variants: Record<Variant, string> = {
   // espresso on bone — high contrast, the brand primary
-  primary: "bg-espresso text-bone hover:bg-espresso-deep shadow-sm shadow-espresso/20",
+  primary:
+    "bg-espresso text-bone hover:bg-espresso-deep shadow-sm shadow-espresso/20 hover:shadow-lg hover:shadow-espresso/25",
   // outline for secondary actions on light surfaces
   outline:
     "border border-espresso/30 text-espresso hover:border-espresso hover:bg-espresso/5",
   // for use on dark espresso sections
-  light: "bg-bone text-espresso hover:bg-white",
+  light: "bg-bone text-espresso hover:bg-white hover:shadow-lg hover:shadow-black/15",
 };
 
 export function Button({
