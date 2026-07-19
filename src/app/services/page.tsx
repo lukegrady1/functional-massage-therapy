@@ -21,13 +21,13 @@ export default function ServicesPage() {
     <>
       {/* Header. Above the fold, so no Reveal. */}
       <section className="bloom-warm">
-        <div className="mx-auto max-w-7xl px-5 pt-10 pb-14 sm:px-8 lg:pt-14 lg:pb-16">
+        <div className="mx-auto max-w-7xl px-5 pt-8 pb-9 sm:px-8 lg:pt-14 lg:pb-16">
           <Eyebrow>Services</Eyebrow>
-          <h1 className="mt-6 max-w-3xl t-headline-xl text-espresso">
+          <h1 className="mt-5 max-w-3xl t-headline-xl text-espresso lg:mt-6">
             Every session is tailored to{" "}
             <em className="pb-1 leading-[1.15] text-copper">you</em>.
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
+          <p className="mt-4 max-w-xl leading-relaxed text-muted lg:mt-6 lg:text-lg">
             No two bodies carry tension the same way. Choose a starting point
             below, and we’ll shape the work around what you need on the day.
           </p>
@@ -40,19 +40,26 @@ export default function ServicesPage() {
         sides so the page reads as a rhythm rather than a list.
       */}
       <section className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3 lg:gap-4">
           {services.map((s, i) => {
             const t = toneStyles[s.tone];
             return (
               <Reveal key={s.slug} delay={(i % 2) * 0.06}>
                 <article
                   id={s.slug}
-                  className={`${t.cell} scroll-mt-24 overflow-hidden rounded-3xl p-7 sm:p-10`}
+                  className={`${t.cell} scroll-mt-24 overflow-hidden rounded-3xl p-5 sm:p-7 lg:p-10`}
                 >
-                  <div className="grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-center lg:gap-14">
-                    {/* Odd rows put the image first on desktop. */}
+                  <div className="grid gap-5 lg:grid-cols-[1fr_0.8fr] lg:items-center lg:gap-14">
+                    {/*
+                      Odd rows put the image first on desktop.
+
+                      Below lg the 4:3 crop was 303px of a ~900px row, which
+                      pushed the service name off the first screen — you met
+                      seven photographs before you met the seventh service. A
+                      2:1 band keeps the photograph without letting it lead.
+                    */}
                     <div
-                      className={`reveal-image relative aspect-[4/3] w-full overflow-hidden rounded-2xl lg:aspect-[5/4] ${
+                      className={`reveal-image relative aspect-[2/1] w-full overflow-hidden rounded-2xl lg:aspect-[5/4] ${
                         i % 2 === 1 ? "lg:order-first" : "lg:order-last"
                       }`}
                     >
@@ -66,7 +73,7 @@ export default function ServicesPage() {
                     </div>
 
                     <div>
-                      <span className={`${t.rule} mb-6 block h-px w-10`} />
+                      <span className={`${t.rule} mb-4 block h-px w-10 lg:mb-6`} />
                       <span
                         className={`${t.meta} text-xs font-semibold uppercase tracking-[0.16em]`}
                       >
@@ -75,7 +82,12 @@ export default function ServicesPage() {
                       <h2 className="mt-2 t-headline-lg">
                         {s.name}
                       </h2>
-                      <p className={`${t.body} mt-5 text-lg leading-relaxed`}>
+                      {/*
+                        Steps down to base on phones. At text-lg the detail set
+                        six lines to a ~294px column; this is the longest block
+                        in the row and the one that decides its height.
+                      */}
+                      <p className={`${t.body} mt-4 leading-relaxed lg:mt-5 lg:text-lg`}>
                         {s.detail}
                       </p>
 
@@ -86,7 +98,7 @@ export default function ServicesPage() {
                         and booking it is one click rather than a service menu
                         you have to re-navigate on the far side.
                       */}
-                      <ul className="mt-7 flex flex-col gap-1">
+                      <ul className="mt-5 flex flex-col gap-1 lg:mt-7">
                         {s.tiers.map((tier) => (
                           <li key={tier.minutes}>
                             <Link
@@ -112,19 +124,27 @@ export default function ServicesPage() {
                         ))}
                       </ul>
 
-                      <ul className="mt-7 flex flex-wrap gap-2">
+                      {/*
+                        Kept on phones rather than dropped the way the home
+                        cards' bullets were: there these restated the summary
+                        sitting directly above them, but this page has no
+                        summary and they are the only place the specific
+                        complaints each service treats are named. Tightened
+                        instead, so three still fit on two lines.
+                      */}
+                      <ul className="mt-5 flex flex-wrap gap-1.5 lg:mt-7 lg:gap-2">
                         {s.bestFor.map((b) => (
                           <li
                             key={b}
-                            className={`${t.chip} inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-medium`}
+                            className={`${t.chip} inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium lg:px-3.5 lg:py-1.5 lg:text-sm`}
                           >
-                            <Check size={14} weight="bold" />
+                            <Check size={13} weight="bold" />
                             {b}
                           </li>
                         ))}
                       </ul>
 
-                      <div className="mt-8">
+                      <div className="mt-6 lg:mt-8">
                         {/*
                           Defaults to the shortest tier; the booking page's own
                           duration switcher covers changing it. Multi-tier
