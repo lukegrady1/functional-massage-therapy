@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  ClockCounterClockwise,
-  Sparkle,
-  ChatCircleText,
-  MapPin,
-} from "@phosphor-icons/react/dist/ssr";
+import { MapPin } from "@phosphor-icons/react/dist/ssr";
 import { Eyebrow } from "@/components/Eyebrow";
 import { Reveal } from "@/components/Reveal";
 import { LocationMap } from "@/components/LocationMap";
@@ -16,24 +11,6 @@ export const metadata: Metadata = {
   description:
     "Book your massage therapy appointment at Functional Massage Therapy in Sturbridge, MA. Online scheduling and booking by phone.",
 };
-
-const expect = [
-  {
-    icon: ChatCircleText,
-    title: "A quick check-in",
-    body: "We talk through your goals, history, and what hurts before any hands-on work begins.",
-  },
-  {
-    icon: Sparkle,
-    title: "Work tailored to you",
-    body: "Pressure, pace, and focus areas are adjusted to your body and how it responds.",
-  },
-  {
-    icon: ClockCounterClockwise,
-    title: "Tools to take home",
-    body: "You leave with simple self-care steps to hold your progress between sessions.",
-  },
-];
 
 export default function BookingPage() {
   return (
@@ -72,10 +49,20 @@ export default function BookingPage() {
           <Reveal>
             <div className="flex flex-col gap-3">
               {services.map((s) => (
-                <div key={s.slug} className="surface-raised rounded-3xl p-7">
+                <div key={s.slug} className="surface-raised rounded-3xl p-5 sm:p-7">
                   <h2 className="t-headline-md text-espresso">{s.name}</h2>
-                  <p className="mt-2 leading-relaxed text-muted">{s.summary}</p>
-                  <div className="mt-5 flex flex-wrap gap-2.5">
+                  {/*
+                    Dropped on phones. Anyone on this page has already decided
+                    to book — what they need is to find their service and pick
+                    a length, and the description is on the services page for
+                    the deciding. Keeping it cost 60px per card across seven
+                    cards and pushed the prices, which are the actual targets,
+                    off the screen.
+                  */}
+                  <p className="mt-2 hidden leading-relaxed text-muted sm:block">
+                    {s.summary}
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2.5 sm:mt-5">
                     {s.tiers.map((tier) => (
                       <Link
                         key={tier.minutes}
@@ -166,31 +153,6 @@ export default function BookingPage() {
         </div>
       </section>
 
-      {/* What to expect */}
-      <section className="bg-espresso text-bone">
-        <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20 lg:py-24">
-          <Reveal>
-            <h2 className="max-w-xl t-headline-lg">
-              What your first visit looks like
-            </h2>
-          </Reveal>
-          <div className="mt-12 grid gap-x-12 gap-y-10 sm:grid-cols-3">
-            {expect.map((item, i) => (
-              <Reveal
-                key={item.title}
-                delay={i * 0.08}
-                className="border-t border-bone/15 pt-6"
-              >
-                <item.icon size={28} weight="bold" className="text-copper-light" />
-                <h3 className="mt-4 t-headline-md">
-                  {item.title}
-                </h3>
-                <p className="mt-2 leading-relaxed text-bone/70">{item.body}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
     </>
   );
 }
