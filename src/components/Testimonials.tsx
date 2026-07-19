@@ -86,9 +86,8 @@ function Card({ t }: { t: Testimonial }) {
         >
           {initials(t.name)}
         </span>
-        <span className="min-w-0 text-xs sm:text-sm">
-          <span className="block font-semibold text-espresso">{t.name}</span>
-          <span className="block text-muted">{t.context}</span>
+        <span className="min-w-0 text-xs font-semibold text-espresso sm:text-sm">
+          {t.name}
         </span>
       </figcaption>
     </figure>

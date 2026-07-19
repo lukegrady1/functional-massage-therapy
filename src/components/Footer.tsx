@@ -171,28 +171,6 @@ export function Footer() {
                 Grady Digital
               </a>
             </p>
-            {/*
-              Fine print, so these sit with the copyright rather than in the
-              Explore column — but present on every page, which is where the
-              forms' own Privacy Policy and Terms links need to point.
-            */}
-            <p className="mt-1 flex items-center gap-2">
-              <Link
-                href="/privacy/"
-                className="transition-colors duration-200 hover:text-copper-light"
-              >
-                Privacy Policy
-              </Link>
-              <span aria-hidden="true" className="text-bone/25">
-                &middot;
-              </span>
-              <Link
-                href="/terms/"
-                className="transition-colors duration-200 hover:text-copper-light"
-              >
-                Terms of Service
-              </Link>
-            </p>
           </div>
           <Link
             href="/booking"

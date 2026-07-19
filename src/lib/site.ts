@@ -66,24 +66,81 @@ export const hours = [
    ------------------------------------------------------------------------ */
 
 export type Testimonial = {
+  /*
+    Verbatim. Not tidied, not shortened, not corrected — several of these have
+    a dropped word or an odd bit of punctuation, and they stay in. Editing what
+    someone actually wrote and still presenting it as their quote misrepresents
+    them, and under the FTC endorsement rules a testimonial has to reflect the
+    endorser's honest words.
+  */
   quote: string;
+  /*
+    First name and last initial — reviewers posted these publicly under their
+    full names on Google, but there is no reason to widen that audience here.
+  */
   name: string;
-  context: string;
   draft?: boolean;
 };
 
+/*
+  Real Google reviews of the practice, selected from the public listing and
+  reproduced word for word.
+
+  Chosen for what they tell the next reader rather than for enthusiasm: a
+  named complaint and what happened to it beats "amazing experience". Between
+  them these cover a specific pain outcome, a fellow therapist's assessment,
+  atmosphere, and being listened to. The one-liners were left out — "great
+  place and massage" fills a card without earning it.
+
+  Nothing here is edited. Where a review has a missing word or unusual
+  punctuation it is kept as written.
+*/
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "Lauren actually listens, finds the problem, and fixes it. My squat depth came back after one session.",
-    name: "Mike Sartori",
-    context: "Masters powerlifter, Worcester",
+      "I booked a massage to help with my sciatica. Lauren listened to my concerns and communicated clearly during each step. She checked in multiple times as to my comfort and I left nearly pain free. Great massage, lovely room and atmosphere, very professional.",
+    name: "Tina H.",
   },
-  { quote: "", name: "", context: "", draft: true },
-  { quote: "", name: "", context: "", draft: true },
-  { quote: "", name: "", context: "", draft: true },
-  { quote: "", name: "", context: "", draft: true },
-  { quote: "", name: "", context: "", draft: true },
+  {
+    quote:
+      "I am fellow massage therapist and had a meniscus tear injury. I needed someone to help release the fascia on my left hip and leg. Lauren did just that and released other parts I needed work in, like my neck and shoulders. Her work made a huge difference in the functioning of the knee no more clicking when I twist and turn.",
+    name: "Julia S.",
+  },
+  {
+    quote:
+      "Lauren does an excellent deep massage. My neck was so sore I could barely look to the left. Now I'm pain free and have full range of motion!",
+    name: "Denise F.",
+  },
+  {
+    quote:
+      "10/10 recommend. Lauren knows what she is doing. If you have an issue you need worked on or simply want better health and flexibility, this woman takes feedback and delivers. If you have been thinking about Functional Massage but haven't take the leap, give Lauren a call today!",
+    name: "Kristen L.",
+  },
+  {
+    quote:
+      "What a wonderful woman Lauren is. A champion for all around health and doesn't hesitate to share her expertise in her field. I'm pretty sure me and my whole family will be on Lauren's table. I initially brought my son to her. I can not wait to book for myself. We were very satisfied with the experience and results.",
+    name: "Gina T.",
+  },
+  {
+    quote:
+      "Lauren was wonderful! The deep massage was just what I needed relieving tension / pain in my neck/ shoulder area. She is professional & extremely knowledgeable x highly recommend!",
+    name: "Leah C.",
+  },
+  {
+    quote:
+      "Such a great experience. Lauren really is the best ! She strives to make you feel better and takes the time to understand the problem and fixes it. I would highly recommend Lauren !!",
+    name: "Eleanor C.",
+  },
+  {
+    quote:
+      "Relaxing atmosphere, warm, nice people, and a fluffy puppy to really set the mood. Lauren really knows what she's doing. Highly recommend to everyone",
+    name: "Jon J.",
+  },
+  {
+    quote:
+      "Lauren is an exceptional massage therapist. She knows the body and is able to go deep. I absolutely will go back.",
+    name: "Alleah F.",
+  },
 ];
 
 /* ------------------------------------------------------------------------
