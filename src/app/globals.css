@@ -258,6 +258,24 @@ body {
 }
 
 /*
+  Deeper elevation for full-width panels. `shadow-ambient` is tuned for cards
+  and reads as almost nothing under something the size of the coaching
+  spotlight.
+
+  Three layers rather than one: a tight contact shadow to seat the bottom
+  edge, a mid layer for body, and a wide low-opacity layer for the ambient
+  falloff. A single large blur at this size looks like grey fog; stacking
+  them is what reads as a physical object resting on the page. All three are
+  tinted with the brand brown, never black.
+*/
+.shadow-lifted {
+  box-shadow:
+    0 2px 4px rgb(51 38 28 / 0.06),
+    0 12px 24px -8px rgb(51 38 28 / 0.12),
+    0 32px 64px -24px rgb(51 38 28 / 0.3);
+}
+
+/*
   Image reveal. Wiping with clip-path rather than fading keeps the photo at
   full opacity the whole way, so it never looks washed out mid-transition.
   The scale settles at the same time to add a touch of parallax.

@@ -348,7 +348,7 @@ export default function Home() {
       <section className="overflow-hidden bg-surface">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
           <Reveal>
-            <div className="shadow-ambient flex flex-col overflow-hidden rounded-[2rem] bg-graphite lg:flex-row">
+            <div className="shadow-lifted flex flex-col overflow-hidden rounded-[2rem] bg-graphite lg:flex-row">
               <div className="flex flex-col justify-center p-10 sm:p-14 lg:w-1/2 lg:p-16">
                 <Eyebrow onDark>Coaching program</Eyebrow>
                 <h2 className="mt-6 font-display text-3xl font-semibold leading-[1.1] tracking-[-0.02em] text-bone sm:text-[2.6rem]">
