@@ -91,8 +91,8 @@ export default function Home() {
                 Book a Session
                 <ArrowRight size={18} weight="bold" />
               </Button>
-              <Button href="/coaching" variant="outline">
-                Explore Coaching
+              <Button href="/services" variant="outline">
+                Explore Services
               </Button>
             </div>
           </div>
