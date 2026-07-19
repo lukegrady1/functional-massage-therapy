@@ -1,19 +1,26 @@
 import type { Metadata } from "next";
-import { Archivo, Inter_Tight } from "next/font/google";
+import { Source_Serif_4, Inter } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 
-// Archivo is a grotesque with flat terminals and tight apertures. Chosen over
-// the previous rounded geometric display face for a sharper, more serious read.
-const display = Archivo({
+// An editorial serif for headlines. Manual therapy is a craft with a long
+// literature behind it, and the serif carries that authority in a way a
+// grotesque cannot. Variable optical size so large headlines tighten and
+// small ones stay open.
+const display = Source_Serif_4({
   variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
-  weight: ["500", "600", "700"],
+  // No `weight`: this loads the full variable range, which is also the only
+  // form that accepts a custom axis. `opsz` lets the large display sizes
+  // tighten their spacing while small headings stay open.
+  axes: ["opsz"],
+  style: ["normal", "italic"],
 });
 
-const body = Inter_Tight({
+// Inter handles everything clinical: durations, prices, hours, form labels.
+const body = Inter({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",

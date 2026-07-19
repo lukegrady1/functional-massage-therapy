@@ -26,7 +26,7 @@ export default function ContactPage() {
         <div className="mx-auto max-w-7xl px-5 pt-10 pb-12 sm:px-8 lg:pt-14 lg:pb-14">
           <Eyebrow>Get in touch</Eyebrow>
           <h1 className="mt-6 max-w-3xl font-display text-[2.6rem] font-bold leading-[1.06] tracking-tight text-espresso sm:text-6xl">
-            Questions before you book? Let&apos;s talk.
+            Questions before you book? Let’s talk.
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
             Reach out by phone, email, or the form below. The fastest way to

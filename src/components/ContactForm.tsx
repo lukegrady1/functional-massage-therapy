@@ -35,7 +35,7 @@ export function ContactForm({
     if (!name) next.name = "Please enter your name.";
     if (!email) next.email = "Please enter your email.";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
-      next.email = "That email doesn't look right.";
+      next.email = "That email doesn’t look right.";
     if (!message) next.message = "Let me know how I can help.";
 
     setErrors(next);
@@ -63,7 +63,7 @@ export function ContactForm({
           Message sent
         </h3>
         <p className="mt-3 max-w-sm leading-relaxed text-muted">
-          Thank you for reaching out. I&apos;ll get back to you within one
+          Thank you for reaching out. I’ll get back to you within one
           business day. For anything urgent, give me a call.
         </p>
         <button
@@ -152,7 +152,7 @@ export function ContactForm({
             id="message"
             name="message"
             rows={5}
-            placeholder="Tell me a little about what you're dealing with."
+            placeholder="Tell me a little about what you’re dealing with."
             className={`${inputCls} resize-none`}
             aria-invalid={!!errors.message}
           />

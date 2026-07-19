@@ -181,8 +181,8 @@ export default function CoachingPage() {
             </Reveal>
             <Reveal delay={0.08}>
               <p className="mt-5 max-w-md text-lg leading-relaxed text-muted">
-                Tell me what you&apos;re training for and where you keep getting
-                stuck. I&apos;ll come back to you within one business day.
+                Tell me what you’re training for and where you keep getting
+                stuck. I’ll come back to you within one business day.
               </p>
             </Reveal>
             <Reveal delay={0.14}>

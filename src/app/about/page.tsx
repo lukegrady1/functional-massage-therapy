@@ -54,7 +54,7 @@ export default function AboutPage() {
               and built for <em className="pb-1 leading-[1.15] text-copper">results</em>.
             </h1>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted">
-              I&apos;m Lauren, owner and therapist of this practice. I&apos;m
+              I’m Lauren, owner and therapist of this practice. I’m
               passionate about whole-body wellness and bringing a comprehensive,
               functional approach to your therapeutic needs.
             </p>
@@ -96,7 +96,7 @@ export default function AboutPage() {
           <div className="mt-8 flex flex-col gap-6 text-lg leading-relaxed text-muted">
             <Reveal delay={0.06} as="span">
               With a background in fitness, competitive powerlifting, and a
-              passion for healthy living, I&apos;ve combined my expertise to
+              passion for healthy living, I’ve combined my expertise to
               create a unique practice. My journey began in personal training
               and nutrition, and I furthered my education in massage therapy in
               2020.
@@ -104,7 +104,7 @@ export default function AboutPage() {
             <Reveal delay={0.1} as="span">
               At Boston College, I had the amazing opportunity to work with
               their D1 football team, providing pre-season sports massage and
-              recovery. Now I&apos;m excited to bring that expertise to my own
+              recovery. Now I’m excited to bring that expertise to my own
               practice, focusing on results-driven care for athletes, weekend
               warriors, and those experiencing chronic pain.
             </Reveal>
@@ -149,8 +149,8 @@ export default function AboutPage() {
         <div className="mx-auto max-w-4xl px-5 py-20 text-center sm:px-8 lg:py-24">
           <Reveal>
             <p className="font-display text-2xl font-semibold leading-snug tracking-tight text-bone sm:text-[2.1rem]">
-              &ldquo;Let&apos;s work together to achieve your health goals. Book
-              your appointment today, and let&apos;s get started on your wellness
+              &ldquo;Let’s work together to achieve your health goals. Book
+              your appointment today, and let’s get started on your wellness
               journey.&rdquo;
             </p>
           </Reveal>

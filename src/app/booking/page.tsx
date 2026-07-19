@@ -47,7 +47,7 @@ export default function BookingPage() {
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
             Pick a time that works for you below. Prefer to talk first? Call me
             at {site.phone}{" "}
-            and we&apos;ll find the right session together.
+            and we’ll find the right session together.
           </p>
         </div>
       </section>

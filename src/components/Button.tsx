@@ -3,8 +3,11 @@ import type { ReactNode } from "react";
 
 type Variant = "primary" | "outline" | "light";
 
+// `press` (globals.css) carries the scale-on-active and the scoped transition.
+// Deliberately not `transition-all`: that animates properties we never intend
+// to move and costs a frame budget for nothing.
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-tight whitespace-nowrap transition-all duration-200 active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper focus-visible:ring-offset-2 focus-visible:ring-offset-bone";
+  "press inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-tight whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper focus-visible:ring-offset-2 focus-visible:ring-offset-bone";
 
 const sizes = "px-7 py-3.5 text-[0.95rem]";
 

@@ -41,8 +41,24 @@
   --color-tan-deep: #b3a58c;
   --color-graphite: #3b3833;
 
-  --font-display: var(--font-display), "Archivo", system-ui, sans-serif;
-  --font-body: var(--font-body), "Inter Tight", system-ui, sans-serif;
+  /*
+    Editorial serif for headlines against a functional sans for body. The
+    serif carries the "printed journal" weight the practice should read with;
+    Inter keeps clinical detail (durations, hours, prices) crisp.
+  */
+  --font-display: var(--font-display), "Source Serif 4", Georgia, serif;
+  --font-body: var(--font-body), "Inter", system-ui, sans-serif;
+
+  /*
+    MOTION
+    --------------------------------------------------------------
+    The built-in CSS easings are too weak to read as intentional. These are
+    the stronger variants. `ease-in` is deliberately absent: it delays the
+    first frame, which is exactly when the eye is watching, so it makes the
+    interface feel sluggish no matter how short the duration.
+  */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 html {
@@ -150,6 +166,85 @@ body {
 }
 .edge-petal {
   border-radius: 2.5rem 8rem 2.5rem 8rem;
+}
+
+/*
+  INTERACTION LAYER
+  --------------------------------------------------------------
+  Only transform and opacity are animated here. Both skip layout and paint
+  and run on the compositor, so these stay smooth even while the page is
+  still fetching images.
+*/
+
+/* Press feedback. Subtle enough to feel like the surface gave, not bounced. */
+.press {
+  transition:
+    transform 160ms var(--ease-out),
+    background-color 200ms var(--ease-out),
+    border-color 200ms var(--ease-out),
+    color 200ms var(--ease-out);
+}
+.press:active {
+  transform: scale(0.97);
+}
+
+/*
+  Hover lift, gated behind a real pointer. Touch devices fire :hover on tap
+  and then leave it stuck, so an ungated lift reads as a stuck card.
+*/
+.lift {
+  transition:
+    transform 240ms var(--ease-out),
+    box-shadow 240ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .lift:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/*
+  Ambient card shadow: large radius, low opacity, tinted with the brand
+  espresso rather than black. Reads as resting on the page, not hovering
+  above it.
+*/
+.shadow-ambient {
+  box-shadow: 0 20px 40px -15px rgb(20 19 18 / 0.1);
+}
+
+/*
+  Image reveal. Wiping with clip-path rather than fading keeps the photo at
+  full opacity the whole way, so it never looks washed out mid-transition.
+  The scale settles at the same time to add a touch of parallax.
+*/
+.reveal-image {
+  clip-path: inset(0 0 0 0);
+  transform: scale(1);
+  transition:
+    clip-path 900ms var(--ease-out),
+    transform 900ms var(--ease-out);
+}
+@starting-style {
+  .reveal-image {
+    clip-path: inset(0 0 100% 0);
+    transform: scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /*
+    Reduced motion means gentler, not none. Color and opacity feedback stays
+    because it aids comprehension; positional movement and wipes go.
+  */
+  .lift:hover {
+    transform: none;
+  }
+  .press:active {
+    transform: none;
+  }
+  .reveal-image {
+    transition: none;
+  }
 }
 
 /* Subtle film grain over fixed layer only (no scroll repaint cost) */

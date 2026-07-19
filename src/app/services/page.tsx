@@ -26,7 +26,7 @@ export default function ServicesPage() {
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
             No two bodies carry tension the same way. Choose a starting point
-            below, and we&apos;ll shape the work around what you need on the day.
+            below, and we’ll shape the work around what you need on the day.
           </p>
         </div>
       </section>
@@ -96,7 +96,7 @@ export default function ServicesPage() {
         <Reveal delay={0.1}>
           <p className="mt-10 max-w-2xl text-[0.95rem] leading-relaxed text-muted">
             Session rates and exact durations are shown when you book online. Not
-            sure which service fits? Give me a call and we&apos;ll figure it out
+            sure which service fits? Give me a call and we’ll figure it out
             together.
           </p>
         </Reveal>
