@@ -162,8 +162,23 @@ export const coachingResults: CoachingResult[] = [
   apart.
 */
 export type ServiceTier = {
+  /* Display label, e.g. "60 min". */
   duration: string;
+  /* Used in the booking URL: /booking/<slug>/<minutes>/ */
+  minutes: number;
   price: string;
+  /*
+    The GoHighLevel calendar this tier books. Every tier is a separate GHL
+    calendar, and they share conflict detection, so booking one blocks the
+    overlapping slots on all the others. Availability is never computed here —
+    the widget asks GHL at load and GHL re-checks on submit.
+
+    Verified 2026-07-19: each id below resolves to a widget whose title and
+    price match the tier it sits on. Re-check with the same method if these
+    are ever edited, because a transposed id books the wrong session at the
+    wrong price and nothing on this site would catch it.
+  */
+  calendarId: string;
 };
 
 export type Service = {
@@ -192,8 +207,8 @@ export const services: Service[] = [
     imageAlt: "A seated figure rotating through the thoracic spine",
     name: "Functional Massage",
     tiers: [
-      { duration: "60 min", price: "$130" },
-      { duration: "90 min", price: "$160" },
+      { duration: "60 min", minutes: 60, price: "$130", calendarId: "lAVYs2s9Wi9BowYFUYh9" },
+      { duration: "90 min", minutes: 90, price: "$160", calendarId: "ZRS7G6nHeU3H5jBaV6gu" },
     ],
     summary:
       "Combines joint motion with massage to address painful conditions and impairments.",
@@ -208,8 +223,8 @@ export const services: Service[] = [
     imageAlt: "Hands working slowly into the deep tissue of a back",
     name: "Deep Tissue",
     tiers: [
-      { duration: "60 min", price: "$110" },
-      { duration: "90 min", price: "$130" },
+      { duration: "60 min", minutes: 60, price: "$110", calendarId: "zXJ840hlQLmv1a5NzBtp" },
+      { duration: "90 min", minutes: 90, price: "$130", calendarId: "uUmyx53dVE5dwrNMnrMl" },
     ],
     summary:
       "Removes severe tension by relieving muscles and connective tissue below the surface.",
@@ -224,8 +239,8 @@ export const services: Service[] = [
     imageAlt: "Massage oils and folded linen in warm light",
     name: "Swedish Massage",
     tiers: [
-      { duration: "60 min", price: "$110" },
-      { duration: "90 min", price: "$130" },
+      { duration: "60 min", minutes: 60, price: "$110", calendarId: "aLi6s2s3xQBeEutT16sV" },
+      { duration: "90 min", minutes: 90, price: "$130", calendarId: "rw0KhOuqyGDeCTiEPHv3" },
     ],
     summary:
       "Firm but gentle pressure to promote relaxation and ease muscle tension.",
@@ -239,7 +254,9 @@ export const services: Service[] = [
     image: "/treatment-in-progress.webp",
     imageAlt: "Focused hands-on work during a treatment session",
     name: "Functional TMJ Therapy",
-    tiers: [{ duration: "45 min", price: "$75" }],
+    tiers: [
+      { duration: "45 min", minutes: 45, price: "$75", calendarId: "WdeevbEKv2DhWv4gH4xP" },
+    ],
     summary:
       "Infrared treatment for TMJ syndrome, providing significant relief.",
     detail:
@@ -252,7 +269,9 @@ export const services: Service[] = [
     image: "/studio-interior.webp",
     imageAlt: "The studio interior, quiet and warmly lit",
     name: "Chair Massage",
-    tiers: [{ duration: "30 min", price: "$60" }],
+    tiers: [
+      { duration: "30 min", minutes: 30, price: "$60", calendarId: "YLg5KgLS39HScX9VMMsn" },
+    ],
     summary:
       "Performed in a specially designed chair, clothes on, for relaxation.",
     detail:
@@ -265,7 +284,9 @@ export const services: Service[] = [
     image: "/athlete-stretch.webp",
     imageAlt: "An athlete mid-stretch in a darkened gym",
     name: "Student Rate",
-    tiers: [{ duration: "60 min", price: "$85" }],
+    tiers: [
+      { duration: "60 min", minutes: 60, price: "$85", calendarId: "mEKtSl5Qt335gPQRDuwV" },
+    ],
     summary:
       "For student-athletes — speeds recovery, improves circulation, and enhances sleep.",
     detail:
@@ -279,8 +300,8 @@ export const services: Service[] = [
     imageAlt: "Eucalyptus and warm stones arranged on linen",
     name: "Massage for Two",
     tiers: [
-      { duration: "90 min", price: "$350" },
-      { duration: "120 min", price: "$400" },
+      { duration: "90 min", minutes: 90, price: "$350", calendarId: "4hA3JKItP5oqrzJCjuZo" },
+      { duration: "120 min", minutes: 120, price: "$400", calendarId: "eJaNTDDq4krKozr4W5OA" },
     ],
     summary:
       "A dual relaxation session with aromatherapy, hot stones, and customizable pressure.",
@@ -290,6 +311,26 @@ export const services: Service[] = [
     tone: "graphite",
   },
 ];
+
+/* The booking route for one tier: /booking/deep-tissue/90/ */
+export function bookingHref(s: Service, tier: ServiceTier): string {
+  return `/booking/${s.slug}/${tier.minutes}/`;
+}
+
+/*
+  Every service/tier pair, used to prerender one booking page each. The site is
+  a static export, so there is no server to read a `?service=` query at request
+  time — each tier has to exist as its own built route.
+*/
+export const serviceTierPairs = services.flatMap((s) =>
+  s.tiers.map((tier) => ({ service: s, tier })),
+);
+
+export function findServiceTier(slug: string, minutes: string) {
+  const service = services.find((s) => s.slug === slug);
+  const tier = service?.tiers.find((t) => String(t.minutes) === minutes);
+  return service && tier ? { service, tier } : null;
+}
 
 /* "60 / 90 min · from $110", or "45 min · $75" for a single-tier service. */
 export function priceLabel(s: Service): string {

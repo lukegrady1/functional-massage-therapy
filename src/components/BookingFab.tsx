@@ -8,8 +8,12 @@ import { CalendarBlank } from "@phosphor-icons/react/dist/ssr";
   Quick-booking FAB from the Stitch mockup: calendar icon plus a permanent
   "Book Now" label, pinned bottom-right on phones.
 
-  Hidden on /booking itself — the booking widget is already the whole page
-  there, so the FAB just floats over the calendar it would send you to.
+  Hidden across the whole /booking section — the service picker and every
+  per-tier calendar page (/booking/deep-tissue/90/) are already the booking
+  flow, so the FAB just floats over the calendar it would send you to.
+
+  Match the prefix, not the exact path: when this only tested for "/booking"
+  the FAB reappeared on all eleven tier pages and sat on top of the widget.
 
   That check is why this is a client component: it reads the current route.
   It renders no state or timers otherwise, so the hook is the only JS here.
@@ -24,7 +28,8 @@ import { CalendarBlank } from "@phosphor-icons/react/dist/ssr";
 export function BookingFab() {
   const pathname = usePathname();
 
-  if (pathname.replace(/\/+$/, "") === "/booking") return null;
+  const path = pathname.replace(/\/+$/, "");
+  if (path === "/booking" || path.startsWith("/booking/")) return null;
 
   return (
     <Link

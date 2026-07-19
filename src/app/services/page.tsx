@@ -5,7 +5,8 @@ import { Button } from "@/components/Button";
 import { Eyebrow } from "@/components/Eyebrow";
 import { Reveal } from "@/components/Reveal";
 import { CtaBand } from "@/components/CtaBand";
-import { services, priceLabel } from "@/lib/site";
+import Link from "next/link";
+import { services, priceLabel, bookingHref } from "@/lib/site";
 import { toneStyles } from "@/lib/tones";
 import { asset } from "@/lib/asset";
 
@@ -80,25 +81,36 @@ export default function ServicesPage() {
 
                       {/*
                         Every tier is priced explicitly rather than left to the
-                        booking flow, so nobody has to start a booking to find
-                        out what a session costs.
+                        booking flow, and each row IS the booking link — it goes
+                        straight to that tier's calendar, so choosing a length
+                        and booking it is one click rather than a service menu
+                        you have to re-navigate on the far side.
                       */}
-                      <dl className="mt-7 flex flex-col gap-2">
+                      <ul className="mt-7 flex flex-col gap-1">
                         {s.tiers.map((tier) => (
-                          <div
-                            key={tier.duration}
-                            className={`${t.body} flex items-baseline gap-3`}
-                          >
-                            <dt className="text-[0.95rem]">{tier.duration}</dt>
-                            <span
-                              className={`${t.rule} h-px flex-1 translate-y-[-0.15em] opacity-50`}
-                            />
-                            <dd className="text-[0.95rem] font-semibold tabular-nums">
-                              {tier.price}
-                            </dd>
-                          </div>
+                          <li key={tier.minutes}>
+                            <Link
+                              href={bookingHref(s, tier)}
+                              className={`${t.body} group/tier -mx-2 flex items-baseline gap-3 rounded-lg px-2 py-1.5 transition-colors duration-200 hover:bg-current/5`}
+                            >
+                              <span className="text-[0.95rem]">
+                                {tier.duration}
+                              </span>
+                              <span
+                                className={`${t.rule} h-px flex-1 translate-y-[-0.15em] opacity-50`}
+                              />
+                              <span className="text-[0.95rem] font-semibold tabular-nums">
+                                {tier.price}
+                              </span>
+                              <ArrowRight
+                                size={14}
+                                weight="bold"
+                                className="shrink-0 opacity-0 transition-opacity duration-200 group-hover/tier:opacity-70"
+                              />
+                            </Link>
+                          </li>
                         ))}
-                      </dl>
+                      </ul>
 
                       <ul className="mt-7 flex flex-wrap gap-2">
                         {s.bestFor.map((b) => (
@@ -113,8 +125,15 @@ export default function ServicesPage() {
                       </ul>
 
                       <div className="mt-8">
+                        {/*
+                          Defaults to the shortest tier; the booking page's own
+                          duration switcher covers changing it. Multi-tier
+                          services already have a per-tier link in the price
+                          list above, so this is the "just book the standard
+                          one" path.
+                        */}
                         <Button
-                          href="/booking"
+                          href={bookingHref(s, s.tiers[0])}
                           variant={s.tone === "tan" || s.tone === "paper" ? "outline" : "light"}
                         >
                           Book {s.name}

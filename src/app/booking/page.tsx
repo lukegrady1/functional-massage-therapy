@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import {
   ClockCounterClockwise,
   Sparkle,
@@ -8,8 +9,7 @@ import {
 import { Eyebrow } from "@/components/Eyebrow";
 import { Reveal } from "@/components/Reveal";
 import { LocationMap } from "@/components/LocationMap";
-import { BookingEmbed } from "@/components/BookingEmbed";
-import { hours, site } from "@/lib/site";
+import { bookingHref, hours, services, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Book a Session",
@@ -46,18 +46,46 @@ export default function BookingPage() {
             Book your appointment
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-            Pick a time that works for you below. Prefer to talk first? Call me
-            at {site.phone}{" "}
-            and we’ll find the right session together.
+            Choose a session and length below, then pick a time that works for
+            you. Prefer to talk first? Call me at {site.phone} and we’ll find the
+            right session together.
           </p>
         </div>
       </section>
 
-      {/* Calendar + sidebar */}
+      {/* Service picker + sidebar */}
       <section className="mx-auto max-w-7xl px-5 pb-14 sm:px-8 sm:pb-20 lg:pb-28">
         <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
+          {/*
+            Replaces the GoHighLevel group widget, which listed all eleven
+            calendars as flat, unordered tiles — so "Functional Massage – 60"
+            and "– 90" read as two unrelated products and the flagship service
+            sat seventh. Here duration is a choice *within* a service, and each
+            button goes straight to that tier's calendar.
+          */}
           <Reveal>
-            <BookingEmbed />
+            <div className="flex flex-col gap-3">
+              {services.map((s) => (
+                <div key={s.slug} className="surface-raised rounded-3xl p-7">
+                  <h2 className="t-headline-md text-espresso">{s.name}</h2>
+                  <p className="mt-2 leading-relaxed text-muted">{s.summary}</p>
+                  <div className="mt-5 flex flex-wrap gap-2.5">
+                    {s.tiers.map((tier) => (
+                      <Link
+                        key={tier.minutes}
+                        href={bookingHref(s, tier)}
+                        className="rounded-full border border-line bg-surface px-5 py-2.5 text-[0.95rem] font-semibold text-espresso transition-colors duration-200 hover:border-copper hover:text-copper"
+                      >
+                        {tier.duration}
+                        <span className="ml-2 tabular-nums text-muted">
+                          {tier.price}
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </Reveal>
 
           <Reveal delay={0.08}>
