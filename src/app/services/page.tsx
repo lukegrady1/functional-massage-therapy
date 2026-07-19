@@ -35,6 +35,54 @@ export default function ServicesPage() {
       </section>
 
       {/*
+        The menu, before the rows.
+
+        The rows below are the right way to *read* a service and the wrong way
+        to find one: seven full-width panels run eight screens on a phone, so
+        answering "do you do TMJ" or "what does the cheapest session cost"
+        meant scrolling the lot. This answers both at a glance and jumps to
+        the detail.
+
+        Plain #hash anchors — same-page, no JS, and ScrollToTop already skips
+        hash navigations so the landing position survives.
+      */}
+      <section className="mx-auto max-w-7xl px-5 pb-9 sm:px-8 lg:pb-12">
+        <Reveal>
+          <nav
+            aria-label="All services"
+            className="surface-raised rounded-3xl p-5 sm:p-7"
+          >
+            <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
+              The full menu
+            </h2>
+            <ul className="mt-3 grid sm:grid-cols-2 sm:gap-x-10">
+              {services.map((s) => (
+                <li key={s.slug}>
+                  <a
+                    href={`#${s.slug}`}
+                    className="group/row flex flex-wrap items-baseline gap-x-3 border-b border-line/50 py-2.5 transition-colors duration-200 hover:text-copper"
+                  >
+                    <span className="font-medium text-espresso transition-colors duration-200 group-hover/row:text-copper">
+                      {s.name}
+                    </span>
+                    {/*
+                      The leader needs a single line to sit on; on phones the
+                      meta wraps under the name, where a rule would cut across
+                      nothing.
+                    */}
+                    <span className="hidden h-px flex-1 bg-line sm:block" />
+                    <span className="text-[0.9rem] tabular-nums text-muted">
+                      {priceLabel(s)}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </Reveal>
+      </section>
+
+      {/*
         Full-width tonal rows rather than a grid of identical photo cards. Each
         service keeps its own surface treatment, and the paired image alternates
         sides so the page reads as a rhythm rather than a list.
@@ -47,7 +95,14 @@ export default function ServicesPage() {
               <Reveal key={s.slug} delay={(i % 2) * 0.06}>
                 <article
                   id={s.slug}
-                  className={`${t.cell} scroll-mt-24 overflow-hidden rounded-3xl p-5 sm:p-7 lg:p-10`}
+                  /*
+                    scroll-mt has to clear the sticky nav, which measures 97px
+                    — scroll-mt-24 is 96px, so an anchored row landed with its
+                    top edge and rounded corner tucked behind the bar. 28 puts
+                    a visible gap under it. Matters more now that the menu
+                    above sends every visitor through these anchors.
+                  */
+                  className={`${t.cell} scroll-mt-28 overflow-hidden rounded-3xl p-5 sm:p-7 lg:p-10`}
                 >
                   <div className="grid gap-5 lg:grid-cols-[1fr_0.8fr] lg:items-center lg:gap-14">
                     {/*
