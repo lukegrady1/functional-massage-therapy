@@ -352,7 +352,7 @@ export default function Home() {
                 </p>
                 <div className="mt-9">
                   <Button href="/coaching" variant="light">
-                    Learn More About Coaching
+                    Learn More
                     <ArrowRight size={18} weight="bold" />
                   </Button>
                 </div>
