@@ -300,9 +300,46 @@ export default function Home() {
       {/* ---------- COACHING SPOTLIGHT: half text, half image ---------- */}
       <section className="overflow-hidden bg-surface">
         <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20 lg:py-28">
+          {/*
+            Two layouts, one card. At lg the panel splits in half — text left,
+            photo right — which is the Stitch composition.
+
+            Below that the split would simply stack, and stacking read badly:
+            the text block ran most of a screen on its own, then a 320px photo
+            sat underneath it *after* the CTA, so the card came apart into two
+            unrelated slabs and the image did no work at the point anyone saw
+            it. On phones the photo instead becomes the card's background with
+            a scrim over it and the text on top — the same treatment as the
+            hero — which holds it together as one object and roughly halves the
+            height.
+          */}
           <Reveal>
-            <div className="shadow-lifted flex flex-col overflow-hidden rounded-[2rem] bg-graphite lg:flex-row">
-              <div className="flex flex-col justify-center p-10 sm:p-14 lg:w-1/2 lg:p-16">
+            <div className="shadow-lifted relative flex flex-col overflow-hidden rounded-[2rem] bg-graphite lg:flex-row">
+              {/*
+                First in the DOM so that on phones — where it is pulled out of
+                flow to sit behind the text — the later, positioned text block
+                paints on top of it without needing a z-index. `lg:order-last`
+                then puts it back on the right at desktop widths, where the
+                composition is unchanged.
+              */}
+              <div className="absolute inset-0 lg:relative lg:inset-auto lg:order-last lg:min-h-[480px] lg:w-1/2">
+                <Image
+                  src={asset("/athlete-stretch.webp")}
+                  alt="An athlete moving through a mobility routine"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+                {/*
+                  Scrim is phone-only: at lg the photo sits beside the text
+                  rather than under it and needs no help. Angled slightly so
+                  the figure stays readable at the foot of the card instead of
+                  being flattened to a texture.
+                */}
+                <div className="absolute inset-0 bg-gradient-to-b from-graphite/95 via-graphite/90 to-graphite/70 lg:hidden" />
+              </div>
+
+              <div className="relative flex flex-col justify-center p-8 py-12 sm:p-14 lg:w-1/2 lg:p-16">
                 <Eyebrow onDark>Coaching program</Eyebrow>
                 <h2 className="mt-6 t-headline-lg text-bone">
                   Beyond the Table: Integrated Wellness
@@ -319,16 +356,6 @@ export default function Home() {
                     <ArrowRight size={18} weight="bold" />
                   </Button>
                 </div>
-              </div>
-
-              <div className="relative min-h-[320px] lg:min-h-[480px] lg:w-1/2">
-                <Image
-                  src={asset("/athlete-stretch.webp")}
-                  alt="An athlete moving through a mobility routine"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
               </div>
             </div>
           </Reveal>
