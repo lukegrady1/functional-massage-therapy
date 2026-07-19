@@ -423,13 +423,20 @@ export default function Home() {
               </div>
             </Reveal>
             <Reveal delay={0.24}>
-              <div className="reveal-image shadow-ambient relative mt-12 aspect-[16/9] w-full overflow-hidden rounded-2xl">
-                <Image
-                  src={asset("/oils-still-life.webp")}
-                  alt="Massage oil and warm stones resting on folded linen"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                  className="object-cover"
+              {/*
+                Google Business Profile embed. Sized by the wrapper's aspect
+                ratio rather than the iframe's own width/height attributes so
+                it scales with the column instead of overflowing on mobile.
+                `title` is what a screen reader announces in place of the map.
+              */}
+              <div className="shadow-ambient relative mt-12 aspect-[16/9] w-full overflow-hidden rounded-2xl">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2960.9312793331314!2d-72.06048369999999!3d42.087521900000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e6a7e25853e50b%3A0x725b4f148e17210d!2sFunctional%20Massage%20Therapy!5e0!3m2!1sen!2sus!4v1784424956324!5m2!1sen!2sus"
+                  title="Map showing Functional Massage Therapy at 48 Main St, Sturbridge, MA"
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  className="absolute inset-0 h-full w-full border-0"
                 />
               </div>
             </Reveal>

@@ -15,8 +15,14 @@ export const site = {
     state: "MA",
     zip: "01566",
   },
+  /*
+    Searches the business by name alongside the address so the link lands on
+    the Business Profile rather than a bare pin. The zip here previously read
+    01506 while the address above reads 01566 — a different town, so every
+    "Get directions" sent people to the wrong place.
+  */
   mapsHref:
-    "https://www.google.com/maps/search/?api=1&query=48+Main+St+Sturbridge+MA+01506",
+    "https://www.google.com/maps/search/?api=1&query=Functional+Massage+Therapy+48+Main+St+Sturbridge+MA+01566",
 } as const;
 
 export const nav = [
