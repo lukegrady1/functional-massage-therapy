@@ -155,10 +155,21 @@ export const coachingResults: CoachingResult[] = [
   { quote: "", name: "", detail: "" },
 ];
 
+/*
+  A service is offered at one or more duration/price tiers. Tiers are listed
+  shortest first; `priceLabel` renders them as the meta line on both the home
+  cards and the services rows, so the menu and the prices can never drift
+  apart.
+*/
+export type ServiceTier = {
+  duration: string;
+  price: string;
+};
+
 export type Service = {
   slug: string;
   name: string;
-  durations: string;
+  tiers: ServiceTier[];
   summary: string;
   detail: string;
   bestFor: string[];
@@ -176,55 +187,114 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    slug: "sports-recovery",
-    image: "/athlete-stretch.webp",
-    imageAlt: "An athlete mid-stretch in a darkened gym",
-    name: "Sports & Recovery",
-    durations: "60 / 90 min",
+    slug: "functional-massage",
+    image: "/mobility-back.webp",
+    imageAlt: "A seated figure rotating through the thoracic spine",
+    name: "Functional Massage",
+    tiers: [
+      { duration: "60 min", price: "$130" },
+      { duration: "90 min", price: "$160" },
+    ],
     summary:
-      "Targeted work for athletes and lifters. Pre-event prep, post-training recovery, and keeping the engine running.",
+      "Combines joint motion with massage to address painful conditions and impairments.",
     detail:
-      "Built from years on the platform and on the sidelines with a D1 football program. We work the tissue you actually train, restore range of motion, and flush the fatigue so you can get back to it sooner.",
-    bestFor: ["Lifters & powerlifters", "Runners & field athletes", "Post-event recovery"],
+      "The approach the practice is named for. Joint movement is worked alongside the soft tissue, so the session addresses the painful condition or impairment itself rather than only the muscle around it. The 90-minute session covers more ground in a single visit.",
+    bestFor: ["Painful conditions", "Movement impairments", "Whole-body reset"],
     tone: "espresso",
   },
   {
     slug: "deep-tissue",
     image: "/hands-detail.webp",
     imageAlt: "Hands working slowly into the deep tissue of a back",
-    name: "Targeted Deep Tissue",
-    durations: "60 / 90 min",
+    name: "Deep Tissue",
+    tiers: [
+      { duration: "60 min", price: "$110" },
+      { duration: "90 min", price: "$130" },
+    ],
     summary:
-      "Firm, specific pressure for the knots that have overstayed their welcome. Relief that holds.",
+      "Removes severe tension by relieving muscles and connective tissue below the surface.",
     detail:
-      "Slow, deliberate work into the deeper layers of muscle and fascia. We find the root of the restriction instead of chasing the symptom, so the change lasts past the parking lot.",
-    bestFor: ["Chronic tension", "Stubborn knots", "Limited mobility"],
+      "Firm, deliberate work into the muscle and connective tissue below the surface, where severe tension actually sits. Book the 90-minute session if you want the same work over a wider area or at a slower pace.",
+    bestFor: ["Severe tension", "Stubborn knots", "Deep muscle work"],
     tone: "tan",
   },
   {
-    slug: "functional-therapeutic",
-    image: "/mobility-back.webp",
-    imageAlt: "A seated figure rotating through the thoracic spine",
-    name: "Functional Therapeutic",
-    durations: "60 / 90 min",
+    slug: "swedish-massage",
+    image: "/oils-still-life.webp",
+    imageAlt: "Massage oils and folded linen in warm light",
+    name: "Swedish Massage",
+    tiers: [
+      { duration: "60 min", price: "$110" },
+      { duration: "90 min", price: "$130" },
+    ],
     summary:
-      "A whole-body, problem-solving session tailored to what your body is dealing with today.",
+      "Firm but gentle pressure to promote relaxation and ease muscle tension.",
     detail:
-      "This is the comprehensive, functional approach the practice is named for. We assess how you move, address the pattern behind the pain, and send you home with tools to keep the progress going between visits.",
-    bestFor: ["Chronic pain", "Desk-bound tension", "Whole-body reset"],
+      "Firm but gentle pressure across the body to promote relaxation and ease muscle tension. A good starting point if you are new to massage or want recovery without deep pressure.",
+    bestFor: ["Relaxation", "Everyday tension", "First-time clients"],
     tone: "graphite",
   },
   {
-    slug: "cupping-stretch",
-    image: "/cupping-still-life.webp",
-    imageAlt: "Cups and a warm stone laid out on folded linen",
-    name: "Cupping & Assisted Stretch",
-    durations: "Add-on or 30 min",
+    slug: "tmj-therapy",
+    image: "/treatment-in-progress.webp",
+    imageAlt: "Focused hands-on work during a treatment session",
+    name: "Functional TMJ Therapy",
+    tiers: [{ duration: "45 min", price: "$75" }],
     summary:
-      "Decompression cupping and guided stretching to open up tight, overworked areas.",
+      "Infrared treatment for TMJ syndrome, providing significant relief.",
     detail:
-      "Add it to a session or book it on its own. Cupping lifts and decompresses tissue while assisted stretching restores length to the muscles that have forgotten how to lengthen.",
-    bestFor: ["Tight hips & shoulders", "Recovery days", "Mobility work"],
+      "A focused session for TMJ syndrome using infrared treatment, which clients report gives significant relief to the jaw, face, and surrounding muscles.",
+    bestFor: ["TMJ syndrome", "Jaw tension", "Focused session"],
     tone: "paper",
   },
+  {
+    slug: "chair-massage",
+    image: "/studio-interior.webp",
+    imageAlt: "The studio interior, quiet and warmly lit",
+    name: "Chair Massage",
+    tiers: [{ duration: "30 min", price: "$60" }],
+    summary:
+      "Performed in a specially designed chair, clothes on, for relaxation.",
+    detail:
+      "Performed in a specially designed massage chair with your clothes on — no table, no oils. A short, easy way to unwind when you are short on time.",
+    bestFor: ["Clothes on", "Short on time", "Relaxation"],
+    tone: "espresso",
+  },
+  {
+    slug: "student-rate",
+    image: "/athlete-stretch.webp",
+    imageAlt: "An athlete mid-stretch in a darkened gym",
+    name: "Student Rate",
+    tiers: [{ duration: "60 min", price: "$85" }],
+    summary:
+      "For student-athletes — speeds recovery, improves circulation, and enhances sleep.",
+    detail:
+      "A reduced rate for student-athletes. The session is built around what a training season demands: speeding recovery, improving circulation, and helping you sleep better between sessions.",
+    bestFor: ["Student-athletes", "In-season recovery", "Better sleep"],
+    tone: "tan",
+  },
+  {
+    slug: "massage-for-two",
+    image: "/eucalyptus-still-life.webp",
+    imageAlt: "Eucalyptus and warm stones arranged on linen",
+    name: "Massage for Two",
+    tiers: [
+      { duration: "90 min", price: "$350" },
+      { duration: "120 min", price: "$400" },
+    ],
+    summary:
+      "A dual relaxation session with aromatherapy, hot stones, and customizable pressure.",
+    detail:
+      "A session for two, side by side, with aromatherapy and hot stones included and the pressure customized for each of you. Choose the 120-minute session for a longer, unhurried version of the same treatment.",
+    bestFor: ["Two people", "Aromatherapy & hot stones", "Pressure to suit each of you"],
+    tone: "graphite",
+  },
 ];
+
+/* "60 / 90 min · from $110", or "45 min · $75" for a single-tier service. */
+export function priceLabel(s: Service): string {
+  const durations = s.tiers.map((t) => t.duration.replace(" min", "")).join(" / ");
+  const price =
+    s.tiers.length > 1 ? `from ${s.tiers[0].price}` : s.tiers[0].price;
+  return `${durations} min · ${price}`;
+}

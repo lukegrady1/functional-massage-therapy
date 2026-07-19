@@ -5,14 +5,14 @@ import { Button } from "@/components/Button";
 import { Eyebrow } from "@/components/Eyebrow";
 import { Reveal } from "@/components/Reveal";
 import { CtaBand } from "@/components/CtaBand";
-import { services } from "@/lib/site";
+import { services, priceLabel } from "@/lib/site";
 import { toneStyles } from "@/lib/tones";
 import { asset } from "@/lib/asset";
 
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Sports and recovery massage, targeted deep tissue, functional therapeutic bodywork, cupping, and assisted stretch in Sturbridge, MA.",
+    "Functional massage, deep tissue, Swedish massage, TMJ therapy, chair massage, student rates, and massage for two in Sturbridge, MA. Session durations and prices listed.",
 };
 
 export default function ServicesPage() {
@@ -69,7 +69,7 @@ export default function ServicesPage() {
                       <span
                         className={`${t.meta} text-xs font-semibold uppercase tracking-[0.16em]`}
                       >
-                        {s.durations}
+                        {priceLabel(s)}
                       </span>
                       <h2 className="mt-2 t-headline-lg">
                         {s.name}
@@ -77,6 +77,28 @@ export default function ServicesPage() {
                       <p className={`${t.body} mt-5 text-lg leading-relaxed`}>
                         {s.detail}
                       </p>
+
+                      {/*
+                        Every tier is priced explicitly rather than left to the
+                        booking flow, so nobody has to start a booking to find
+                        out what a session costs.
+                      */}
+                      <dl className="mt-7 flex flex-col gap-2">
+                        {s.tiers.map((tier) => (
+                          <div
+                            key={tier.duration}
+                            className={`${t.body} flex items-baseline gap-3`}
+                          >
+                            <dt className="text-[0.95rem]">{tier.duration}</dt>
+                            <span
+                              className={`${t.rule} h-px flex-1 translate-y-[-0.15em] opacity-50`}
+                            />
+                            <dd className="text-[0.95rem] font-semibold tabular-nums">
+                              {tier.price}
+                            </dd>
+                          </div>
+                        ))}
+                      </dl>
 
                       <ul className="mt-7 flex flex-wrap gap-2">
                         {s.bestFor.map((b) => (
@@ -109,9 +131,8 @@ export default function ServicesPage() {
 
         <Reveal delay={0.1}>
           <p className="mt-10 max-w-2xl text-[0.95rem] leading-relaxed text-muted">
-            Session rates and exact durations are shown when you book online. Not
-            sure which service fits? Give me a call and we’ll figure it out
-            together.
+            Prices shown are per session. Not sure which service fits? Give me a
+            call and we’ll figure it out together.
           </p>
         </Reveal>
       </section>

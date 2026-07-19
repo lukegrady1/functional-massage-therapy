@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  Barbell,
+  Leaf,
   HandHeart,
   PersonSimpleTaiChi,
   CheckCircle,
@@ -13,7 +13,7 @@ import { Eyebrow } from "@/components/Eyebrow";
 import { Reveal } from "@/components/Reveal";
 import { CtaBand } from "@/components/CtaBand";
 import { Testimonials } from "@/components/Testimonials";
-import { services } from "@/lib/site";
+import { services, priceLabel } from "@/lib/site";
 import { asset } from "@/lib/asset";
 
 /*
@@ -27,9 +27,9 @@ import { asset } from "@/lib/asset";
 */
 
 const serviceIcons: Record<string, Icon> = {
-  "sports-recovery": Barbell,
+  "functional-massage": PersonSimpleTaiChi,
   "deep-tissue": HandHeart,
-  "functional-therapeutic": PersonSimpleTaiChi,
+  "swedish-massage": Leaf,
 };
 
 // Stitch features three services and sends the rest to the services page.
@@ -251,7 +251,7 @@ export default function Home() {
                   >
                     <Icon size={34} className="text-copper" />
                     <span className="mt-6 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-                      {s.durations}
+                      {priceLabel(s)}
                     </span>
                     <h3 className="mt-2 t-headline-md text-espresso">
                       {s.name}
