@@ -45,6 +45,48 @@ export const metadata: Metadata = {
   },
   description,
   metadataBase: new URL(`${siteOrigin}${basePath}`),
+  /*
+    Every icon is declared here, and the files live in /public rather than
+    using the app/ file convention (icon.png, apple-icon.png, favicon.ico).
+
+    The two approaches do not combine: declaring `icons` in metadata REPLACES
+    the file-convention tags rather than adding to them. Tried it — with
+    app/favicon.ico plus app/icon0.png and app/icon1.png, the convention
+    emitted links for the PNGs and silently left the .ico unreferenced; adding
+    the .ico here then wiped the PNG and apple-touch links instead. Explicit
+    is the only way to get all of them.
+
+    `basePath` is applied by hand for the same reason lib/asset.ts exists —
+    this deploys to a GitHub Pages subpath, and an unprefixed "/favicon.ico"
+    resolves to github.io's root, not ours.
+
+    Worth knowing about that subpath: a browser or crawler that requests
+    /favicon.ico blind, without reading the page, gets github.io's file. The
+    <link> tags below are the only thing pointing at ours, which is why the
+    .ico is declared and not just left sitting in the output.
+  */
+  icons: {
+    icon: [
+      { url: `${basePath}/favicon.ico`, sizes: "any" },
+      {
+        url: `${basePath}/favicon-32x32.png`,
+        sizes: "32x32",
+        type: "image/png",
+      },
+      {
+        url: `${basePath}/favicon-16x16.png`,
+        sizes: "16x16",
+        type: "image/png",
+      },
+    ],
+    apple: [
+      {
+        url: `${basePath}/apple-touch-icon.png`,
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+  },
   openGraph: {
     title: "Functional Massage Therapy | Sturbridge, MA",
     description:
